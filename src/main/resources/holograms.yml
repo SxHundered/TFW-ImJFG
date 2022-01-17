@@ -1,0 +1,10 @@
+Leaderboards:
+  - "------------------------------"
+  - "  "
+  - "TIMER: %time%"
+  - "TEMA: %team_name%"
+  - "KILLS: %team_kills%"
+  - "DEAHTS: %team_deaths%"
+  - "YOUR HEART IS %team_heart%"
+  - "  "
+  - "------------------------------"

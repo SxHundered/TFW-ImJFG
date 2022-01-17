@@ -1,0 +1,25 @@
+Teams:
+  Theyab:
+    display: "THEYAB TEAM"
+    color: BLUE
+    chat_format: ""
+    scoreboard: #IN GAME SCOREBOARD ONLY!
+      title: ""
+      lines:
+        - ""
+        - ""
+        - ""
+        - ""
+        - ""
+  ImJFG:
+    display: "ImJFG TEAM"
+    color: GREEN
+    chat_format: ""
+    scoreboard: #IN GAME SCOREBOARD ONLY!
+      title: ""
+      lines:
+        - ""
+        - ""
+        - ""
+        - ""
+        - ""

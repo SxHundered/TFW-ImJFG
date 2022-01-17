@@ -1,0 +1,43 @@
+Game:
+  worldBoarder:
+    size: "300"
+  HeartOfTheTeam: BED
+  
+Scoreboards:
+  Lobby:
+    titleOptions:
+      animated: false
+      interval: 0
+      delay: 1
+      title:
+        - "lobby title"
+    lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
+      - ""
+      - ""
+      - ""
+      - ""
+  Grace:
+    titleOptions:
+      animated: false
+      interval: 0
+      delay: 1
+      title:
+        - "lobby title"
+    lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
+      - ""
+      - ""
+      - ""
+      - ""
+  InGame: #TEAMS SCOREBOARD!
+  Win:
+    titleOptions:
+      animated: false
+      interval: 0
+      delay: 1
+      title:
+        - "lobby title"
+    lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
+      - ""
+      - ""
+      - ""
+      - ""

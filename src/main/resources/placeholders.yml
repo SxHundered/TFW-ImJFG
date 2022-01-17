@@ -1,0 +1,11 @@
+placeholders:
+  - "%online%"
+  - "%status%"
+  - "%time%"
+  - "%team_name%"
+  - "%team_alive%"
+  - "%team_kills%"
+  - "%team_deaths%"
+  - "%team_heart%"
+  - "%arena_name%"
+  - "%arena_players%"

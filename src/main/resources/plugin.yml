@@ -1,0 +1,5 @@
+name: TFW
+version: '${project.version}'
+main: com.tfw.main.tfw.TFW
+authors: [ AbdulazizCr ]
+description: Team Fight Plugin
