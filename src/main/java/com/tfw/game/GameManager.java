@@ -20,8 +20,26 @@ public class GameManager implements IGame{
     /**
      * Starts the game
      */
+
+    @Override
+    public int gameTime() {
+        return timer;
+    }
+
+    @Override
+    public String currentTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.SECOND, timer);
+        return new SimpleDateFormat("mm:ss").format(calendar.getTime());
+    }
+
     @Override
     public void startGame() {
 
     }
+
+
 }
