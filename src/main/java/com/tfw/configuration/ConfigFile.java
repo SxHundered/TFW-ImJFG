@@ -1,4 +1,4 @@
-package com.ftw.configuration;
+package com.tfw.configuration;
 
 import lombok.Getter;
 import org.bukkit.ChatColor;
@@ -25,12 +25,12 @@ public class ConfigFile {
      */
     public ConfigFile(JavaPlugin plugin, String name) {
         this.plugin = plugin;
-        file = new File(plugin.getDataFolder(), name + ".yml");
+        file = new File(plugin.getDataFolder(), name);
 
         if (!file.getParentFile().exists())
             file.getParentFile().mkdir();
 
-        plugin.saveResource(name + ".yml", false);
+        plugin.saveResource(name, false);
 
         yaml = YamlConfiguration.loadConfiguration(file);
     }

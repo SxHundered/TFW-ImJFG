@@ -1,0 +1,13 @@
+#####################################################################
+#                                                                   #
+#                                                                   #
+#                           TFW v1.0                                #
+#                      Made by: AbdulAzizCr                         #
+#                     Contributors: F4res                           #
+#                                                                   #
+#####################################################################
+
+
+# General Configurations
+Prefix: "§6§lTFW &7>> "
+defaultWorld: "world" #THIS IS ARENA WORLD MUST BE SAME AS TEAMS LOCATIONS WORLD!

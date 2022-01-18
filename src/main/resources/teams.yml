@@ -1,25 +1,109 @@
 Teams:
-  Theyab:
-    display: "THEYAB TEAM"
+  Theyab: #TEAM A
+    TEAM_TYPE: A #DO NOT CHANGE THIS!
+    display: "&5&lTEAM &9&lTHEYAB"
     color: BLUE
     chat_format: ""
-    scoreboard: #IN GAME SCOREBOARD ONLY!
-      title: ""
-      lines:
-        - ""
-        - ""
-        - ""
-        - ""
-        - ""
-  ImJFG:
+    fighter_equipments:
+      armors: #ARMOR CONTENTS!
+        helmet:
+          type: IRON_HELMET
+          name: "%teamname% HELMET!"
+          glow: false # GLOW ENCHANTMENT, NO EFFECTS
+          enchantments:
+            - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
+          lore:
+            - ""
+        chestplate:
+          type: IRON_CHESTPLATE
+          name: "%teamname% CHEST!"
+          glow: false # GLOW ENCHANTMENT, NO EFFECTS
+          enchantments:
+            - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
+          lore:
+            - ""
+        leggings:
+          type: IRON_LEGGINGS
+          name: "%teamname% LEGGINGS!"
+          glow: false # GLOW ENCHANTMENT, NO EFFECTS
+          enchantments:
+            - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
+          lore:
+            - ""
+        boots:
+          type: IRON_BOOTS
+          name: "%teamname% BOOT!"
+          glow: false # GLOW ENCHANTMENT, NO EFFECTS
+          enchantments:
+            - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
+          lore:
+            - ""
+      contents: #CONTENT OF THE INVENTORY!
+        sword:
+          IRON_SWORD:
+            name: "%teamname% SWORD!"
+            slot: 0
+            amount: 1
+            durability: 1
+            glow: false # GLOW ENCHANTMENT, NO EFFECTS
+            enchantments:
+              - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
+            lore: []
+          WOOL:
+            name: "%teamname% BLOCKS!"
+            slot: 1
+            amount: 64
+            durability: 0
+            glow: true # GLOW ENCHANTMENT, NO EFFECTS
+            enchantments: []
+            lore: []
+  ImJFG: #TEAM B
+    TEAM_TYPE: B #DO NOT CHANGE THIS!
     display: "ImJFG TEAM"
     color: GREEN
     chat_format: ""
-    scoreboard: #IN GAME SCOREBOARD ONLY!
-      title: ""
-      lines:
-        - ""
-        - ""
-        - ""
-        - ""
-        - ""
+    fighter_equipments:
+      armors: #ARMOR CONTENTS!
+        helmet:
+          type: IRON_HELMET
+          name: "%teamname% HELMET!"
+          glow: false # GLOW ENCHANTMENT, NO EFFECTS
+          enchantments:
+            - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
+          lore:
+            - ""
+        chestplate:
+          type: IRON_CHESTPLATE
+          name: "%teamname% CHEST!"
+          glow: false # GLOW ENCHANTMENT, NO EFFECTS
+          enchantments:
+            - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
+          lore:
+            - ""
+        leggings:
+          type: IRON_LEGGINGS
+          name: "%teamname% LEGGINGS!"
+          glow: false # GLOW ENCHANTMENT, NO EFFECTS
+          enchantments:
+            - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
+          lore:
+            - ""
+        boots:
+          type: IRON_BOOTS
+          name: "%teamname% BOOT!"
+          glow: false # GLOW ENCHANTMENT, NO EFFECTS
+          enchantments:
+            - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
+          lore:
+            - ""
+      contents: #CONTENT OF THE INVENTORY!
+        sword:
+          IRON_SWORD:
+            name: "%teamname% SWORD!"
+            slot: 0
+            amount: 1
+            durability: 1
+            glow: false # GLOW ENCHANTMENT, NO EFFECTS
+            enchantments:
+              - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
+            lore: []

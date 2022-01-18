@@ -23,6 +23,7 @@
  */
 package com.tfw.scoreboard.boards;
 
+import com.tfw.configuration.Style;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -297,7 +298,7 @@ public class FastBoard {
      * @throws IllegalStateException    if {@link #delete()} was call before
      */
     public void updateLines(String... lines) {
-        updateLines(Arrays.asList(lines));
+        updateLines(Style.translateLines(Arrays.asList(lines)));
     }
 
     /**

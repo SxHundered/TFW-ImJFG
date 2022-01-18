@@ -1,0 +1,51 @@
+Scoreboards:
+  Lobby:
+    titleOptions:
+      animated: false
+      interval: 0
+      delay: 1
+      title:
+        - "lobby title"
+    lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
+      - "%tfw_online%"
+      - ""
+      - ""
+      - ""
+  Grace:
+    titleOptions:
+      animated: false
+      interval: 0
+      delay: 1
+      title:
+        - "lobby title"
+    lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
+      - ""
+      - ""
+      - ""
+      - ""
+  InGame:
+    titleOptions:
+      animated: true
+      interval: 20
+      delay: 20
+      title:
+        - "&eINGAME"
+        - "&cINGAME"
+        - "&aINGAME"
+        - "&bINGAME"
+    lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
+      - "TEAM KILLS: "
+      - "SOLO KILLS: "
+      - ""
+  Win:
+    titleOptions:
+      animated: false
+      interval: 0
+      delay: 1
+      title:
+        - "lobby title"
+    lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
+      - ""
+      - ""
+      - ""
+      - ""

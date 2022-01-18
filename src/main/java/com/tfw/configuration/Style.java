@@ -1,9 +1,11 @@
 
-package com.ftw.configuration;
+package com.tfw.configuration;
 
 import com.tfw.main.TFW;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ public final class Style {
 
 	public static final String API_FAILED =
 			ChatColor.RED.toString() + "The API failed to retrieve your information. Try again later.";
+	public static final String DEPENDENCIES_FAILED = ChatColor.RED + "One of the Dependencies failed to be found. Add missing dependencies first!, then try again!";
 	public static final String BLUE = ChatColor.BLUE.toString();
 	public static final String AQUA = ChatColor.AQUA.toString();
 	public static final String YELLOW = ChatColor.YELLOW.toString();
@@ -61,12 +64,26 @@ public final class Style {
 		return net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', in).replace("%prefix%", TFW.getPrefix());
 	}
 
-	public static List<String> translateLines(List<String> lines) {
+	public static List<String> translateLines_Holders(Player player, List<String> lines) {
+
+		//TODO: REPLACE ALL HOLDERS WITH THE ONES WE SAVED!
+
 		List<String> toReturn = new ArrayList<>();
 
-		for (String line : lines) {
+		for (String line : lines)
+			toReturn.add(PlaceholderAPI.setPlaceholders(player,
+					ChatColor.translateAlternateColorCodes('&', line.replace("%prefix%", TFW.getPrefix()))
+			));
+
+		return toReturn;
+	}
+
+	public static List<String> translateLines(List<String> lines) {
+
+		List<String> toReturn = new ArrayList<>();
+
+		for (String line : lines)
 			toReturn.add(ChatColor.translateAlternateColorCodes('&', line.replace("%prefix%", TFW.getPrefix())));
-		}
 
 		return toReturn;
 	}
