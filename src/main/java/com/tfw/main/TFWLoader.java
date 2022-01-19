@@ -38,11 +38,13 @@ public class TFWLoader {
     }
 
     private static void registerEvents(JavaPlugin javaPlugin){
-        Arrays.asList(new PlayerHandler(),
+        Arrays.asList(
+                new PlayerHandler(),
                 new DamageHandler(),
                 new GameListener(),
+                new PlayerListener(),
                 new SettingsListener(),
-                new TeamListener()).forEach(listener -> Bukkit.getServer().getPluginManager().registerEvents(listener, javaPlugin));
+                new TeamListener()).forEach(listener -> javaPlugin.getServer().getPluginManager().registerEvents(listener, javaPlugin));
     }
 
 

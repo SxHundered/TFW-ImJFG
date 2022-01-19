@@ -43,6 +43,9 @@ public class PlayerManager implements IManage {
 
         playerData.preparePlayer();
 
+        if (TFW.isDebug())
+            playerData.printDebug();
+
         playerDataList.add(playerData);
     }
 

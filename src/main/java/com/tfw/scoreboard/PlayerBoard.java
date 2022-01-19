@@ -25,18 +25,18 @@ public class PlayerBoard extends FastBoard {
         this.iScoreboard = iScoreboard;
         this.playerData = playerData;
         this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-        initialBoard();
     }
 
     public PlayerBoard(Player player, PlayerData playerData) {
         super(player);
+
+        //FOR DEBUG ONLY!
+        this.iScoreboard = new IScoreboard("LOBBY", "STATIC TITLE", 15);
+        this.iScoreboard.setLines(new String[]{"&a&lABDULAZIZ", "&eHI", "&bLOVELY"});
+
+
         this.playerData = playerData;
         this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-        initialBoard();
-    }
-
-    private void initialBoard(){
-        playerData.getPlayer().setScoreboard(scoreboard);
     }
 
     public void delete(String name) {

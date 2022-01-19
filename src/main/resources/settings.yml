@@ -1,4 +1,5 @@
 worldSettings:
+  HEART_TEAM: BED
   Weather: "CLEAR"
   Time:
     type: "FIXED"

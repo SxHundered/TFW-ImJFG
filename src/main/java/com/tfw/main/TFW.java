@@ -30,6 +30,9 @@ public final class TFW extends JavaPlugin {
 
     private static String prefix;
 
+    @Getter
+    private static boolean isDebug;
+
     @Getter(AccessLevel.PRIVATE)
     private TFWPlaceHolder tfwPlaceHolder;
 
@@ -42,6 +45,7 @@ public final class TFW extends JavaPlugin {
         instance = this;
         configFile = new ConfigFile(this, "config.yml");
         prefix = configFile.getYaml().contains("Prefix") ? configFile.getYaml().getString("Prefix") : "NO PREFIX!";
+        isDebug = configFile.getYaml().contains("Debug") && configFile.getYaml().getBoolean("Debug");
 
         try {
 

@@ -19,7 +19,6 @@ public class PlayerHandler implements Listener {
     public void onJoin(PlayerJoinEvent playerJoinEvent) {
         playerJoinEvent.setJoinMessage(null);
 
-
         TFWJoinEvent tfwJoinEvent = new TFWJoinEvent(playerJoinEvent.getPlayer());
         Bukkit.getServer().getPluginManager().callEvent(tfwJoinEvent);
     }

@@ -11,9 +11,13 @@ public enum Settings {
     @Setter@Getter
     boolean staff;
     @Setter@Getter
-    boolean refresh;
+    boolean refresh; //change to scoreboard_refresh
     Settings(boolean b, boolean b1) {
         this.staff = b;
         this.refresh = b1;
+    }
+
+    public String info() {
+        return "{Staff: " + staff + ", Refresh: " + refresh + "}";
     }
 }

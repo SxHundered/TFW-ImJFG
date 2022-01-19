@@ -11,6 +11,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -113,12 +114,13 @@ public class PlayerData implements IData{
     public void generateScoreboard() {
 
         //Sync
-        setFastBoard(new PlayerBoard(getPlayer(), this));
-        getPlayer().setScoreboard(getFastBoard().scoreboard());
+        PlayerBoard playerBoard = new PlayerBoard(getPlayer(), this);
+        setFastBoard(playerBoard);
+        getPlayer().setScoreboard(playerBoard.getScoreboard());
 
         //Async
         Bukkit.getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), ()->{
-            AsyncBoard.getBoardArrayList().add((PlayerBoard) getFastBoard());
+            AsyncBoard.getBoardArrayList().add(getFastBoard());
             AsyncBoard.updateTitle();
         });
     }
@@ -153,5 +155,19 @@ public class PlayerData implements IData{
         //TODO
         playerData.getSettings().setStaff(false);
 
+    }
+
+    /**
+     * If debug mode is enabled then print debug messages
+     */
+    public void printDebug(){
+        Bukkit.getConsoleSender().sendMessage(Style.translate("&4&lDEBUG &7>>"));
+        Bukkit.getConsoleSender().sendMessage(Style.YELLOW + playerName + Style.BLUE + "{");
+        Bukkit.getConsoleSender().sendMessage(Style.BLUE + "UUID: " + Style.YELLOW + uuid.toString());
+        Bukkit.getConsoleSender().sendMessage(Style.BLUE + "Stats: kills -> " + stats.kills);
+        Bukkit.getConsoleSender().sendMessage(Style.BLUE + "Settings: " + settings.info());
+        Bukkit.getConsoleSender().sendMessage(Style.BLUE + "Status: " + playerStatus.name().toUpperCase(Locale.ROOT));
+        fastBoard.getIScoreboard().info();
+        Bukkit.getConsoleSender().sendMessage(Style.BLUE + "}");
     }
 }

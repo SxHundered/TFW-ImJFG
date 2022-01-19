@@ -10,4 +10,5 @@
 
 # General Configurations
 Prefix: "§6§lTFW &7>> "
+Debug: true
 defaultWorld: "world" #THIS IS ARENA WORLD MUST BE SAME AS TEAMS LOCATIONS WORLD!

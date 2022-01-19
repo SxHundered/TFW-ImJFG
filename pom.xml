@@ -54,38 +54,65 @@
     </build>
 
     <repositories>
+
+        <!-- Spigot REPO -->
         <repository>
             <id>spigotmc-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+
+        <!-- Lombok REPO -->
         <repository>
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
+
+        <!-- PLACEHOLDER API REPO -->
         <repository>
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
+
+        <!-- SLIME WORLD REPO -->
+        <repository>
+            <id>glaremasters</id>
+            <url>https://repo.glaremasters.me/repository/concuncan/</url>
+        </repository>
     </repositories>
 
     <dependencies>
+
+        <!-- Spigot 1.8.8-R3 Libs Dependency -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Lombok Libs Dependency -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <version>1.18.22</version>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
+
+
+        <!-- PLACEHOLDER-API Dependency -->
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
             <version>2.11.1</version>
             <scope>provided</scope>
+        </dependency>
+
+
+        <!-- SlimeWorldManagement Dependency -->
+        <dependency>
+            <groupId>com.grinderwolf</groupId>
+            <artifactId>slimeworldmanager-api</artifactId>
+            <version>2.2.1</version>
         </dependency>
     </dependencies>
 </project>

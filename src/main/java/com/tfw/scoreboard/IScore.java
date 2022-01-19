@@ -9,4 +9,5 @@ public interface IScore {
     String animatedText();
     boolean isAnimated();
 
+    void info();
 }
