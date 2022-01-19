@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IScore {
 
-    void createScoreboard(String name, List<String> lines);
+    void createScoreboard(List<String> lines);
     List<String> lines();
     String animatedText();
     boolean isAnimated();

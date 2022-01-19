@@ -1,5 +1,5 @@
 Scoreboards:
-  Lobby:
+  Lobby: #ISCOREBOARD identifier ,
     titleOptions:
       animated: false
       interval: 0
@@ -11,7 +11,7 @@ Scoreboards:
       - ""
       - ""
       - ""
-  Grace:
+  Grace: #ISCOREBOARD identifier
     titleOptions:
       animated: false
       interval: 0
@@ -23,7 +23,7 @@ Scoreboards:
       - ""
       - ""
       - ""
-  InGame:
+  InGame: #ISCOREBOARD identifier
     titleOptions:
       animated: true
       interval: 20
@@ -37,7 +37,19 @@ Scoreboards:
       - "TEAM KILLS: "
       - "SOLO KILLS: "
       - ""
-  Win:
+  Staff: #ISCOREBOARD identifier
+    titleOptions:
+      animated: true
+      interval: 20
+      delay: 20
+      title:
+        - "&eSTAFF"
+        - "&aSTAFF"
+    lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
+      - "TEAM KILLS: "
+      - "SOLO KILLS: "
+      - ""
+  Win: #ISCOREBOARD identifier
     titleOptions:
       animated: false
       interval: 0

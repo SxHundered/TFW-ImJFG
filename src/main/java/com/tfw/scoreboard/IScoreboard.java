@@ -21,7 +21,7 @@ public class IScoreboard implements IScore{
     public IScoreboard(String name, String title, int scoreboardSize) {
         this.name = name;
         animationTitle = null;
-        this.staticTitle = title.length() > 32 ? title.substring(0, 31) : title;
+        this.staticTitle = Style.translate(title.length() > 32 ? title.substring(0, 31) : title);
         this.lines = new String[scoreboardSize];
     }
 
@@ -35,12 +35,20 @@ public class IScoreboard implements IScore{
 
 
     /**
-     * @param name scoreboardName!
-     * @param lines
+     * @param lines Scoreboard lines!
      */
     @Override
-    public void createScoreboard(String name, List<String> lines) {
+    public void createScoreboard(List<String> lines) {
+        int x = 0;
+        for (; x < this.lines.length; x++)
+            this.lines[x] = lines.get(x);
 
+        //Checks if each line is higher than 32 characters!
+        x = 0;
+        for (; x < this.lines.length; x++){
+            if (this.lines[x].length() >= 32)
+                this.lines[x] = this.lines[x].substring(0, 31);
+        }
     }
 
     @Override

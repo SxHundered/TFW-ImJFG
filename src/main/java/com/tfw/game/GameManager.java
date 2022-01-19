@@ -129,4 +129,10 @@ public class GameManager implements IGame,ISettings{
     }
 
 
+    public enum GameStates{
+        LOBBY,INGAME,RESTART;
+
+        private static GameStates gameStates;
+
+    }
 }

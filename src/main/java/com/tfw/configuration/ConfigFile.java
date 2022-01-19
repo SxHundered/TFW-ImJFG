@@ -118,7 +118,7 @@ public class ConfigFile {
             }
             return strings;
         }
-        return Collections.singletonList("ERROR: STRING LIST NOT FOUND!");
+        return Collections.singletonList(Style.RED + "ERROR: STRING LIST NOT FOUND!");
     }
 
     /**

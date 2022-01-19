@@ -2,6 +2,9 @@ package com.tfw.main;
 
 import com.tfw.configuration.ConfigFile;
 import com.tfw.configuration.Style;
+import com.tfw.events.worldsEvent.MultiverseEvents;
+import com.tfw.events.worldsEvent.NormalWorldEvents;
+import com.tfw.events.worldsEvent.SlimeWorldEvents;
 import com.tfw.game.WorldExceptions;
 import com.tfw.game.arena.ArenaExceptions;
 import com.tfw.manager.TeamExceptions;
@@ -53,6 +56,7 @@ public final class TFW extends JavaPlugin {
                 //All instances for dependencies
                 tfwPlaceHolder = new TFWPlaceHolder();
                 tfwPlaceHolder.register();
+
             }
 
             TFWLoader.loadInstances(this);

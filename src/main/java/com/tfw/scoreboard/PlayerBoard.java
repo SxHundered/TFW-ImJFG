@@ -3,6 +3,7 @@ package com.tfw.scoreboard;
 import com.tfw.manager.data.PlayerData;
 import com.tfw.scoreboard.boards.FastBoard;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -13,6 +14,7 @@ import org.bukkit.scoreboard.Scoreboard;
 public class PlayerBoard extends FastBoard {
 
     private final PlayerData playerData;
+    @Setter
     private IScoreboard iScoreboard;
     private final Scoreboard scoreboard;
 
@@ -31,7 +33,6 @@ public class PlayerBoard extends FastBoard {
         super(player);
 
         //FOR DEBUG ONLY!
-        this.iScoreboard = new IScoreboard("LOBBY", "STATIC TITLE", 15);
         this.iScoreboard.setLines(new String[]{"&a&lABDULAZIZ", "&eHI", "&bLOVELY"});
 
 

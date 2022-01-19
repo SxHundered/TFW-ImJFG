@@ -2,8 +2,11 @@ package com.tfw.manager.data;
 
 import com.tfw.configuration.Style;
 import com.tfw.main.TFW;
+import com.tfw.main.TFWLoader;
 import com.tfw.manager.team.Team;
 import com.tfw.scoreboard.AsyncBoard;
+import com.tfw.scoreboard.IScoreboardException;
+import com.tfw.scoreboard.IScoreboardManager;
 import com.tfw.scoreboard.PlayerBoard;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
