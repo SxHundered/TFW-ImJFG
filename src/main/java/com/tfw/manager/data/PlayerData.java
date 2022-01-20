@@ -125,6 +125,11 @@ public class PlayerData implements IData{
         Bukkit.getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), ()->{
             AsyncBoard.getBoardArrayList().add(getFastBoard());
             AsyncBoard.updateTitle();
+            try {
+                getFastBoard().setIScoreboard(TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.LOBBY));
+            } catch (IScoreboardException e) {
+                Bukkit.getConsoleSender().sendMessage(e.getMessage());
+            }
         });
     }
 

@@ -128,7 +128,6 @@ public class GameManager implements IGame,ISettings{
         return ArenaManager.getArena();
     }
 
-
     public enum GameStates{
         LOBBY,INGAME,RESTART;
 
