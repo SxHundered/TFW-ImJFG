@@ -90,6 +90,22 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- BUKKIT API 1.8.8 -->
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>1.8.8-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- NMS BUKKIT API 1.8.8 -->
+        <dependency>
+            <groupId>com.github.azbh111</groupId>
+            <artifactId>craftbukkit-1.8.8</artifactId>
+            <version>R</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Lombok Libs Dependency -->
         <dependency>
             <groupId>org.projectlombok</groupId>

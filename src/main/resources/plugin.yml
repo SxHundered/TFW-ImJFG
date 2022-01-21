@@ -3,3 +3,13 @@ version: '${project.version}'
 main: com.tfw.main.TFW
 authors: [ AbdulazizCr ]
 description: Team Fight Plugin
+
+commands:
+  TFW:
+    description: General Command
+    permission: ""
+    aliases:
+      - teamfightwar
+      - tfws
+      - teamvsteam
+      - tvst

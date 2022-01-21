@@ -20,14 +20,14 @@ import java.util.Set;
 
 public class WorldSettings implements Listener {
 
-    String weather = "CLEAR"; //CLEAR,RAIN
-    String time = "FIXED"; //FIXED,AUTO
-    String time_type = "DAY"; //DAY,NIGHT
-    boolean isWorldBorder = true; // TRUE,FALSE
-    List<Double> center; //CORDINATES
-    int size; //SIZE
-    Set<Material> breakable; //ARRAY OF BLOCKS MATERIALS!
-    Set<Material> placeable; //ARRAY OF BLOCKS MATERIALS!
+    public String weather = "CLEAR"; //CLEAR,RAIN
+    public String time = "FIXED"; //FIXED,AUTO
+    public String time_type = "DAY"; //DAY,NIGHT
+    public boolean isWorldBorder = true; // TRUE,FALSE
+    public List<Double> center; //CORDINATES
+    public int size; //SIZE
+    public Set<Material> breakable; //ARRAY OF BLOCKS MATERIALS!
+    public Set<Material> placeable; //ARRAY OF BLOCKS MATERIALS!
 
     /**
      * @param javaPlugin MAIN CLASS

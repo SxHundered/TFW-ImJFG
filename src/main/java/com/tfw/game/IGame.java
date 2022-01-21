@@ -1,7 +1,11 @@
 package com.tfw.game;
 
 
-import org.bukkit.plugin.java.JavaPlugin;
+import com.tfw.manager.data.PlayerData;
+import com.tfw.manager.team.Team;
+import org.bukkit.Sound;
+
+import java.util.Set;
 
 public interface IGame {
 
@@ -9,16 +13,19 @@ public interface IGame {
 
     void teleportPlayers();
 
-    void playSound();
+    void playSound(Sound sound);
 
     void notification(String message);
 
-    void celebrate();
+    void title_Notification(String title, String subTitle);
+
+    void celebrate(Team team);
 
     void restartTheGame();
 
-    int gameTime();
-
     String currentTime();
 
+    void loadKits(Set<PlayerData> playerDataSet);
+
+    void startGameTask();
 }

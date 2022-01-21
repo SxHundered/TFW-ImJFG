@@ -2,7 +2,7 @@ worldSettings:
   HEART_TEAM: BED
   Weather: "CLEAR"
   Time:
-    type: "FIXED"
+    type: "FIXED" # FIXED,AUTO
     fixed_to_be: DAY
   WorldBorder:
     enable: false

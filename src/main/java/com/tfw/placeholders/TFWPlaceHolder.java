@@ -2,6 +2,7 @@ package com.tfw.placeholders;
 
 import com.tfw.configuration.Style;
 import com.tfw.game.arena.ArenaManager;
+import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.data.PlayerData;
 import com.tfw.manager.team.Team;
@@ -62,7 +63,7 @@ public class TFWPlaceHolder extends PlaceholderExpansion {
         if (params.equalsIgnoreCase("online"))
             return "" + Bukkit.getOnlinePlayers().size();
         else if (params.equalsIgnoreCase("status"))
-            return playerData.getPlayerStatus().toString();
+            return playerData.getPlayerStatus().getCurrentStatus();
         else if (params.equalsIgnoreCase("time"))
             return TFWLoader.getGameManager().currentTime();
 

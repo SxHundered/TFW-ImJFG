@@ -4,6 +4,7 @@ import com.tfw.manager.data.PlayerData;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.bukkit.Location;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
@@ -16,6 +17,9 @@ public class PlayerEliminationEvent extends Event {
 
     @Getter
     private final PlayerData playerData;
+
+    @Getter
+    private final Location location;
 
     private static final HandlerList HANDLER_LIST = new HandlerList();
 

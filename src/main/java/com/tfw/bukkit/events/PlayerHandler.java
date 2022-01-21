@@ -1,4 +1,4 @@
-package com.tfw.bukkit;
+package com.tfw.bukkit.events;
 
 import com.tfw.events.custom.PlayerEliminationEvent;
 import com.tfw.events.custom.TFWJoinEvent;
@@ -43,7 +43,7 @@ public class PlayerHandler implements Listener {
 
         assert playerData != null;
 
-        PlayerEliminationEvent playerEliminationEvent = new PlayerEliminationEvent(playerData);
+        PlayerEliminationEvent playerEliminationEvent = new PlayerEliminationEvent(playerData, playerDeathEvent.getEntity().getLocation());
         Bukkit.getServer().getPluginManager().callEvent(playerEliminationEvent);
 
     }

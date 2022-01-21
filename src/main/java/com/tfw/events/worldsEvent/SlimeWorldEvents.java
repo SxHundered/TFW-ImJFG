@@ -11,13 +11,22 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
+ *     ######################################################
+ *     #      THIS PROJECT HAS BEEN CREATED BY ABDULAZIZCR  #
+ *     #              DISCORD: Az#7012                      #
+ *     #              IGN: AbdulAzizCr                      #
+ *     #                                                    #
+ *     #              Date: 1/17/2022                       #
+ *     ######################################################
+ *     Only handle Game modifications
+ *
  *     | Soft Dependency for SlimeWorldManager usage ONLY WORKS WITH 2.2.1 or HIGHER!, IF EXISTED!
  *     | (ONLY USE COMMANDS TO LOAD AND UNLOAD)
  */
 public class SlimeWorldEvents implements Listener {
 
 
-    private JavaPlugin plugin;
+    private final JavaPlugin plugin;
 
     /**
      * Load (WorldLoad & WorldUnload)
@@ -27,12 +36,13 @@ public class SlimeWorldEvents implements Listener {
      * @param javaPlugin Main Class
      */
     public SlimeWorldEvents(JavaPlugin javaPlugin) {
+        this.plugin = javaPlugin;
+
         final DependencyLoader.PLUGINS plugin = DependencyLoader.depencendies.stream().filter(plugins -> plugins.getPluginName().equalsIgnoreCase("SlimeWorldManager")).findFirst().orElse(null);
         if (plugin != null)
             if (plugin.isLoaded()) {
                 javaPlugin.getServer().getPluginManager().registerEvents(this, javaPlugin);
                 Bukkit.getServer().getConsoleSender().sendMessage(Style.translate("&aSlimeWorld events have been triggered!"));
-                this.plugin = javaPlugin;
             }
     }
 

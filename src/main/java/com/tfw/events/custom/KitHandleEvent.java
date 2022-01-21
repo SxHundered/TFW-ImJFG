@@ -1,19 +1,25 @@
 package com.tfw.events.custom;
 
+import com.tfw.manager.data.PlayerData;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.bukkit.plugin.java.JavaPlugin;
 
-@RequiredArgsConstructor
+import java.util.Set;
+
+@RequiredArgsConstructor@Getter
 public class KitHandleEvent extends Event {
 
-    @Getter
     @Setter
     private boolean canceled = false;
 
     private static final HandlerList HANDLER_LIST = new HandlerList();
+
+    private final JavaPlugin javaPlugin;
+    private final Set<PlayerData> playerDataSet;
 
     public static HandlerList getHandlerList() {
         return HANDLER_LIST;

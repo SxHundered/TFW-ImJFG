@@ -4,13 +4,15 @@ import com.tfw.configuration.Style;
 import com.tfw.events.custom.TeamLeaveEvent;
 import com.tfw.main.TFW;
 import com.tfw.manager.data.PlayerData;
+import com.tfw.manager.data.PlayerStatus;
 import com.tfw.scoreboard.AsyncBoard;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *     ######################################################
@@ -90,13 +92,30 @@ public class PlayerManager implements IManage {
      */
     @Override
     public void eliminatePlayer(PlayerData playerData) {
+        playerData.setPlayerStatus(PlayerStatus.DEAD);
 
-        playerData.getPlayer().kickPlayer(Style.RED + "You have lost this tournament! \n §eHave a lovely day");
+        playerData.getPlayer().kickPlayer(Style.translate("&cYou have lost this tournament! \n &aHave a lovely day"));
 
         //Elimination team event!
         if (playerData.getTeam() != null){
             TeamLeaveEvent teamLeaveEvent = new TeamLeaveEvent(playerData, "killed");
             Bukkit.getServer().getPluginManager().callEvent(teamLeaveEvent);
         }
+    }
+
+    /**
+     * @return Retrieve only online players in the server!
+     */
+    @Override
+    public Stream<PlayerData> filtered_online_players() {
+        return getPlayerDataList().stream().filter(Objects::nonNull).filter(PlayerData::isOnline);
+    }
+
+    /**
+     * @return Retrieve all players except staff ones
+     */
+    @Override
+    public Set<PlayerData> exceptStaff() {
+        return getPlayerDataList().stream().filter(Objects::nonNull).filter(playerData -> playerData.isOnline() && !playerData.getSettings().isStaff()).collect(Collectors.toSet());
     }
 }

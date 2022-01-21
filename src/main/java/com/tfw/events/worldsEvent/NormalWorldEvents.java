@@ -8,10 +8,21 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ *     ######################################################
+ *     #      THIS PROJECT HAS BEEN CREATED BY ABDULAZIZCR  #
+ *     #              DISCORD: Az#7012                      #
+ *     #              IGN: AbdulAzizCr                      #
+ *     #                                                    #
+ *     #              Date: 1/17/2022                       #
+ *     ######################################################
+ *     Only handle Game modifications
+ */
+
 public class NormalWorldEvents implements Listener {
 
 
-    private JavaPlugin plugin;
+    private final JavaPlugin plugin;
 
     /**
      * Load (WorldLoad & WorldUnload)
@@ -21,6 +32,7 @@ public class NormalWorldEvents implements Listener {
      * @param javaPlugin Main Class
      */
     public NormalWorldEvents(JavaPlugin javaPlugin) {
+        this.plugin = javaPlugin;
         javaPlugin.getServer().getPluginManager().registerEvents(this, javaPlugin);
     }
 
@@ -34,8 +46,7 @@ public class NormalWorldEvents implements Listener {
 
         Bukkit.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
             Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () ->
-                       Bukkit.unloadWorld(worldLoadEvent.getWorldName(), true)
-                    , 1L);
+                       Bukkit.unloadWorld(worldLoadEvent.getWorldName(), true), 1L);
         });
     }
 

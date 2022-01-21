@@ -1,5 +1,6 @@
 package com.tfw.main;
 
+import com.tfw.bukkit.commands.TFWCommand;
 import com.tfw.configuration.ConfigFile;
 import com.tfw.configuration.Style;
 import com.tfw.events.worldsEvent.MultiverseEvents;
@@ -69,6 +70,8 @@ public final class TFW extends JavaPlugin {
 
         //Generate all stuff needed!
         try {
+            TFWCommand.init(this);
+
             TFWLoader.getArenaManager().arenaSetup(this);
             TFWLoader.getTeamManager().teamSetup(this);
             TFWLoader.getGameManager().gameSetup(this);

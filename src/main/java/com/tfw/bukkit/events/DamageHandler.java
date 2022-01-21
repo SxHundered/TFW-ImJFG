@@ -1,4 +1,4 @@
-package com.tfw.bukkit;
+package com.tfw.bukkit.events;
 
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.data.PlayerData;

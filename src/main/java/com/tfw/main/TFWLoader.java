@@ -1,7 +1,7 @@
 package com.tfw.main;
 
-import com.tfw.bukkit.DamageHandler;
-import com.tfw.bukkit.PlayerHandler;
+import com.tfw.bukkit.events.DamageHandler;
+import com.tfw.bukkit.events.PlayerHandler;
 import com.tfw.events.GameListener;
 import com.tfw.events.PlayerListener;
 import com.tfw.events.SettingsListener;
@@ -15,7 +15,6 @@ import com.tfw.manager.PlayerManager;
 import com.tfw.manager.TeamManager;
 import com.tfw.scoreboard.IScoreboardManager;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;

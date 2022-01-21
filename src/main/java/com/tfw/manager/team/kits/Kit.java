@@ -12,7 +12,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import java.util.Locale;
 
 @RequiredArgsConstructor@Data
-public class Kit implements IKIT{
+public class Kit implements IKIT {
 
     private final ITeam team;
     private CustomItem[] armors;
@@ -26,7 +26,7 @@ public class Kit implements IKIT{
         ConfigurationSection configurationSection = teamConfig.getYaml().getConfigurationSection(path);
         for (String key : configurationSection.getKeys(false)) {
             //armors , contents
-            switch (key.toUpperCase(Locale.ROOT)){
+            switch (key.toUpperCase(Locale.ROOT)) {
                 case "ARMORS":
                     String armorPath = path + "." + key + ".armors";
                     ConfigurationSection armorSection = teamConfig.getYaml().getConfigurationSection(armorPath);
@@ -75,28 +75,8 @@ public class Kit implements IKIT{
 
     @Override
     public void giveKitAll() {
-        for (CustomItem customItem : contents)
-            for (PlayerData playerData : team.alive_members())
-                if (playerData.isOnline())
-                    playerData.getPlayer().getInventory().setItem(customItem.getSlot(), customItem.getItemStack());
-
-        for (CustomItem customItem : armors)
-            for (PlayerData playerData : team.alive_members())
-                if (playerData.isOnline())
-                    switch (customItem.getName().toLowerCase(Locale.ROOT)) {
-                        case "helmet":
-                            playerData.getPlayer().getInventory().setHelmet(customItem.getItemStack());
-                            break;
-                        case "chestplate":
-                            playerData.getPlayer().getInventory().setChestplate(customItem.getItemStack());
-                            break;
-                        case "leggings":
-                            playerData.getPlayer().getInventory().setLeggings(customItem.getItemStack());
-                            break;
-                        case "boots":
-                            playerData.getPlayer().getInventory().setBoots(customItem.getItemStack());
-                            break;
-                    }
+        for (PlayerData playerData : team.alive_members())
+            giveKit(playerData);
     }
 
     @Override
@@ -121,6 +101,7 @@ public class Kit implements IKIT{
                         playerData.getPlayer().getInventory().setBoots(customItem.getItemStack());
                         break;
                 }
+        playerData.textPlayer("%prefix% &eYou have received your kit successfully!");
     }
 
     @Override

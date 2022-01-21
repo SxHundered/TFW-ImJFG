@@ -1,5 +1,5 @@
 main_Arena:
-  displayName: "THE GREAT WAR ARENA"
+  displayName: "THE GREAT WAR ARENA" #
   locations:
     a: 0.5777938708669308, 50.001, 30.57530347383923, -181.13884, 3.0050259, world
     a_heart: 0.5777938708669308, 50.001, 30.57530347383923, -181.13884, 3.0050259, world

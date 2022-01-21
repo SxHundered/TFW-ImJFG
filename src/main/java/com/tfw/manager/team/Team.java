@@ -7,6 +7,8 @@ import com.tfw.main.TFWLoader;
 import com.tfw.manager.data.PlayerData;
 import com.tfw.manager.data.PlayerStatus;
 import com.tfw.manager.team.heart.Heart;
+import com.tfw.manager.team.kits.Kit;
+import com.tfw.particleeffect.ParticlePacketUtil;
 import com.tfw.utils.CustomLocation;
 import lombok.Getter;
 import lombok.NonNull;
@@ -14,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 
 import java.util.ArrayList;
@@ -51,6 +55,9 @@ public class Team implements ITeam{
     private final String color;
     private String teamOrder;
     private TeamStats stats = TeamStats.STATS;
+    private Kit kit;
+
+    private CustomLocation spawn;
 
     /**
      * @return Team name
@@ -148,7 +155,7 @@ public class Team implements ITeam{
                     broadcastTeam(getColorTeam().toString() + target.getPlayerName() + ChatColor.RED + " has been killed!");
                     break;
             }
-            TFWLoader.getGameManager().playSound();
+            TFWLoader.getGameManager().playSound(Sound.AMBIENCE_THUNDER);
 
             //Checks if the game is started!
             //here we check whether the team has no members left to end the game!
@@ -179,6 +186,11 @@ public class Team implements ITeam{
         return Style.translate(chat_format);
     }
 
+    @Override
+    public void setKit(Kit kit) {
+        this.kit = kit;
+    }
+
     public void updateStats(){
         stats.setKills(stats.kills + 1);
     }
@@ -186,6 +198,11 @@ public class Team implements ITeam{
     @Override
     public Heart getHeart() {
         return heart;
+    }
+
+    @Override
+    public void eliminationEffect(Location location) {
+        ParticlePacketUtil.teamElimination_Effect(location, this);
     }
 
     @Override

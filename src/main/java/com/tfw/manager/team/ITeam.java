@@ -2,6 +2,8 @@ package com.tfw.manager.team;
 
 import com.tfw.manager.data.PlayerData;
 import com.tfw.manager.team.heart.Heart;
+import com.tfw.manager.team.kits.IKIT;
+import com.tfw.manager.team.kits.Kit;
 import com.tfw.utils.CustomLocation;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -44,7 +46,11 @@ public interface ITeam {
 
     String chat_Format();
 
+    void setKit(Kit kit);
+
     void generateHeart(EntityType entityType, CustomLocation location);
 
     Heart getHeart();
+
+    void eliminationEffect(Location location);
 }

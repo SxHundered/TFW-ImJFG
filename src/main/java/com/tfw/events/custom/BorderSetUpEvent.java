@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
+import java.util.List;
+
 @RequiredArgsConstructor@Getter
 public class BorderSetUpEvent extends Event {
 
@@ -15,7 +17,7 @@ public class BorderSetUpEvent extends Event {
 
     private final String worldName;
     private final double borderSize;
-    private final double[] center;
+    private final List<Double> center;
 
     private static final HandlerList HANDLER_LIST = new HandlerList();
 

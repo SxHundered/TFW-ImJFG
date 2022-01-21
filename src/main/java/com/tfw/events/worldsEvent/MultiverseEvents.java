@@ -16,7 +16,17 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+
 /**
+ *     ######################################################
+ *     #      THIS PROJECT HAS BEEN CREATED BY ABDULAZIZCR  #
+ *     #              DISCORD: Az#7012                      #
+ *     #              IGN: AbdulAzizCr                      #
+ *     #                                                    #
+ *     #              Date: 1/17/2022                       #
+ *     ######################################################
+ *
+ *     Only handle Game modifications
  *     | Soft Dependency for Multiverse-Core usage ONLY WORKS WITH 2.5-b717 IF EXISTED!
  */
 public class MultiverseEvents implements Listener {

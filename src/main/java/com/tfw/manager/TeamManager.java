@@ -58,9 +58,11 @@ public class TeamManager implements ITeams{
                 //Kits loader
                 Kit kitA = new Kit(A);
                 kitA.loadKits(teamsConfig, pathTeams + "." + A.getIdentifier());
+                A.setKit(kitA);
 
                 Kit kitB = new Kit(B);
                 kitB.loadKits(teamsConfig, pathTeams + "." + B.getIdentifier());
+                B.setKit(kitB);
 
             }else
                 throw new TeamExceptions(Style.translate("&a&lSORRY, &c&lTEAMS CAN NOT BE MORE THAN OR LESS THAN 2 TEAMS IN THE &7&lteams.yml!"));
