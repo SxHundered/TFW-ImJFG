@@ -12,7 +12,9 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.Async;
 
 import java.util.Locale;
@@ -105,7 +107,25 @@ public class PlayerData implements IData{
      */
     @Override
     public void clearPlayer() {
-        //TODO
+        getPlayer().setHealth(20);
+        getPlayer().setMaxHealth(20);
+        getPlayer().setFoodLevel(20);
+        getPlayer().setSaturation(12.8F);
+        getPlayer().setMaximumNoDamageTicks(20);
+        getPlayer().setFireTicks(0);
+        getPlayer().setFallDistance(0.0F);
+        getPlayer().setLevel(0);
+        getPlayer().setExp(0.0F);
+        getPlayer().setWalkSpeed(0.2F);
+        getPlayer().getInventory().setHeldItemSlot(0);
+        getPlayer().setAllowFlight(false);
+        getPlayer().getInventory().clear();
+        getPlayer().getInventory().setArmorContents(null);
+        getPlayer().closeInventory();
+        getPlayer().setGameMode(GameMode.SURVIVAL);
+        for (PotionEffect activePotionEffect : getPlayer().getActivePotionEffects())
+            getPlayer().removePotionEffect(activePotionEffect.getType());
+        getPlayer().updateInventory();
     }
 
     @Override
@@ -114,7 +134,7 @@ public class PlayerData implements IData{
     }
 
     /**
-     * create a full scoreboard for the player.
+     * create a full scoreboard for the getPlayer().
      */
     @Override
     public void generateScoreboard() {
