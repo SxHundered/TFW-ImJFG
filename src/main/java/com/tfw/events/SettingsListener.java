@@ -45,11 +45,9 @@ public class SettingsListener implements Listener {
         worldBorder.setSize(borderSetUpEvent.getBorderSize());
         worldBorder.setWarningDistance(5);
 
-        Bukkit.getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), () -> {
-            TFWLoader.getPlayerManager().filtered_online_players().forEach(playerData -> {
-                PacketPlayOutWorldBorder packet = new PacketPlayOutWorldBorder(worldBorder, PacketPlayOutWorldBorder.EnumWorldBorderAction.INITIALIZE);
-                ((CraftPlayer) playerData.getPlayer()).getHandle().playerConnection.sendPacket(packet);
-            });
+        TFWLoader.getPlayerManager().filtered_online_players().forEach(playerData -> {
+            PacketPlayOutWorldBorder packet = new PacketPlayOutWorldBorder(worldBorder, PacketPlayOutWorldBorder.EnumWorldBorderAction.INITIALIZE);
+            ((CraftPlayer) playerData.getPlayer()).getHandle().playerConnection.sendPacket(packet);
         });
     }
 

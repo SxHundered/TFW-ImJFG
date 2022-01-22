@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -35,13 +36,17 @@ public class PlayerManager implements IManage {
     */
 
     @Getter
-    private final List<PlayerData> playerDataList = new ArrayList<>();
+    private final List<PlayerData> playerDataList = new CopyOnWriteArrayList<>();
 
     /**
      * @param player player needed to be added into the list
      */
     public void addPlayer(Player player){
-        PlayerData playerData = new PlayerData(player.getName(), player.getUniqueId());
+        PlayerData playerData = new PlayerData(player.getName(), player.getUniqueId(),
+                (AsyncBoard.getArgs()[0] + "_" +
+                        player.getName()).length() >= 16 ? (AsyncBoard.getArgs()[0] + "_" +
+                        player.getName()).substring(0, 15) : (AsyncBoard.getArgs()[0] + "_" +
+                        player.getName()));
 
         playerData.preparePlayer();
 
@@ -61,18 +66,24 @@ public class PlayerManager implements IManage {
     @Override
     public void removePlayer(PlayerData playerData) {
 
-        //Deleting the player from his team,
-        final String teamOrder = playerData.getTeam().getTeamOrder();
-
-        //The player is still on a team, meaning that we might be in LOBBY STATE SO YEAH :p
-        if (playerData.getTeam() != null)
-            playerData.getTeam().removeTeamPlayer(playerData, "leave");
+        playerData.setPlayerStatus(PlayerStatus.DEAD);
 
         AsyncBoard.getBoardArrayList().remove(playerData.getFastBoard());
 
+        String teamRemoval;
+
+        //The player is still on a team, meaning that we might be in LOBBY STATE SO YEAH :p
+        if (playerData.getTeam() != null) {
+            playerData.getTeam().removeTeamPlayer(playerData, "leave");
+
+            //Deleting the player from his team,
+            teamRemoval = playerData.getTeam().getTeamOrder();
+        }else
+            teamRemoval = playerData.getDefaultTeam();
+
         for (PlayerData playerDatas : playerDataList)
             if (playerDatas.isOnline())
-                playerDatas.getFastBoard().delete(teamOrder);
+                playerDatas.getFastBoard().delete(teamRemoval);
 
         Bukkit.getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), () -> playerDataList.remove(playerData));
     }

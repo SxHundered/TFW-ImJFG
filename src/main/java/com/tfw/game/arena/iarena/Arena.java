@@ -54,9 +54,17 @@ public class Arena implements IArena{
     public boolean prepareLocations(CustomLocation a, CustomLocation b, CustomLocation a_heart, CustomLocation b_heart) throws ArenaExceptions {
         //Here prepare locations Needed!
         this.a = a;
+        TeamManager.getA().setSpawn(a);
+
         this.b = b;
+        TeamManager.getB().setSpawn(a);
+
         this.a_heart = a_heart;
+        TeamManager.getA().getHeart().updateHeart(a_heart);
+
+
         this.b_heart = b_heart;
+        TeamManager.getB().getHeart().updateHeart(a_heart);
         return true;
     }
 }

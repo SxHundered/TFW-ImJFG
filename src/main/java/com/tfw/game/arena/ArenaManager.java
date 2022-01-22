@@ -30,12 +30,15 @@ public class ArenaManager implements IArenas {
     private static Arena arena;
 
     @Getter@Setter
+    private CustomLocation spawn;
+
+    @Getter@Setter
     private static String worldName;
 
     @Getter(AccessLevel.PRIVATE)
     String pathArena = "main_Arena";
-    @Getter(AccessLevel.PRIVATE)
-    ConfigFile arenasConfig;
+    @Getter(AccessLevel.PUBLIC)
+    static ConfigFile arenasConfig;
 
     String[] chars = {"a", "a_heart", "b", "b_heart"};
 
@@ -49,6 +52,9 @@ public class ArenaManager implements IArenas {
 
         if (!arenasConfig.getYaml().contains(pathArena))
             throw new ArenaExceptions(Style.RED + Style.translate("&cCOULD NOT FIND ANY ARENA!, &aPLEASE SETUP USING &7/arena create &c&lmain"));
+
+        if (arenasConfig.getYaml().contains(pathArena + ".spawn"))
+            spawn = CustomLocation.stringToLocation(arenasConfig.getString(pathArena + ".spawn"));
 
         pathArena = pathArena + ".displayName";
 

@@ -3,6 +3,7 @@ package com.tfw.events;
 import com.tfw.events.custom.PlayerEliminationEvent;
 import com.tfw.events.custom.TFWJoinEvent;
 import com.tfw.events.custom.TFWLeaveEvent;
+import com.tfw.game.arena.ArenaManager;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.TeamManager;
 import com.tfw.manager.team.Team;
@@ -35,6 +36,9 @@ public class PlayerListener implements Listener {
         final Player player = tfwJoinEvent.getPlayer();
 
         TFWLoader.getPlayerManager().addPlayer(player);
+
+        if (TFWLoader.getArenaManager().getSpawn() != null)
+            player.teleport(TFWLoader.getArenaManager().getSpawn().toBukkitLocation());
     }
 
     /**

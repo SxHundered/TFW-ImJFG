@@ -14,10 +14,9 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 
 import java.util.ArrayList;
@@ -39,7 +38,7 @@ import java.util.stream.Collectors;
  */
 
 @RequiredArgsConstructor@Getter@Setter
-public class Team implements ITeam{
+public class Team implements ITeam {
 
     //TODO: UPDATE STATS TEAM METHODS! F4RES
 
@@ -143,7 +142,7 @@ public class Team implements ITeam{
      * @param target Removes the target player from the list given!
      */
     @Override
-    public void removeTeamPlayer(@NonNull PlayerData target, String reason){
+    public void removeTeamPlayer(@NonNull PlayerData target, String reason) {
         players.remove(target);
         target.setTeam(null);
 
@@ -160,8 +159,8 @@ public class Team implements ITeam{
 
             //Checks if the game is started!
             //here we check whether the team has no members left to end the game!
-            if (currentAlive() == 0){
-                Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TFW.getInstance(), ()-> {
+            if (currentAlive() == 0) {
+                Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TFW.getInstance(), () -> {
                     TeamEliminationEvent teamEliminationEvent = new TeamEliminationEvent(this);
                     Bukkit.getServer().getPluginManager().callEvent(teamEliminationEvent);
                 });
@@ -192,7 +191,24 @@ public class Team implements ITeam{
         this.kit = kit;
     }
 
-    public void updateStats(){
+    @Override
+    public void heartSetUp(Material block, CustomLocation location) {
+        heart = new Heart(this, block);
+
+        if (location == null)
+            return;
+        heart.setLocation(location);
+        heart.setWorld(Bukkit.getWorld(location.getWorld()));
+    }
+
+    @Override
+    public void spawnHeart() {
+        heart.spawnEffect();
+        heart.spawnHeart();
+        broadcastTeam(TFW.getPrefix() + ChatColor.GREEN.toString() + "YOUR HEART HAS BEEN SPAWNED!\n  §e§lPROTECT YOUR HEART,§c§l AND DESTROY THEIR HEART TO WIN THE GAME!");
+    }
+
+    public void updateStats() {
         stats.setKills(stats.kills + 1);
     }
 
@@ -207,12 +223,15 @@ public class Team implements ITeam{
     }
 
     @Override
-    public void generateHeart(EntityType entityType, CustomLocation location) {
-        heart = new Heart(this, entityType, location);
+    public TextComponent getMembersAsString() {
 
-        heart.setWorld(Bukkit.getWorld(location.getWorld()));
-        heart.spawnEffect();
-        heart.spawnHeart();
-        broadcastTeam(TFW.getPrefix() + ChatColor.GREEN.toString() + "YOUR HEART HAS BEEN SPAWNED!\n  §e§lPROTECT YOUR HEART,§c§l AND DESTROY THEIR HEART TO WIN THE GAME!");
+        TextComponent textComponent = new TextComponent("Team Members: ");
+
+        getMembers().forEach(playerData ->
+                textComponent.addExtra(playerData.getPlayerName() + ", ")
+        );
+
+        return null;
     }
+
 }

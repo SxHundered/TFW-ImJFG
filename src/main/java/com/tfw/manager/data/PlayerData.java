@@ -48,6 +48,8 @@ public class PlayerData implements IData{
     private final Stats stats = Stats.STATS;
     private final Settings settings = Settings.PLAYER_SETTINGS;
 
+    private final String defaultTeam;
+
     private Team team;
     private PlayerBoard fastBoard;
     private PlayerStatus playerStatus = PlayerStatus.LOBBY;
@@ -125,16 +127,12 @@ public class PlayerData implements IData{
 
         AsyncBoard.createTeams_Instance(getPlayer(), playerBoard, 0);
         getPlayer().setScoreboard(playerBoard.getScoreboard());
+        fastBoard.updateTitle();
 
         //Async
         Bukkit.getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), ()->{
             AsyncBoard.getBoardArrayList().add(getFastBoard());
             AsyncBoard.updateTitle();
-            try {
-                getFastBoard().setIScoreboard(TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.LOBBY));
-            } catch (IScoreboardException e) {
-                Bukkit.getConsoleSender().sendMessage(e.getMessage());
-            }
         });
     }
 

@@ -1,6 +1,5 @@
 package com.tfw.events;
 
-import com.tfw.events.custom.CelebrationEvent;
 import com.tfw.events.custom.TeamEliminationEvent;
 import com.tfw.events.custom.TeamJoinEvent;
 import com.tfw.events.custom.TeamLeaveEvent;
@@ -22,7 +21,7 @@ import org.bukkit.event.Listener;
  *     #                                                    #
  *     #              Date: 1/17/2022                       #
  *     ######################################################
- *     Only handle Game modifications
+ *
  */
 
 public class TeamListener implements Listener {

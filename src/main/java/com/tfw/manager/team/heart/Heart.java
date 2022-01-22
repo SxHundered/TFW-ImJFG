@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 
@@ -16,8 +17,8 @@ public class Heart implements IHeart{
     //TODO: F4RES DO IT PLEASE
 
     private final ITeam team;
-    private final EntityType entity;
-    private final CustomLocation location;
+    private final Material entity;
+    private CustomLocation location;
     private boolean destroyed = false;
     private World world;
 
@@ -27,7 +28,7 @@ public class Heart implements IHeart{
      */
     @Override
     public void spawnHeart() {
-        world.spawnEntity(location.toBukkitLocation(), entity);
+       // world.spawnEntity(location.toBukkitLocation(), entity);
         //ADD THE HOLOGRAM
     }
 
@@ -40,6 +41,12 @@ public class Heart implements IHeart{
     public void destroyHeart(String destroyer) {
         Bukkit.broadcastMessage(Style.translate(destroyer + " has destroied " + getTeam() + "'s HEART!"));
         world.playEffect(getLocation().toBukkitLocation(), Effect.BLAZE_SHOOT, 1, 1);
+    }
+
+    @Override
+    public void updateHeart(CustomLocation location) {
+        setLocation(location);
+        setWorld(Bukkit.getWorld(location.getWorld()));
     }
 
     /**

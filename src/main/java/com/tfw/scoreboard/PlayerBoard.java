@@ -1,5 +1,6 @@
 package com.tfw.scoreboard;
 
+import com.tfw.main.TFWLoader;
 import com.tfw.manager.data.PlayerData;
 import com.tfw.scoreboard.boards.FastBoard;
 import lombok.Getter;
@@ -22,19 +23,15 @@ public class PlayerBoard extends FastBoard {
 
     private final boolean deleted = false;
 
-    public PlayerBoard(Player player, IScoreboard iScoreboard, PlayerData playerData) {
-        super(player);
-        this.iScoreboard = iScoreboard;
-        this.playerData = playerData;
-        this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-    }
-
     public PlayerBoard(Player player, PlayerData playerData) {
         super(player);
 
-        //FOR DEBUG ONLY!
-        this.iScoreboard.setLines(new String[]{"&a&lABDULAZIZ", "&eHI", "&bLOVELY"});
-
+        try {
+            this.iScoreboard = TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.LOBBY);
+            System.out.println(iScoreboard);
+        } catch (IScoreboardException e) {
+            e.printStackTrace();
+        }
 
         this.playerData = playerData;
         this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
@@ -49,6 +46,6 @@ public class PlayerBoard extends FastBoard {
         if (getIScoreboard().isAnimated())
             updateTitle(getIScoreboard().animatedText());
         else
-            updateTitle(getIScoreboard().getStaticTitle());
+            updateTitle(getIScoreboard().getStaticTitle() == null ? "NO STATIC TITLE" : getIScoreboard().getStaticTitle());
     }
 }

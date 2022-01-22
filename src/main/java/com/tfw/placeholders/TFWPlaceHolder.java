@@ -2,6 +2,7 @@ package com.tfw.placeholders;
 
 import com.tfw.configuration.Style;
 import com.tfw.game.arena.ArenaManager;
+import com.tfw.game.arena.iarena.Arena;
 import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.data.PlayerData;
@@ -55,38 +56,41 @@ public class TFWPlaceHolder extends PlaceholderExpansion {
     private String onRequests(Player p, String params) {
         //All placeholders place here and translated!
 
-        final PlayerData playerData = TFWLoader.getPlayerManager().data(p.getName());
+        PlayerData playerData = TFWLoader.getPlayerManager().data(p.getName());
 
-        if(playerData == null)
-            return "";
+        if (playerData != null) {
+            if (params.equalsIgnoreCase("online"))
+                return "" + Bukkit.getOnlinePlayers().size();
+            else if (params.equalsIgnoreCase("status"))
+                return playerData.getPlayerStatus().getCurrentStatus();
+            else if (params.equalsIgnoreCase("time"))
+                return TFWLoader.getGameManager().currentTime();
 
-        if (params.equalsIgnoreCase("online"))
-            return "" + Bukkit.getOnlinePlayers().size();
-        else if (params.equalsIgnoreCase("status"))
-            return playerData.getPlayerStatus().getCurrentStatus();
-        else if (params.equalsIgnoreCase("time"))
-            return TFWLoader.getGameManager().currentTime();
+            Team team = playerData.getTeam();
+            if(team != null) {
+                if (params.equalsIgnoreCase("team_name"))
+                    return team.getTeam();
+                else if (params.equalsIgnoreCase("team_alive"))
+                    return "" + team.currentAlive();
+                else if (params.equalsIgnoreCase("team_kills"))
+                    return "" + team.getStats().getKills();
+                else if (params.equalsIgnoreCase("team_heart"))
+                    return team.getTeam() + "'s" + Style.RED + Style.BOLD + "HEART";
+                else if (params.equalsIgnoreCase("team_heart_status"))
+                    return (team.getHeart().isDestroyed() ? Style.RED + "\u274C" : Style.GREEN + "\u2713");
+            }else {
+                if (params.equalsIgnoreCase("team_name"))
+                    return "&c&lNO TEAM";
+            }
+        }
 
-        Team team = playerData.getTeam();
-
-        if(team == null)
-            return "";
-
-        if (params.equalsIgnoreCase("team_name"))
-            return team.getTeam();
-        else if (params.equalsIgnoreCase("team_alive"))
-            return "" + team.currentAlive();
-        else if (params.equalsIgnoreCase("team_kills"))
-            return "" + team.getStats().getKills();
-        else if (params.equalsIgnoreCase("team_heart"))
-            return team.getTeam() + "'s" + Style.RED + Style.BOLD + "HEART";
-        else if (params.equalsIgnoreCase("team_heart_status"))
-            return (team.getHeart().isDestroyed() ? Style.RED + "\u274C" : Style.GREEN + "\u2713");
-        else if (params.equalsIgnoreCase("arena_name"))
-            return ArenaManager.getArena().getName();
-        else if (params.equalsIgnoreCase("arena_players"))
-            return "" + ArenaManager.getArena().arena_Players();
-
+        Arena arena = ArenaManager.getArena();
+        if (arena != null) {
+            if (params.equalsIgnoreCase("arena_name"))
+                return arena.getName();
+            else if (params.equalsIgnoreCase("arena_players"))
+                return "" + arena.arena_Players();
+        }
         return "";
     }
 }

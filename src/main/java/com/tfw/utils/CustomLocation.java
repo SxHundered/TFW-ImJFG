@@ -39,11 +39,17 @@ public class CustomLocation {
     }
 
     public static CustomLocation fromBukkitLocation(Location location) {
+
+        if (location == null)
+            return null;
+
         return new CustomLocation(location.getWorld().getName(), location.getX(), location.getY(), location.getZ(),
                 location.getYaw(), location.getPitch());
     }
 
     public static CustomLocation stringToLocation(String string) {
+        if (string == null)
+            return null;
 
         String[] split = string.split(", ");
         if (split.length != 0) {
@@ -60,19 +66,19 @@ public class CustomLocation {
     }
 
     public static String locationToString(CustomLocation loc) {
+        if (loc == null)
+            return null;
+
         StringJoiner joiner = new StringJoiner(", ");
         joiner.add(Double.toString(loc.getX()));
         joiner.add(Double.toString(loc.getY()));
         joiner.add(Double.toString(loc.getZ()));
-        if (loc.getYaw() == 0.0f && loc.getPitch() == 0.0f) {
-            joiner.add(loc.getWorld());
-            return joiner.toString();
-        } else {
+        if (loc.getYaw() != 0.0f || loc.getPitch() != 0.0f) {
             joiner.add(Float.toString(loc.getYaw()));
             joiner.add(Float.toString(loc.getPitch()));
-            joiner.add(loc.getWorld());
-            return joiner.toString();
         }
+        joiner.add(loc.getWorld());
+        return joiner.toString();
     }
 
     public Location toBukkitLocation() {

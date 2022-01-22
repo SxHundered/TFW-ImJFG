@@ -5,8 +5,10 @@ import com.tfw.manager.team.heart.Heart;
 import com.tfw.manager.team.kits.IKIT;
 import com.tfw.manager.team.kits.Kit;
 import com.tfw.utils.CustomLocation;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 
 import java.util.List;
@@ -48,9 +50,13 @@ public interface ITeam {
 
     void setKit(Kit kit);
 
-    void generateHeart(EntityType entityType, CustomLocation location);
+    void heartSetUp(Material block, CustomLocation location);
+
+    void spawnHeart();
 
     Heart getHeart();
 
     void eliminationEffect(Location location);
+
+    TextComponent getMembersAsString();
 }

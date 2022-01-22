@@ -11,6 +11,7 @@ import com.tfw.game.arena.ArenaManager;
 import com.tfw.game.arena.iarena.Arena;
 import com.tfw.game.arena.iarena.IArena;
 import com.tfw.game.task.GameTask;
+import com.tfw.game.task.IScoreBoardTask;
 import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.TeamManager;
@@ -46,7 +47,7 @@ import java.util.Set;
 @Getter
 public class GameManager implements IGame,ISettings{
 
-    @Getter(AccessLevel.PRIVATE)
+    @Getter
     private static ConfigFile settings;
     private GameTask gameTask;
     private WorldSettings worldSettings;
@@ -61,6 +62,8 @@ public class GameManager implements IGame,ISettings{
         worldSettings = new WorldSettings();
         javaPlugin.getServer().getPluginManager().registerEvents(worldSettings, javaPlugin);
         worldSettings.setUpWorldSettings(javaPlugin, settings);
+
+        new IScoreBoardTask().runTaskTimerAsynchronously(javaPlugin, 0L, 1L);
     }
 
     /**

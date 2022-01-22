@@ -2,15 +2,18 @@ package com.tfw.scoreboard;
 
 import com.tfw.configuration.Style;
 import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@RequiredArgsConstructor@Data
-public class IScoreboard implements IScore{
+@RequiredArgsConstructor@Getter@Setter
+public class IScoreboard extends BukkitRunnable implements IScore{
 
     private final String name;
     private int index = 0;
@@ -29,7 +32,8 @@ public class IScoreboard implements IScore{
     public IScoreboard(String name, List<String> animationTitle, int size){
         this.name = name;
         staticTitle = null;
-        animationTitle = new ArrayList<>(animationTitle);
+        this.animationTitle = new ArrayList<>(animationTitle);
+
         this.lines = new String[size];
     }
 
@@ -58,12 +62,12 @@ public class IScoreboard implements IScore{
 
     @Override
     public String animatedText() {
-        return isAnimated() ? getAnimationTitle().get(index) : staticTitle;
+        return isAnimated() ? getAnimationTitle().get(index) : "NO ANIMATED TITLE!";
     }
 
     @Override
     public boolean isAnimated() {
-        return animationTitle != null;
+        return staticTitle == null;
     }
 
     @Override
@@ -77,5 +81,14 @@ public class IScoreboard implements IScore{
         for (String line : lines)
             Bukkit.getConsoleSender().sendMessage(Style.translate(line));
         Bukkit.getConsoleSender().sendMessage(Style.BLUE + "}");
+    }
+
+    @Override
+    public void run() {
+        //if Animated Run this task!
+        if ((index +1) == animationTitle.size())
+            index = 0;
+        else
+            index++;
     }
 }

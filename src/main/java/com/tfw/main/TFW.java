@@ -72,9 +72,10 @@ public final class TFW extends JavaPlugin {
         try {
             TFWCommand.init(this);
 
-            TFWLoader.getArenaManager().arenaSetup(this);
             TFWLoader.getTeamManager().teamSetup(this);
+            TFWLoader.getArenaManager().arenaSetup(this);
             TFWLoader.getGameManager().gameSetup(this);
+            TFWLoader.getIScoreboardManager().loadScoreboards(this);
         } catch (ArenaExceptions | TeamExceptions | WorldExceptions e) {
             Bukkit.getConsoleSender().sendMessage(e.getMessage());
         }

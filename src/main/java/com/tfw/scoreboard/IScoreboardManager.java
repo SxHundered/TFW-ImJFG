@@ -35,6 +35,10 @@ public class IScoreboardManager {
             //Path
             iScoreboard.createScoreboard(Style.translateLines(scoreboards_config.getStringList(pathPrefix + "." + identifier + ".lines")));
 
+            //Activate scoreboard animator task
+            if (iScoreboard.isAnimated())
+                iScoreboard.runTaskTimerAsynchronously(javaPlugin, scoreboards_config.getInt(pathPrefix + "." + identifier + ".titleOptions.interval"), scoreboards_config.getInt(pathPrefix + "." + identifier + ".titleOptions.delay"));
+
             switch (identifier.toLowerCase(Locale.ROOT)){
                 case "lobby":
                     scoreboardHashMap.put(ScoreboardTYPE.LOBBY, iScoreboard);
@@ -48,6 +52,7 @@ public class IScoreboardManager {
                 case "staff":
                     scoreboardHashMap.put(ScoreboardTYPE.STAFF, iScoreboard);
             }
+
         }
     }
 

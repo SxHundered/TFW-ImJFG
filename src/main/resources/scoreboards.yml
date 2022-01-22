@@ -1,4 +1,4 @@
-Scoreboards:
+scoreboards:
   Lobby: #ISCOREBOARD identifier ,
     titleOptions:
       animated: false

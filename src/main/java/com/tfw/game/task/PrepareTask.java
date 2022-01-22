@@ -2,7 +2,6 @@ package com.tfw.game.task;
 
 import com.tfw.configuration.Style;
 import com.tfw.game.GameManager;
-import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;

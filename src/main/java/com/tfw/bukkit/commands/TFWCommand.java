@@ -1,10 +1,14 @@
 package com.tfw.bukkit.commands;
 
 import com.tfw.bukkit.commands.sub.CheckCommand;
+import com.tfw.bukkit.commands.sub.GameCommand;
 import com.tfw.bukkit.commands.sub.HelpCommand;
+import com.tfw.bukkit.commands.sub.TeamCommand;
+import com.tfw.bukkit.commands.sub.debug.ScoreboardCommand;
 import com.tfw.configuration.Style;
 import com.tfw.main.TFW;
 import lombok.Getter;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -24,7 +28,9 @@ public class TFWCommand {
             }
         };
 
-        Arrays.asList(new HelpCommand(instance, "help"), new CheckCommand(instance, "check")).forEach(tfwCommandBase ->
+        Arrays.asList(new HelpCommand(instance, "help"), new CheckCommand(instance, "check")
+                , new TeamCommand(instance, "team")
+                , new GameCommand(instance, "game"), new ScoreboardCommand(instance, "iscore")).forEach(tfwCommandBase ->
                 checkCommand.registerSubCommand(tfwCommandBase.getName(), tfwCommandBase));
 
         instance.getCommand("TFW").setExecutor(checkCommand);
@@ -33,6 +39,8 @@ public class TFWCommand {
     static List<String> HELP_OP = Arrays.asList(
             "%prefix% &5Commands",
             "",
-            "/tfw &echeck &b<playername>",
-            "&7/tfw &ehelp");
+            "&7/tfw &echeck &b<playername>",
+            "&7/tfw &ehelp",
+             "&7Authors: &aAbdulAzizCr &7& &eF4res",
+             "&eSource Code:&a&l https://github.com/SxHundered/TFW-ImJFG");
 }

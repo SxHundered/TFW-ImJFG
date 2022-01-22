@@ -1,6 +1,7 @@
 package com.tfw.game.task;
 
-import com.tfw.game.GameManager;
+import com.tfw.scoreboard.AsyncBoard;
+import com.tfw.scoreboard.PlayerBoard;
 import org.bukkit.scheduler.BukkitRunnable;
 
 
@@ -12,26 +13,23 @@ import org.bukkit.scheduler.BukkitRunnable;
  *     #                                                    #
  *     #              Date: 1/17/2022                       #
  *     ######################################################
- *     Only handle Game modifications
+ *     Async Task Scoreboard Updater!
  */
 
-// TODO:
 public class IScoreBoardTask extends BukkitRunnable {
-
-    //WE DO NOT STOP THIS TASK AT ALL!
 
     @Override
     public void run() {
+        for (PlayerBoard scoreBoard : AsyncBoard.getBoardArrayList()){
+            if (scoreBoard == null)
+                continue;
+            else if(!scoreBoard.getPlayerData().getSettings().isRefresh())
+                continue;
 
-        switch (GameManager.GameStates.getGameStates()){
-            case LOBBY:
-                break;
-            case INGAME:
-                break;
-            case RESTART:
-                break;
-            case COUNTDOWN:
-                break;
+            AsyncBoard.generate_ifExists(scoreBoard);
+
+            //Update lines
+            AsyncBoard.updateBoard(scoreBoard);
         }
     }
 }

@@ -25,7 +25,7 @@ public class CheckCommand extends CommandBase<TFW> {
     @Override
     public boolean runCommand(CommandSender sender, Command rootCommand, String label, String[] args) {
 
-        if (args.length != 2) {
+        if (args.length != 1) {
             sender.sendMessage(Style.translate(CHECK_USAGE));
             return true;
         }
@@ -48,7 +48,7 @@ public class CheckCommand extends CommandBase<TFW> {
             sender.sendMessage(Style.translate(detail.replace("%playerName%", target.getName())
                     .replace("%states%", playerData.getPlayerStatus().getCurrentStatus()).replace("%team%",
                             playerData.getTeam() == null ? "&c&lNONE" : playerData.getTeam().getColorTeam() + playerData.getTeam().getTeam())));
-        return false;
+        return true;
     }
 
     final List<String> DETAILS = Arrays.asList(
