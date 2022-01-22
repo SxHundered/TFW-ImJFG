@@ -28,4 +28,6 @@ public interface IGame {
     void loadKits(Set<PlayerData> playerDataSet);
 
     void startGameTask();
+
+    String game_info();
 }

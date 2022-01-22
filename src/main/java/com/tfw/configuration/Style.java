@@ -66,14 +66,13 @@ public final class Style {
 
 	public static List<String> translateLines_Holders(Player player, List<String> lines) {
 
-		//TODO: REPLACE ALL HOLDERS WITH THE ONES WE SAVED!
-
 		List<String> toReturn = new ArrayList<>();
 
-		for (String line : lines)
-			toReturn.add(PlaceholderAPI.setPlaceholders(player,
-					ChatColor.translateAlternateColorCodes('&', line.replace("%prefix%", TFW.getPrefix()))
-			));
+		for (String line : lines) {
+			line = PlaceholderAPI.setPlaceholders(player, ChatColor.translateAlternateColorCodes('&', line.replace("%prefix%", TFW.getPrefix())));
+			line = line.length() > 30 ? line.substring(0, 29) : line;
+			toReturn.add(line);
+		}
 
 		return toReturn;
 	}

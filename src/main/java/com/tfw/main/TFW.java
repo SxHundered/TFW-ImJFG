@@ -6,6 +6,7 @@ import com.tfw.configuration.Style;
 import com.tfw.events.worldsEvent.MultiverseEvents;
 import com.tfw.events.worldsEvent.NormalWorldEvents;
 import com.tfw.events.worldsEvent.SlimeWorldEvents;
+import com.tfw.game.GameManager;
 import com.tfw.game.WorldExceptions;
 import com.tfw.game.arena.ArenaExceptions;
 import com.tfw.manager.TeamExceptions;
@@ -76,10 +77,14 @@ public final class TFW extends JavaPlugin {
             TFWLoader.getArenaManager().arenaSetup(this);
             TFWLoader.getGameManager().gameSetup(this);
             TFWLoader.getIScoreboardManager().loadScoreboards(this);
+            
         } catch (ArenaExceptions | TeamExceptions | WorldExceptions e) {
             Bukkit.getConsoleSender().sendMessage(e.getMessage());
+            this.getServer().getPluginManager().disablePlugin(this);
+            return;
         }
 
+        GameManager.GameStates.setGameStates(GameManager.GameStates.LOBBY);
     }
 
     @Override

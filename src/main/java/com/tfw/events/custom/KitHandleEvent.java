@@ -4,6 +4,7 @@ import com.tfw.manager.data.PlayerData;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -28,5 +29,17 @@ public class KitHandleEvent extends Event {
     @Override
     public HandlerList getHandlers() {
         return HANDLER_LIST;
+    }
+
+    public void loadKits(){
+        Bukkit.getServer().getScheduler().runTaskLater(javaPlugin, ()-> {
+            for (PlayerData playerData : playerDataSet) {
+                //Skip condition
+                if (!playerData.isOnline() || playerData.getTeam() == null)
+                    continue;
+                playerData.clearPlayer();
+                playerData.getTeam().getKit().giveKit(playerData);
+            }
+        }, 1L);
     }
 }

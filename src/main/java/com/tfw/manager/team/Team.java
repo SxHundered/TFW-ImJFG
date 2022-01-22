@@ -130,6 +130,7 @@ public class Team implements ITeam {
             return false;
 
         players.add(target);
+        target.setTeam(this);
         broadcastTeam(getColorTeam().toString() + target.getPlayerName() + ChatColor.YELLOW + " has joined your team!");
         return true;
     }
@@ -138,6 +139,7 @@ public class Team implements ITeam {
      * Removes a team player from the game!
      * Play sound effects, for all players
      * If playing and the team is empty it means the game has ended!
+     * Async Call method!
      *
      * @param target Removes the target player from the list given!
      */
@@ -146,7 +148,7 @@ public class Team implements ITeam {
         players.remove(target);
         target.setTeam(null);
 
-        if (target.getPlayerStatus().equals(PlayerStatus.PLAYING)) {
+        if (target.getPlayerStatus().equals(PlayerStatus.PLAYING) || target.getPlayerStatus().equals(PlayerStatus.DEAD)) {
             switch (reason.toLowerCase(Locale.ROOT)) {
                 case "leave":
                     broadcastTeam(getColorTeam().toString() + target.getPlayerName() + ChatColor.RED + " has left your team!");
@@ -166,8 +168,6 @@ public class Team implements ITeam {
                 });
             }
         }
-
-        //LOBBY STATE NO CHANGES REQUIRED!
     }
 
     /**
@@ -231,7 +231,7 @@ public class Team implements ITeam {
                 textComponent.addExtra(playerData.getPlayerName() + ", ")
         );
 
-        return null;
+        return textComponent;
     }
 
 }

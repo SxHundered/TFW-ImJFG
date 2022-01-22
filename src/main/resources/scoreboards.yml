@@ -17,10 +17,10 @@ scoreboards:
       interval: 0
       delay: 1
       title:
-        - "lobby title"
+        - "GRACE SCOREBOARD"
     lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
-      - ""
-      - ""
+      - "GRACING"
+      - "..."
       - ""
       - ""
   InGame: #ISCOREBOARD identifier

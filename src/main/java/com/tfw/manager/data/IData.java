@@ -13,6 +13,8 @@ public interface IData {
 
     boolean isOnline();
 
+    void backToHome();
+
     void textPlayer(String massage);
 
     void textPlayer(TextComponent massage);

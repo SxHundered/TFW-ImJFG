@@ -57,8 +57,15 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onElimination(PlayerEliminationEvent playerEliminationEvent){
 
+        if (playerEliminationEvent.getPlayerData().getTeam() == null)
+            return;
+
         //Elimination effect!
-        Team killerTeam = TeamManager.getA().equals(playerEliminationEvent.getPlayerData().getTeam()) ? TeamManager.getB() : TeamManager.getA();
+        final Team killerTeam = TeamManager.getA().equals(playerEliminationEvent.getPlayerData().getTeam()) ? TeamManager.getB() : TeamManager.getA();
+
+        if (killerTeam.getPlayers().size() == 0)
+            return;
+
         killerTeam.eliminationEffect(playerEliminationEvent.getLocation());
         killerTeam.updateStats();
 

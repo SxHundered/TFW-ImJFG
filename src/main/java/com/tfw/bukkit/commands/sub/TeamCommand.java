@@ -2,6 +2,8 @@ package com.tfw.bukkit.commands.sub;
 
 import com.tfw.bukkit.commands.CommandBase;
 import com.tfw.configuration.Style;
+import com.tfw.events.custom.TeamJoinEvent;
+import com.tfw.events.custom.TeamLeaveEvent;
 import com.tfw.game.GameManager;
 import com.tfw.game.arena.ArenaManager;
 import com.tfw.main.TFW;
@@ -42,7 +44,7 @@ public class TeamCommand extends CommandBase<TFW> {
 
     @Override
     public boolean runCommand(CommandSender sender, Command rootCommand, String label, String[] args) {
-        if (args.length == 0){
+        if (args.length == 0) {
             for (String s : CHECK_USAGE)
                 sender.sendMessage(Style.translate(s));
             return true;
@@ -79,7 +81,9 @@ public class TeamCommand extends CommandBase<TFW> {
                                 sender.sendMessage(Style.translate(TEAM_NOT_FOUND.replace("%team_name%", args[2])));
                                 return true;
                             } else {
-                                playerData.setTeam(team1);
+                                TeamJoinEvent teamJoinEvent = new TeamJoinEvent(playerData, team1);
+                                Bukkit.getServer().getPluginManager().callEvent(teamJoinEvent);
+
                                 sender.sendMessage(Style.translate(PLAYER_ADDED_TO_TEAM.replace("%team_name%", args[2]).replace("%player_name%", args[1])));
                                 playerData.textPlayer(Style.translate(YOU_HAVE_BEEN_ADDED.replace("%team_name%", args[2]).replace("%operator%", sender.getName())));
                             }
@@ -95,7 +99,9 @@ public class TeamCommand extends CommandBase<TFW> {
                     } else {
                         sender.sendMessage(Style.translate(REMOVED_FROM_TEAM.replace("%player_name%", args[1]).replace("%team_name%", args[2])));
                         playerData.textPlayer(Style.translate(YOU_HAVE_BEEN_REMOVED.replace("%team_name%", args[2]).replace("%operator%", sender.getName())));
-                        team.removeTeamPlayer(playerData, "leave");
+
+                        TeamLeaveEvent teamLeaveEvent = new TeamLeaveEvent(playerData, "leave");
+                        Bukkit.getServer().getPluginManager().callEvent(teamLeaveEvent);
                     }
                 }
                 break;
@@ -140,7 +146,8 @@ public class TeamCommand extends CommandBase<TFW> {
                 try {
                     TFWLoader.getTeamManager().updateConfig(ArenaManager.getArenasConfig());
                     sender.sendMessage(Style.translate(CONFIGURATION_SAVED));
-                } catch (TeamExceptions ignore) {}
+                } catch (TeamExceptions ignore) {
+                }
                 break;
         }
         return true;

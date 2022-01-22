@@ -7,6 +7,7 @@ import com.tfw.manager.data.PlayerData;
 import com.tfw.manager.data.PlayerStatus;
 import com.tfw.scoreboard.AsyncBoard;
 import lombok.Getter;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -41,7 +42,7 @@ public class PlayerManager implements IManage {
     /**
      * @param player player needed to be added into the list
      */
-    public void addPlayer(Player player){
+    public void addPlayer(Player player) {
         PlayerData playerData = new PlayerData(player.getName(), player.getUniqueId(),
                 (AsyncBoard.getArgs()[0] + "_" +
                         player.getName()).length() >= 16 ? (AsyncBoard.getArgs()[0] + "_" +
@@ -57,7 +58,6 @@ public class PlayerManager implements IManage {
     }
 
     /**
-     *
      * Checks whether the player inside a team or not!
      * Disabling scoreboard for the player!
      *
@@ -78,7 +78,7 @@ public class PlayerManager implements IManage {
 
             //Deleting the player from his team,
             teamRemoval = playerData.getTeam().getTeamOrder();
-        }else
+        } else
             teamRemoval = playerData.getDefaultTeam();
 
         for (PlayerData playerDatas : playerDataList)
@@ -103,12 +103,12 @@ public class PlayerManager implements IManage {
      */
     @Override
     public void eliminatePlayer(PlayerData playerData) {
-        playerData.setPlayerStatus(PlayerStatus.DEAD);
 
-        playerData.getPlayer().kickPlayer(Style.translate("&cYou have lost this tournament! \n &aHave a lovely day"));
+        playerData.setPlayerStatus(PlayerStatus.DEAD);
+        playerData.getPlayer().kickPlayer(Style.translate("&cYou have lost this tournament! \n &aNext Time"));
 
         //Elimination team event!
-        if (playerData.getTeam() != null){
+        if (playerData.getTeam() != null) {
             TeamLeaveEvent teamLeaveEvent = new TeamLeaveEvent(playerData, "killed");
             Bukkit.getServer().getPluginManager().callEvent(teamLeaveEvent);
         }
@@ -118,8 +118,8 @@ public class PlayerManager implements IManage {
      * @return Retrieve only online players in the server!
      */
     @Override
-    public Stream<PlayerData> filtered_online_players() {
-        return getPlayerDataList().stream().filter(Objects::nonNull).filter(PlayerData::isOnline);
+    public Set<PlayerData> filtered_online_players() {
+        return getPlayerDataList().stream().filter(Objects::nonNull).filter(PlayerData::isOnline).collect(Collectors.toSet());
     }
 
     /**
@@ -128,5 +128,22 @@ public class PlayerManager implements IManage {
     @Override
     public Set<PlayerData> exceptStaff() {
         return getPlayerDataList().stream().filter(Objects::nonNull).filter(playerData -> playerData.isOnline() && !playerData.getSettings().isStaff()).collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<PlayerData> onlyTeamPlayers() {
+        return getPlayerDataList().stream().filter(Objects::nonNull).filter(playerData -> playerData.isOnline() && !playerData.getSettings().isStaff() && playerData.getTeam() != null).collect(Collectors.toSet());
+    }
+
+    @Override
+    public TextComponent getStaffAsString() {
+        TextComponent textComponent = new TextComponent("Team Members: ");
+
+        getPlayerDataList().stream().filter(Objects::nonNull).forEach(playerData -> {
+            if (playerData.getPlayerStatus().equals(PlayerStatus.STAFF))
+                textComponent.addExtra(playerData.getPlayerName() + ", ");
+                }
+        );
+        return textComponent;
     }
 }

@@ -1,11 +1,15 @@
 package com.tfw.events.custom;
 
+import com.tfw.main.TFW;
 import com.tfw.manager.data.PlayerData;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.Set;
 
@@ -26,5 +30,23 @@ public class PreparePlayersEvent extends Event {
     @Override
     public HandlerList getHandlers() {
         return HANDLER_LIST;
+    }
+
+    public void startTeleportation() {
+        for (PlayerData playerData : playerDataSet) {
+            if (playerData.isOnline()) {
+
+                playerData.clearPlayer();
+
+                playerData.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20, 3));
+                playerData.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 3));
+                playerData.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20, 3));
+
+                Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TFW.getInstance(), () -> {
+                    if (playerData.isOnline())
+                        playerData.getPlayer().teleport(playerData.getTeam().getSpawn().toBukkitLocation());
+                }, 30L);
+            }
+        }
     }
 }

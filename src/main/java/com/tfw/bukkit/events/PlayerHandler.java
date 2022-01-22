@@ -41,7 +41,8 @@ public class PlayerHandler implements Listener {
 
         PlayerData playerData = TFWLoader.getPlayerManager().data(playerDeathEvent.getEntity().getName());
 
-        assert playerData != null;
+        if (playerData == null)
+            return;
 
         PlayerEliminationEvent playerEliminationEvent = new PlayerEliminationEvent(playerData, playerDeathEvent.getEntity().getLocation());
         Bukkit.getServer().getPluginManager().callEvent(playerEliminationEvent);

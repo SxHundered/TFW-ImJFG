@@ -3,10 +3,13 @@ package com.tfw.events;
 import com.tfw.events.custom.BorderSetUpEvent;
 import com.tfw.events.custom.KitHandleEvent;
 import com.tfw.events.custom.PreparePlayersEvent;
+import com.tfw.game.GameManager;
 import com.tfw.game.task.PrepareTask;
 import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.data.PlayerData;
+import com.tfw.scoreboard.IScoreboardException;
+import com.tfw.scoreboard.IScoreboardManager;
 import net.minecraft.server.v1_8_R3.PacketPlayOutWorldBorder;
 import net.minecraft.server.v1_8_R3.WorldBorder;
 import org.bukkit.Bukkit;
@@ -16,7 +19,6 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-
 
 /**
  *     ######################################################
@@ -54,15 +56,8 @@ public class SettingsListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onKitHandler(KitHandleEvent kitHandleEvent){
 
-        //Equip Kits to players!
-        Bukkit.getServer().getScheduler().runTaskLater(kitHandleEvent.getJavaPlugin(), ()-> {
-            for (PlayerData playerData : kitHandleEvent.getPlayerDataSet()) {
-                //Skip condition
-                if (!playerData.isOnline() || playerData.getTeam() == null) continue;
-
-                playerData.getTeam().getKit().giveKit(playerData);
-            }
-        }, 1L);
+        //Load kits
+        kitHandleEvent.loadKits();
 
         //WorldBorder Async Initializer!
         BorderSetUpEvent borderSetUpEvent = new BorderSetUpEvent("world", TFWLoader.getGameManager().getWorldSettings().size, TFWLoader.getGameManager().getWorldSettings().center);
@@ -75,14 +70,24 @@ public class SettingsListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPrepare(PreparePlayersEvent preparePlayersEvent){
 
+        GameManager.GameStates.setGameStates(GameManager.GameStates.COUNTDOWN);
+
+        Bukkit.getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), ()-> {
+            for (PlayerData playerData : TFWLoader.getPlayerManager().filtered_online_players()) {
+                if (playerData.isOnline())
+                    try {
+                        playerData.getFastBoard().setIScoreboard(
+                                TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.GRACE));
+                    } catch (IScoreboardException e) {
+                        e.printStackTrace();
+                    }
+            }
+        });
+
+        TFWLoader.getGameManager().title_Notification("&eTeleporting", "&cin a moment");
         TFWLoader.getGameManager().notification("%prefix% &a&lYou will be teleported in a moment!");
 
-        for (PlayerData playerData : preparePlayersEvent.getPlayerDataSet()) {
-            if (playerData.isOnline()){
-                playerData.clearPlayer();
-                playerData.getPlayer().teleport(playerData.getTeam().getSpawn().toBukkitLocation());
-            }
-        }
+        preparePlayersEvent.startTeleportation();
 
         TFWLoader.getGameManager().loadKits(preparePlayersEvent.getPlayerDataSet());
     }

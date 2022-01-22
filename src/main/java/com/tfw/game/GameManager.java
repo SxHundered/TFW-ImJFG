@@ -31,6 +31,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -103,6 +104,22 @@ public class GameManager implements IGame,ISettings{
     }
 
     @Override
+    public String game_info() {
+
+        TextComponent textComponent = new TextComponent("Current State: " + GameStates.getGameStates().name().toUpperCase(Locale.ROOT) + "\n");
+
+        textComponent.addExtra(TeamManager.getA().getTeam() + ": \n");
+        textComponent.addExtra(TeamManager.getA().getMembersAsString().toLegacyText() + "\n");
+        textComponent.addExtra(TeamManager.getB().getTeam() + ": " + "\n");
+        textComponent.addExtra(TeamManager.getB().getMembersAsString().toLegacyText() + "\n");
+
+        textComponent.addExtra("Staff Team: \n");
+        textComponent.addExtra(TFWLoader.getPlayerManager().getStaffAsString().toLegacyText() + "\n");
+
+        return textComponent.toLegacyText();
+    }
+
+    @Override
     public void startGame() {
         GameStartEvent gameStartEvent = new GameStartEvent();
         Bukkit.getServer().getPluginManager().callEvent(gameStartEvent);
@@ -141,7 +158,6 @@ public class GameManager implements IGame,ISettings{
         TFW.getInstance().getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), () -> {
 
             TFWLoader.getPlayerManager().filtered_online_players().forEach(playerData ->
-                //Already checked players is online!
                 playerData.getPlayer().sendMessage(finalMessage));
         });
     }
@@ -154,14 +170,14 @@ public class GameManager implements IGame,ISettings{
 
         final String finaltitle = Style.translate(title);
         final String finalsubTitle = Style.translate(subTitle);
+
         TFW.getInstance().getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), () -> {
 
             TFWLoader.getPlayerManager().filtered_online_players().forEach(playerData -> {
-                //Already checked players is online!{
+                //Already checked players is online!
                 try {
                     ReflectionUtil.sendTitle(playerData.getPlayer(), finaltitle, finalsubTitle, 5, 20, 5);
-                } catch (Exception ignore) {
-                }
+                } catch (Exception ignore) {}
             });
         });
     }
@@ -194,7 +210,7 @@ public class GameManager implements IGame,ISettings{
     }
 
     public enum GameStates{
-        LOBBY,COUNTDOWN,INGAME,RESTART;
+        LOBBY,COUNTDOWN,INGAME,ENDING,RESTART;
 
         @Getter@Setter
         private static GameStates gameStates;

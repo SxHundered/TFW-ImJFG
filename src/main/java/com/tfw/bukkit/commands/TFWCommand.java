@@ -8,7 +8,6 @@ import com.tfw.bukkit.commands.sub.debug.ScoreboardCommand;
 import com.tfw.configuration.Style;
 import com.tfw.main.TFW;
 import lombok.Getter;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 

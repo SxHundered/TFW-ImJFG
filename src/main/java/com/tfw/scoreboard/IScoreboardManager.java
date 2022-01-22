@@ -51,6 +51,9 @@ public class IScoreboardManager {
                     break;
                 case "staff":
                     scoreboardHashMap.put(ScoreboardTYPE.STAFF, iScoreboard);
+                    break;
+                case "win":
+                    scoreboardHashMap.put(ScoreboardTYPE.WIN, iScoreboard);
             }
 
         }
@@ -62,6 +65,7 @@ public class IScoreboardManager {
             case GRACE:
             case INGAME:
             case STAFF:
+            case WIN:
                 return scoreboardHashMap.get(scoreboardTYPE);
         }
         throw new IScoreboardException("%prefix% &cInvalid SCOREBOARD TYPE: &7(&aLOBBY&7,GRACE,INGAME,STAFF)");
@@ -73,6 +77,6 @@ public class IScoreboardManager {
     }
 
     public enum ScoreboardTYPE{
-        LOBBY,GRACE,INGAME,STAFF
+        LOBBY,GRACE,INGAME,WIN,STAFF
     }
 }

@@ -1,6 +1,7 @@
 package com.tfw.manager;
 
 import com.tfw.manager.data.PlayerData;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
 
 import java.util.Set;
@@ -16,7 +17,11 @@ public interface IManage {
 
     void eliminatePlayer(PlayerData playerData);
 
-    Stream<PlayerData> filtered_online_players();
+    Set<PlayerData> filtered_online_players();
 
     Set<PlayerData> exceptStaff();
+
+    Set<PlayerData> onlyTeamPlayers();
+
+    TextComponent getStaffAsString();
 }

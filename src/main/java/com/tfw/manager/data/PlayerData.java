@@ -78,6 +78,15 @@ public class PlayerData implements IData{
         return Bukkit.getPlayer(uuid) != null;
     }
 
+    @Override
+    public void backToHome() {
+        if (!isOnline())
+            return;
+
+        clearPlayer();
+        getPlayer().teleport(TFWLoader.getArenaManager().getSpawn().toBukkitLocation());
+    }
+
     /**
      * @param massage String wanted to be sent
      */
