@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Async;
 
 import java.util.Locale;
 import java.util.UUID;
@@ -119,6 +120,10 @@ public class PlayerData implements IData{
         //Sync
         PlayerBoard playerBoard = new PlayerBoard(getPlayer(), this);
         setFastBoard(playerBoard);
+        //
+        settings.setRefresh(true);
+
+        AsyncBoard.createTeams_Instance(getPlayer(), playerBoard, 0);
         getPlayer().setScoreboard(playerBoard.getScoreboard());
 
         //Async

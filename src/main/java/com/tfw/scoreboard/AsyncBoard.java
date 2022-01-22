@@ -1,9 +1,11 @@
 package com.tfw.scoreboard;
 
 import com.tfw.configuration.Style;
+import com.tfw.main.TFWLoader;
+import com.tfw.manager.team.Team;
 import lombok.Getter;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.ArrayList;
@@ -15,31 +17,27 @@ public class AsyncBoard extends BukkitRunnable {
 
     private static final String[] args = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
-    public static void createTeams_Instance(Player player, PlayerBoard fastBoard){
+    public static void createTeams_Instance(Player player, PlayerBoard fastBoard, int weight){
+
         final Scoreboard scoreboard = fastBoard.getScoreboard();
-   /*     String teamOrder =
-                (args[fastBoard.getPlayerData().getRankWeight()] + "_" +
-                        player.getName()).length() >= 16 ? (args[fastBoard.getPlayerData().getRankWeight()] + "_" +
-                        player.getName()).substring(0, 15) : (args[fastBoard.getPlayerData().getRankWeight()] + "_" +
-                        player.getName());
-        fastBoard.getPlayerData().setTeam(teamOrder);
-        scoreboard.registerNewTeam(teamOrder);
-        generateTeam(player, teamOrder, fastBoard.getPlayerData().getRankColor().toString(), fastBoard);
-    */}
+
+        scoreboard.registerNewTeam(fastBoard.getPlayerData().getTeam() != null ? fastBoard.getPlayerData().getTeam().getIdentifier() :
+                fastBoard.getPlayerData().getDefaultTeam());
+
+        generateTeam(player, fastBoard.getPlayerData().getTeam() != null ? fastBoard.getPlayerData().getTeam().getIdentifier() :
+                fastBoard.getPlayerData().getDefaultTeam(), fastBoard.getPlayerData().getTeam() != null ?
+                fastBoard.getPlayerData().getTeam().getColorTeam().toString() : ChatColor.GRAY.toString(), fastBoard);
+    }
 
     //Create teams for every new clan!
     private static void generateTeam(Player player, String name, String prefix, PlayerBoard fastBoard){
-       /* Team team = fastBoard.getScoreboard().getTeam(name) == null ?
+        org.bukkit.scoreboard.Team team = fastBoard.getScoreboard().getTeam(name) == null ?
                 (fastBoard.getScoreboard().registerNewTeam(name)) :
                 (fastBoard.getScoreboard().getTeam(name));
         if (!team.hasEntry(player.getName())) {
             team.addEntry(player.getName());
-            if (!fastBoard.getPlayerData().getClanTag().equalsIgnoreCase(""))
-                fastBoard.getScoreboard().getTeam(name).setSuffix(" §7▏ §b" + fastBoard.getPlayerData().getClanTag());
-            else
-                team.setSuffix("");
             team.setPrefix(prefix);
-        }*/
+        }
     }
 
     public static void delete(PlayerBoard fastBoard, String name){
@@ -51,46 +49,25 @@ public class AsyncBoard extends BukkitRunnable {
     private static void generate_ifExists(PlayerBoard fastBoard) {
      /*   PlayerManager.getPlayerDataList().forEach(playerData -> {
             if (playerData != null) {
-                String teamName = playerData.getTeam();
+                Team teamName = playerData.getTeam();
+                if (teamName == null) {
+                    if (fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()) == null)
+                        fastBoard.getScoreboard().registerNewTeam(playerData.getDefaultTeam());
+                    else
+                        if (!fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).hasEntry(playerData.getPlayerName()))
+                            fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).addEntry(playerData.getPlayerName());
+                    fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).setPrefix(ChatColor.GRAY.toString());
 
-                if (fastBoard.getScoreboard().getTeam(teamName) == null)
-                    fastBoard.getScoreboard().registerNewTeam(teamName);
+                } else {
 
-                if (!fastBoard.getScoreboard().getTeam(teamName).hasEntry(playerData.getPlayerName())) {
-
-                    fastBoard.getScoreboard().getTeam(teamName).addEntry(playerData.getPlayerName());
+                    if (fastBoard.getScoreboard().getTeam(teamName.getIdentifier()) == null)
+                        fastBoard.getScoreboard().registerNewTeam(teamName.getIdentifier());
+                    else if (!fastBoard.getScoreboard().getTeam(teamName.getIdentifier()).hasEntry(playerData.getPlayerName()))
+                        fastBoard.getScoreboard().getTeam(teamName.getIdentifier()).addEntry(playerData.getPlayerName());
+                    fastBoard.getScoreboard().getTeam(teamName.getIdentifier()).setPrefix(playerData.getTeam().getColorTeam().toString());
                 }
-
-
-                if (!playerData.getClanTag().equalsIgnoreCase(""))
-                    fastBoard.getScoreboard().getTeam(teamName).setSuffix(" §7▏ §b" + playerData.getClanTag());
-                else fastBoard.getScoreboard().getTeam(teamName).setSuffix("");
-
-                fastBoard.getScoreboard().getTeam(teamName).setPrefix(playerData.getRankColor().toString());
             }
         });
-    */}
-
-
-    public static void ping_clanChange(PlayerBoard fastBoard) {
-       /* for (final PlayerData playerData : new ArrayList<>(PlayerManager.getPlayerDataList())) {
-            if (playerData.isOnline()) {
-                String teamName = playerData.getTeam();
-
-                if (fastBoard.getScoreboard().getTeam(teamName) == null)
-                    fastBoard.getScoreboard().registerNewTeam(teamName);
-
-                if (!fastBoard.getScoreboard().getTeam(teamName).hasEntry(playerData.getPlayerName())) {
-                    //suffiex = suffiex.length() >= 16 ? suffiex.substring(0, 14) : suffiex;
-                    fastBoard.getScoreboard().getTeam(teamName).addEntry(playerData.getPlayerName());
-                }
-                fastBoard.getScoreboard().getTeam(teamName).setSuffix("");
-                if (playerData.getClanTag().equalsIgnoreCase(""))
-                    fastBoard.getScoreboard().getTeam(teamName).setSuffix("");
-
-                fastBoard.getScoreboard().getTeam(teamName).setPrefix(playerData.getRankColor() + "");
-            }
-        }*/
     }
 
     public static void updateTitle(){

@@ -56,6 +56,7 @@ public class Team implements ITeam{
     private String teamOrder;
     private TeamStats stats = TeamStats.STATS;
     private Kit kit;
+    private int weight = 0;
 
     private CustomLocation spawn;
 
