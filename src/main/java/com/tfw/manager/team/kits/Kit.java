@@ -20,7 +20,7 @@ public class Kit implements IKIT {
 
     //fighter_equipments
     @Override
-    public void loadKits(ConfigFile teamConfig, String path) {
+    public void loadKits(ConfigFile teamConfig, String path, String teamName) {
         //TODO
         int index = 0;
         path = path + ".fighter_equipments";

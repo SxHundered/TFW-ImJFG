@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
  */
 public class PrepareTask extends BukkitRunnable {
 
-    private short countdown;
+    public static short countdown;
 
     public PrepareTask(short countDown) {
         GameManager.GameStates.setGameStates(GameManager.GameStates.COUNTDOWN);

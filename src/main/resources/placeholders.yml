@@ -1,12 +1,2 @@
 placeholders:
-  - "%tfw_online%" #total online
-  - "%tfw_status%" #game stats
-  - "%tfw_time%" #timer
-  - "%tfw_team_name%"
-  - "%tfw_team_alive%"
-  - "%tfw_team_kills%"
-  - "%tfw_team_deaths%"
-  - "%tfw_team_heart%"
-  - "%tfw_team_heart_status%"
-  - "%tfw_arena_name%"
-  - "%tfw_arena_players%"
+  - "#TODO"

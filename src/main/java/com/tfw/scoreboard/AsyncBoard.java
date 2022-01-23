@@ -31,10 +31,10 @@ public class AsyncBoard {
 
         generateTeam(player, fastBoard.getPlayerData().getTeam() != null ? fastBoard.getPlayerData().getTeam().getIdentifier() :
                 fastBoard.getPlayerData().getDefaultTeam(), fastBoard.getPlayerData().getTeam() != null ?
-                fastBoard.getPlayerData().getTeam().getIdentifier().toUpperCase(Locale.ROOT)
-                        + ChatColor.GRAY.toString() + " ┃ "//w + fastBoard.getPlayerData().getTeam().getColorTeam().toString()
+                fastBoard.getPlayerData().getTeam().getColorTeam() + fastBoard.getPlayerData().getTeam().getIdentifier().toUpperCase(Locale.ROOT)
+                        + ChatColor.GRAY + " ┃ "//w + fastBoard.getPlayerData().getTeam().getColorTeam().toString()
                 : ChatColor.RED + ChatColor.BOLD.toString()
-                + "✘ " + ChatColor.GRAY.toString() + "┃ " + ChatColor.GRAY.toString(), fastBoard);
+                + "✘ " + ChatColor.GRAY + "┃ " + ChatColor.GRAY, fastBoard);
     }
 
     private static void generateTeam(Player player, String name, String prefix, PlayerBoard fastBoard) {

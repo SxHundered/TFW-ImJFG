@@ -44,7 +44,7 @@ public class PlayerBoard extends FastBoard {
 
     public void updateTitle() {
         if (getIScoreboard().isAnimated())
-            updateTitle(getIScoreboard().animatedText());
+            updateTitle(getIScoreboard().animatedText(getPlayer()));
         else
             updateTitle(getIScoreboard().getStaticTitle() == null ? "NO STATIC TITLE" : getIScoreboard().getStaticTitle());
     }

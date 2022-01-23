@@ -61,8 +61,8 @@ public class IScoreboard extends BukkitRunnable implements IScore{
     }
 
     @Override
-    public String animatedText() {
-        return isAnimated() ? getAnimationTitle().get(index) : "NO ANIMATED TITLE!";
+    public String animatedText(Player player) {
+        return isAnimated() ? Style.translateLine_Holders(player, getAnimationTitle().get(index)) : "NO ANIMATED TITLE!";
     }
 
     @Override

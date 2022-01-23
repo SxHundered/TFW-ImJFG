@@ -3,8 +3,10 @@ package com.tfw.placeholders;
 import com.tfw.configuration.Style;
 import com.tfw.game.arena.ArenaManager;
 import com.tfw.game.arena.iarena.Arena;
+import com.tfw.game.task.PrepareTask;
 import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
+import com.tfw.manager.TeamManager;
 import com.tfw.manager.data.PlayerData;
 import com.tfw.manager.team.Team;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
@@ -69,7 +71,7 @@ public class TFWPlaceHolder extends PlaceholderExpansion {
             Team team = playerData.getTeam();
             if(team != null) {
                 if (params.equalsIgnoreCase("team_name"))
-                    return team.getTeam();
+                    return team.getIdentifier();
                 else if (params.equalsIgnoreCase("team_alive"))
                     return "" + team.currentAlive();
                 else if (params.equalsIgnoreCase("team_kills"))
@@ -78,7 +80,7 @@ public class TFWPlaceHolder extends PlaceholderExpansion {
                     return team.getTeam() + "'s" + Style.RED + Style.BOLD + "HEART";
                 else if (params.equalsIgnoreCase("team_heart_status"))
                     return (team.getHeart().isDestroyed() ? Style.RED + "\u274C" : Style.GREEN + "\u2713");
-            }else {
+            } else {
                 if (params.equalsIgnoreCase("team_name"))
                     return "&c&lNO TEAM";
             }

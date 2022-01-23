@@ -6,7 +6,7 @@ import com.tfw.manager.team.kits.items.CustomItem;
 
 public interface IKIT {
 
-    void loadKits(ConfigFile teamConfig, String path);
+    void loadKits(ConfigFile teamConfig, String path, String teamName);
 
     void giveKitAll();
     void giveKit(PlayerData playerData);

@@ -23,4 +23,23 @@ public class GameStartEvent extends Event {
     public HandlerList getHandlers() {
         return HANDLER_LIST;
     }
+
+
+    public void toggleScoreBoard(){
+        Bukkit.getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), ()-> {
+            for (PlayerData playerData : TFWLoader.getPlayerManager().filtered_online_players()) {
+                if (playerData.isOnline()) {
+                    try {
+                        if (playerData.getTeam() != null)
+                            playerData.setPlayerStatus(PlayerStatus.PLAYING);
+
+                        playerData.getFastBoard().setIScoreboard(
+                                TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.INGAME));
+                    } catch (IScoreboardException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
 }

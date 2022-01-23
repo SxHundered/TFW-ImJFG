@@ -67,11 +67,11 @@ public class TeamManager implements ITeams{
 
                 //Kits loader
                 Kit kitA = new Kit(A);
-                kitA.loadKits(teamsConfig, pathTeams + "." + A.getIdentifier());
+                kitA.loadKits(teamsConfig, pathTeams + "." + A.getIdentifier(), A.getIdentifier());
                 A.setKit(kitA);
 
                 Kit kitB = new Kit(B);
-                kitB.loadKits(teamsConfig, pathTeams + "." + B.getIdentifier());
+                kitB.loadKits(teamsConfig, pathTeams + "." + B.getIdentifier(), B.getIdentifier());
                 B.setKit(kitB);
 
             }else

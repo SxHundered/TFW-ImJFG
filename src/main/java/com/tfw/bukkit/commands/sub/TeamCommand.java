@@ -24,9 +24,9 @@ import java.util.Locale;
 public class TeamCommand extends CommandBase<TFW> {
 
 
-    final String OFFLINE_PLAYER = "%prefix% %playerName% is currently OFFLINE";
-    final String ALREADY_IN_TEAM = "%prefix% %playerName% is already in team, use /TFW team removeplayer <playername>.";
-    final String ALREADY_NOT_IN_TEAM = "%prefix% %playerName% is not in team, use /TFW team addplayer <playername> <teamname>.";
+    final String OFFLINE_PLAYER = "%prefix% %player_name% is currently OFFLINE";
+    final String ALREADY_IN_TEAM = "%prefix% %player_name% is already in team, use /TFW team removeplayer <playername>.";
+    final String ALREADY_NOT_IN_TEAM = "%prefix% %player_name% is not in team, use /TFW team addplayer <playername> <teamname>.";
     final String TEAM_NOT_FOUND = "%prefix% Could not find %team_name% team!";
     final String PLAYER_ADDED_TO_TEAM = "%prefix% Sucessfully added %player_name% to %team_name%";
     final String YOU_HAVE_BEEN_ADDED = "%prefix% You've been added to %team_name% by %operator%";
@@ -59,13 +59,13 @@ public class TeamCommand extends CommandBase<TFW> {
                 Player target = Bukkit.getPlayer(args[1]);
                 if (target == null) {
                     sender.sendMessage(Style.translate(
-                            OFFLINE_PLAYER.replace("%playerName%", args[1])));
+                            OFFLINE_PLAYER.replace("%player_name%", args[1])));
                     return true;
                 }
                 PlayerData playerData = TFWLoader.getPlayerManager().data(target.getName());
                 if (playerData == null) {
                     sender.sendMessage(Style.translate(
-                            OFFLINE_PLAYER.replace("%playerName%", args[1])));
+                            OFFLINE_PLAYER.replace("%player_name%", args[1])));
                     return true;
                 }
                 if (args[0].toLowerCase(Locale.ROOT).equalsIgnoreCase("addplayer")) {

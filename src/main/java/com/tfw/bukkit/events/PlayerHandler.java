@@ -36,8 +36,12 @@ public class PlayerHandler implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onKill(PlayerDeathEvent playerDeathEvent) {
+
+        playerDeathEvent.setDeathMessage(null);
+
         playerDeathEvent.setDroppedExp(0);
         playerDeathEvent.getDrops().clear();
+
 
         PlayerData playerData = TFWLoader.getPlayerManager().data(playerDeathEvent.getEntity().getName());
 
