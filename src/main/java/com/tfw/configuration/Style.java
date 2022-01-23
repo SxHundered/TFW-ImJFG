@@ -64,14 +64,18 @@ public final class Style {
 		return net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', in).replace("%prefix%", TFW.getPrefix());
 	}
 
+	public static String translateLine_Holders(Player player, String line) {
+		return PlaceholderAPI.setPlaceholders(player, ChatColor.translateAlternateColorCodes('&', line.replace("%prefix%", TFW.getPrefix())));
+	}
+
 	public static List<String> translateLines_Holders(Player player, List<String> lines) {
 
 		List<String> toReturn = new ArrayList<>();
 
 		for (String line : lines) {
-			line = PlaceholderAPI.setPlaceholders(player, ChatColor.translateAlternateColorCodes('&', line.replace("%prefix%", TFW.getPrefix())));
-			line = line.length() > 30 ? line.substring(0, 29) : line;
-			toReturn.add(line);
+			String newLine = PlaceholderAPI.setPlaceholders(player, ChatColor.translateAlternateColorCodes('&', line.replace("%prefix%", TFW.getPrefix())));
+			newLine = newLine.length() >= 30 ? newLine.substring(0, 29) : newLine;
+			toReturn.add(newLine);
 		}
 
 		return toReturn;

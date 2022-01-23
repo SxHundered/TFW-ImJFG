@@ -1,8 +1,15 @@
 package com.tfw.events.custom;
 
+import com.tfw.main.TFW;
+import com.tfw.main.TFWLoader;
+import com.tfw.manager.data.PlayerData;
+import com.tfw.manager.data.PlayerStatus;
+import com.tfw.scoreboard.IScoreboardException;
+import com.tfw.scoreboard.IScoreboardManager;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 

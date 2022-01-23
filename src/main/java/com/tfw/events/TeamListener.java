@@ -57,6 +57,8 @@ public class TeamListener implements Listener {
         final Team team = teamEliminationEvent.getTeam();
         final Team winners = team.equals(TeamManager.getA()) ? TeamManager.getB() : TeamManager.getA();
 
+        TeamManager.setWinners(winners);
+
         TFWLoader.getGameManager().celebrate(winners);
     }
 

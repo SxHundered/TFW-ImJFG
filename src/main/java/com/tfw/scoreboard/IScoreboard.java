@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -46,13 +47,6 @@ public class IScoreboard extends BukkitRunnable implements IScore{
         int x = 0;
         for (; x < this.lines.length; x++)
             this.lines[x] = lines.get(x);
-
-        //Checks if each line is higher than 32 characters!
-        x = 0;
-        for (; x < this.lines.length; x++){
-            if (this.lines[x].length() >= 32)
-                this.lines[x] = this.lines[x].substring(0, 31);
-        }
     }
 
     @Override

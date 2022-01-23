@@ -1,63 +1,109 @@
 scoreboards:
   Lobby: #ISCOREBOARD identifier ,
     titleOptions:
-      animated: false
-      interval: 0
-      delay: 1
+      animated: true
+      interval: 10
+      delay: 3
       title:
-        - "lobby title"
+        - "     &fTFW    "
+        - "     &6T&fFW    "
+        - "     T&6F&fW    "
+        - "     TF&6W    "
+        - "     &fTFW    "
+        - "     TF&6W    "
+        - "     T&6F&fW    "
+        - "     &6T&fFW    "
     lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
-      - "%tfw_online%"
       - ""
+      - "&aState &7&l» &b%tfw_status%"
       - ""
+      - "&aOnline &7&l» &b%tfw_online%"
       - ""
+      - "&aYour Team &7&l» &b%tfw_team_name%"
+      - ""
+      - "     &c&lTEAM FIGHT WAR    "
   Grace: #ISCOREBOARD identifier
     titleOptions:
-      animated: false
-      interval: 0
-      delay: 1
+      animated: true
+      interval: 10
+      delay: 3
       title:
-        - "GRACE SCOREBOARD"
+        - "     &aStarting in &f%tfw_startingtime%    "
+        - "     &bStarting in &f%tfw_startingtime%    "
     lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
-      - "GRACING"
-      - "..."
       - ""
+      - "&aState &7&l» &b%tfw_status%"
       - ""
+      - "&aArena &7&l» &b%tfw_arena_name%"
+      - ""
+      - "&aYour Team &7&l» &b%tfw_team_name%"
+      - ""
+      - "     &c&lTEAM FIGHT WAR    "
   InGame: #ISCOREBOARD identifier
     titleOptions:
       animated: true
-      interval: 20
-      delay: 20
+      interval: 10
+      delay: 3
       title:
-        - "&eINGAME"
-        - "&cINGAME"
-        - "&aINGAME"
-        - "&bINGAME"
+        - "     &fTFW &7- &f%tfw_time%    "
+        - "     &6T&fFW &7- &f%tfw_time%    "
+        - "     T&6F&fW &7- &f%tfw_time%    "
+        - "     TF&6W &7- &f%tfw_time%    "
+        - "     &fTFW &7- &f%tfw_time%    "
+        - "     TF&6W &7- &f%tfw_time%    "
+        - "     T&6F&fW &7- &f%tfw_time%    "
+        - "     &6T&fFW &7- &f%tfw_time%    "
     lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
-      - "TEAM KILLS: "
-      - "SOLO KILLS: "
       - ""
+      - "&f&lTEAM STATS:"
+      - "&aName &7&l» &b%tfw_team_name%"
+      - "&aAlive &7&l» &b%tfw_team_alive%"
+      - "&aKills &7&l» &b%tfw_team_kills%"
+      - "&aHeart &7&l» &b%tfw_team_heart_status%"
+      - ""
+      - "&f&lARENA:"
+      - "&aName &7&l» &b%tfw_arena_name%"
+      - ""
+      - "     &c&lTEAM FIGHT WAR    "
   Staff: #ISCOREBOARD identifier
     titleOptions:
       animated: true
-      interval: 20
-      delay: 20
+      interval: 10
+      delay: 3
       title:
-        - "&eSTAFF"
-        - "&aSTAFF"
+        - "     &fTFW    "
+        - "     &6T&fFW    "
+        - "     T&6F&fW    "
+        - "     TF&6W    "
+        - "     &fTFW    "
+        - "     TF&6W    "
+        - "     T&6F&fW    "
+        - "     &6T&fFW    "
     lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
-      - "TEAM KILLS: "
-      - "SOLO KILLS: "
       - ""
+      - "&f&lARENA:"
+      - "&aName &7&l» &b%tfw_arena_name%"
+      - "&aPlayers &7&l» &b%tfw_arena_players%"
+      - ""
+      - "     &c&lTEAM FIGHT WAR    "
   Win: #ISCOREBOARD identifier
     titleOptions:
-      animated: false
-      interval: 0
-      delay: 1
+      animated: true
+      interval: 10
+      delay: 3
       title:
-        - "lobby title"
+        - "     &fTFW &7- &c&lCHAMPIONS    "
+        - "     &6T&fFW &7- &4&lCHAMPIONS    "
+        - "     T&6F&fW &7- &c&lCHAMPIONS    "
+        - "     TF&6W &7- &4&lCHAMPIONS    "
+        - "     &fTFW &7- &c&lCHAMPIONS    "
+        - "     TF&6W &7- &4&lCHAMPIONS    "
+        - "     T&6F&fW &7- &c&lCHAMPIONS    "
+        - "     &6T&fFW &7- &4&lCHAMPIONS    "
     lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
       - ""
+      - "&f&lWINNER:"
+      - "&aTeam &7&l» &b%tfw_winner_team%"
+      - "&aWith &7&l» &b%tfw_team_kills% Kills"
       - ""
-      - ""
-      - ""
+      - "     &c&lTEAM FIGHT WAR    "

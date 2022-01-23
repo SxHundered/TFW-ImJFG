@@ -5,6 +5,7 @@ import com.tfw.events.custom.TFWJoinEvent;
 import com.tfw.events.custom.TFWLeaveEvent;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.data.PlayerData;
+import com.tfw.manager.data.PlayerStatus;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -46,6 +47,9 @@ public class PlayerHandler implements Listener {
         PlayerData playerData = TFWLoader.getPlayerManager().data(playerDeathEvent.getEntity().getName());
 
         if (playerData == null)
+            return;
+
+        if (playerData.getPlayerStatus().equals(PlayerStatus.DEAD))
             return;
 
         PlayerEliminationEvent playerEliminationEvent = new PlayerEliminationEvent(playerData, playerDeathEvent.getEntity().getLocation());

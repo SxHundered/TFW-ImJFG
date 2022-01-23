@@ -66,6 +66,7 @@ public class PlayerManager implements IManage {
     @Override
     public void removePlayer(PlayerData playerData) {
 
+
         playerData.setPlayerStatus(PlayerStatus.DEAD);
 
         AsyncBoard.getBoardArrayList().remove(playerData.getFastBoard());
@@ -74,10 +75,10 @@ public class PlayerManager implements IManage {
 
         //The player is still on a team, meaning that we might be in LOBBY STATE SO YEAH :p
         if (playerData.getTeam() != null) {
-            playerData.getTeam().removeTeamPlayer(playerData, "leave");
-
             //Deleting the player from his team,
-            teamRemoval = playerData.getTeam().getTeamOrder();
+            teamRemoval = playerData.getTeam().getIdentifier();
+
+            playerData.getTeam().removeTeamPlayer(playerData, "leave");
         } else
             teamRemoval = playerData.getDefaultTeam();
 

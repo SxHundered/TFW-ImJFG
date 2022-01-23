@@ -58,7 +58,6 @@ public class GameCommand extends CommandBase<TFW> {
                     return true;
                 }
 
-
                 //Initialize the game
                 Set<PlayerData> TEAMS = TFWLoader.getPlayerManager().onlyTeamPlayers();
                 PreparePlayersEvent preparePlayersEvent = new PreparePlayersEvent(TEAMS);

@@ -13,9 +13,9 @@ public class PrepareTask extends BukkitRunnable {
 
     public static short countdown;
 
-    public PrepareTask(short countDown) {
+    public PrepareTask(short countDowns) {
         GameManager.GameStates.setGameStates(GameManager.GameStates.COUNTDOWN);
-        this.countdown = countDown;
+        countdown = countDowns;
         Bukkit.getServer().getConsoleSender().sendMessage(Style.translate("&9&lPREPARE TASK -> &a&lSTARTED"));
     }
 

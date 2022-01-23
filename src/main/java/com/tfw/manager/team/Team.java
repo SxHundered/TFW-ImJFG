@@ -16,8 +16,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
-import org.bukkit.block.Block;
-import org.bukkit.entity.EntityType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +50,7 @@ public class Team implements ITeam {
     private final String name;
     private final String chat_format;
     private final String color;
-    private String teamOrder;
-    private TeamStats stats = TeamStats.STATS;
+    private int kills = 0;
     private Kit kit;
     private int weight = 0;
 
@@ -108,7 +105,9 @@ public class Team implements ITeam {
      */
     @Override
     public int currentAlive() {
-        return (int) players.stream().filter(Objects::nonNull).filter(playerData -> playerData.getPlayerStatus().equals(PlayerStatus.PLAYING)).count();
+        return (int)
+                players.stream().filter(Objects::nonNull).filter(playerData -> playerData.getPlayerStatus().equals(PlayerStatus.PLAYING))
+                        .count();
     }
 
     /**
@@ -209,7 +208,7 @@ public class Team implements ITeam {
     }
 
     public void updateStats() {
-        stats.setKills(stats.kills + 1);
+        setKills(kills + 1);
     }
 
     @Override
@@ -233,5 +232,4 @@ public class Team implements ITeam {
 
         return textComponent;
     }
-
 }

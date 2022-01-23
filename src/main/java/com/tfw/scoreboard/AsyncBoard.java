@@ -8,14 +8,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class AsyncBoard {
 
     @Getter
-    private final static List<PlayerBoard> boardArrayList = new ArrayList<>();
+    private final static List<PlayerBoard> boardArrayList = new CopyOnWriteArrayList<>();
 
     /**
      * A = (NORMAL), B= (STAFF), C0= (TEAM A) , C1= (TEAM B)

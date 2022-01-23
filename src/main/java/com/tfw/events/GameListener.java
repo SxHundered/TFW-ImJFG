@@ -4,11 +4,11 @@ import com.tfw.events.custom.CelebrationEvent;
 import com.tfw.events.custom.GameRestartEvent;
 import com.tfw.events.custom.GameStartEvent;
 import com.tfw.game.GameManager;
-import com.tfw.game.arena.ArenaManager;
 import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.TeamManager;
 import com.tfw.manager.data.PlayerData;
+import com.tfw.manager.data.PlayerStatus;
 import com.tfw.scoreboard.IScoreboardException;
 import com.tfw.scoreboard.IScoreboardManager;
 import org.bukkit.Bukkit;
@@ -16,7 +16,6 @@ import org.bukkit.Sound;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.scheduler.BukkitRunnable;
 
 
 /**
@@ -36,17 +35,7 @@ public class GameListener implements Listener {
     public void onGameStart(GameStartEvent gameStartEvent) {
         GameManager.GameStates.setGameStates(GameManager.GameStates.INGAME);
 
-        Bukkit.getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), ()-> {
-            for (PlayerData playerData : TFWLoader.getPlayerManager().filtered_online_players()) {
-                if (playerData.isOnline())
-                    try {
-                        playerData.getFastBoard().setIScoreboard(
-                                TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.INGAME));
-                    } catch (IScoreboardException e) {
-                        e.printStackTrace();
-                    }
-            }
-        });
+        gameStartEvent.toggleScoreBoard();
 
         TFWLoader.getGameManager().notification("&c&lTHE WAR HAS STARTED!");
         TFWLoader.getGameManager().notification("&9&lTEAM: " + TeamManager.getA().getIdentifier() + " &c&lVS &9&lTEAM: " + TeamManager.getB().getIdentifier());
@@ -71,23 +60,13 @@ public class GameListener implements Listener {
     public void onCelebration(CelebrationEvent celebrationEvent){
 
         GameManager.GameStates.setGameStates(GameManager.GameStates.ENDING);
+        celebrationEvent.toggleScoreBoard();
 
-        Bukkit.getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), ()-> {
-            for (PlayerData playerData : TFWLoader.getPlayerManager().filtered_online_players()) {
-                if (playerData.isOnline())
-                    try {
-                        playerData.getFastBoard().setIScoreboard(
-                                TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.WIN));
-                    } catch (IScoreboardException e) {
-                        e.printStackTrace();
-                    }
-            }
-        });
 
         TFWLoader.getGameManager().notification("%prefix% &c&lGREAT WAR, &a&lEVERYONE WAS HONOR!");
         TFWLoader.getGameManager().notification("  " + celebrationEvent.getWinners().getName() + " has won the tournament!");
         TFWLoader.getGameManager().notification("  Score: ");
-        TFWLoader.getGameManager().notification("    &aKills &7-> &c&l" + celebrationEvent.getWinners().getStats().getKills() + "");
+        TFWLoader.getGameManager().notification("    &aKills &7-> &c&l" + celebrationEvent.getWinners().getKills() + "");
 
         for (PlayerData playerData : TFWLoader.getPlayerManager().filtered_online_players())
             playerData.backToHome();

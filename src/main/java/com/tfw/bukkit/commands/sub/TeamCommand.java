@@ -127,7 +127,8 @@ public class TeamCommand extends CommandBase<TFW> {
                             sender.sendMessage(Style.translate(team.getMembersAsString().toLegacyText()));
                             break;
                         case "score":
-                            sender.sendMessage(Style.translate(TEAM_SCORE.replace("%team_name%", args[1]).replace("%team_score%", "" + team.getStats().getKills())));
+                            sender.sendMessage(Style.translate(TEAM_SCORE.replace("%team_name%", args[1]).replace("%team_score%", "" +
+                                    team.getKills())));
                             break;
                         case "spawn":
                             customLocation = CustomLocation.fromBukkitLocation(((Player) sender).getLocation());

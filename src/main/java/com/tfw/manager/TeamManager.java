@@ -9,6 +9,7 @@ import com.tfw.manager.team.kits.Kit;
 import com.tfw.utils.CustomLocation;
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
@@ -33,6 +34,9 @@ public class TeamManager implements ITeams{
 
     @Getter(AccessLevel.PRIVATE)
     static ConfigFile teamsConfig;
+
+    @Getter@Setter
+    private static Team winners = null;
 
     @Getter
     private static Team A;

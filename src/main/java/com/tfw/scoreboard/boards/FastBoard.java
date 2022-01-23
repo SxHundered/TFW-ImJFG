@@ -310,14 +310,15 @@ public class FastBoard {
      */
     public synchronized void updateLines(Collection<String> lines) {
         Objects.requireNonNull(lines, "lines");
-        checkLineNumber(lines.size(), false, true);
+        checkLineNumber(lines.size(), false, false);
+
 
         if (!VersionType.V1_13.isHigherOrEqual()) {
             int lineCount = 0;
             for (String s : lines) {
-                if (s != null && s.length() > 30) {
-                    throw new IllegalArgumentException("Line " + lineCount + " is longer than 30 chars");
-                }
+                //if (s != null && s.length() > 30) {
+                //    throw new IllegalArgumentException("Line " + lineCount + " is longer than 30 chars");
+                //}
                 lineCount++;
             }
         }
@@ -349,11 +350,9 @@ public class FastBoard {
                 }
             }
 
-            for (int i = 0; i < linesSize; i++) {
-                if (!Objects.equals(getLineByScore(oldLines, i), getLineByScore(i))) {
+            for (int i = 0; i < linesSize; i++)
+                if (!Objects.equals(getLineByScore(oldLines, i), getLineByScore(i)))
                     sendTeamPacket(i, TeamMode.UPDATE);
-                }
-            }
         } catch (Throwable t) {
             throw new RuntimeException("Unable to update scoreboard lines", t);
         }
@@ -500,6 +499,7 @@ public class FastBoard {
     }
 
     private void sendTeamPacket(int score, TeamMode mode) throws Throwable {
+
         if (mode == TeamMode.ADD_PLAYERS || mode == TeamMode.REMOVE_PLAYERS) {
             throw new UnsupportedOperationException();
         }
@@ -515,9 +515,9 @@ public class FastBoard {
             String prefix;
             String suffix = null;
 
-            if (line == null || line.isEmpty()) {
+            if (line == null || line.isEmpty()){
                 prefix = COLOR_CODES[score] + ChatColor.RESET;
-            } else if (line.length() <= maxLength) {
+            } else if (line.length() <= maxLength){
                 prefix = line;
             } else {
                 // Prevent splitting color codes

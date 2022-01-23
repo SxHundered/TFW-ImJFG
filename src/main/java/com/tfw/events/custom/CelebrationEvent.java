@@ -2,7 +2,10 @@ package com.tfw.events.custom;
 
 import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
+import com.tfw.manager.data.PlayerData;
 import com.tfw.manager.team.Team;
+import com.tfw.scoreboard.IScoreboardException;
+import com.tfw.scoreboard.IScoreboardManager;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -40,8 +43,10 @@ public class CelebrationEvent extends Event {
     public void start_Celebration() {
 
         final Location location = TFWLoader.getArenaManager().getSpawn().toBukkitLocation();
-        final Color color = Color.fromBGR(java.awt.Color.getColor(winners.getColor()).getBlue(), java.awt.Color.getColor(winners.getColor()).getGreen(), java.awt.Color.getColor(winners.getColor()).getRed());
-        Bukkit.getServer().getScheduler().runTaskTimer(TFW.getInstance(), new BukkitRunnable() {
+        //final Color color = Color.fromBGR(java.awt.Color.getColor(winners.getColor()).getBlue(), java.awt.Color.getColor(winners.getColor()).getGreen(), java.awt.Color.getColor(winners.getColor()).getRed());
+        final Color color = Color.RED;
+
+        new BukkitRunnable() {
             int counter = 0;
 
             @Override
@@ -50,18 +55,31 @@ public class CelebrationEvent extends Event {
                 //Spawns FireWorks!
                 fireWorkLauncher(location, color);
                 if (counter == 10) {
-                    cancel();
                     TFWLoader.getGameManager().restartTheGame();
+                    cancel();
                 }
             }
-        }, 20L, 20L);
-
+        }.runTaskTimer(TFW.getInstance(), 20L, 20L);
     }
 
     private static void fireWorkLauncher(Location location, Color color){
         Firework firework = location.getWorld().spawn(location, Firework.class);
         FireworkMeta fireworkMeta = firework.getFireworkMeta();
         fireworkMeta.setPower(10);
-        fireworkMeta.addEffect(FireworkEffect.builder().withColor(color).withFade(Color.BLACK).build());
+        fireworkMeta.addEffect(FireworkEffect.builder().trail(true).withColor(color).withFade(Color.BLACK).build());
+    }
+
+    public void toggleScoreBoard(){
+        Bukkit.getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), ()-> {
+            for (PlayerData playerData : TFWLoader.getPlayerManager().filtered_online_players()) {
+                if (playerData.isOnline())
+                    try {
+                        playerData.getFastBoard().setIScoreboard(
+                                TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.WIN));
+                    } catch (IScoreboardException e) {
+                        e.printStackTrace();
+                    }
+            }
+        });
     }
 }

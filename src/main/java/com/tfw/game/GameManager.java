@@ -123,6 +123,7 @@ public class GameManager implements IGame,ISettings{
     public void startGame() {
         GameStartEvent gameStartEvent = new GameStartEvent();
         Bukkit.getServer().getPluginManager().callEvent(gameStartEvent);
+        startGameTask();
     }
 
     /**

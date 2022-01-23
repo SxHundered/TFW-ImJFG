@@ -14,6 +14,7 @@ import com.tfw.placeholders.TFWPlaceHolder;
 import lombok.AccessLevel;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -93,6 +94,6 @@ public final class TFW extends JavaPlugin {
     }
 
     public static String getPrefix() {
-        return prefix;
+        return ChatColor.translateAlternateColorCodes('&', prefix);
     }
 }

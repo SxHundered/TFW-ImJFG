@@ -8,7 +8,7 @@ Teams:
       armors: #ARMOR CONTENTS!
         helmet:
           type: IRON_HELMET
-          name: "%teamname% HELMET!"
+          name: "%team_name% HELMET!"
           glow: false # GLOW ENCHANTMENT, NO EFFECTS
           enchantments:
             - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
@@ -16,7 +16,7 @@ Teams:
             - ""
         chestplate:
           type: IRON_CHESTPLATE
-          name: "%teamname% CHEST!"
+          name: "%team_name% CHEST!"
           glow: false # GLOW ENCHANTMENT, NO EFFECTS
           enchantments:
             - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
@@ -24,7 +24,7 @@ Teams:
             - ""
         leggings:
           type: IRON_LEGGINGS
-          name: "%teamname% LEGGINGS!"
+          name: "%team_name% LEGGINGS!"
           glow: false # GLOW ENCHANTMENT, NO EFFECTS
           enchantments:
             - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
@@ -32,7 +32,7 @@ Teams:
             - ""
         boots:
           type: IRON_BOOTS
-          name: "%teamname% BOOT!"
+          name: "%team_name% BOOT!"
           glow: false # GLOW ENCHANTMENT, NO EFFECTS
           enchantments:
             - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
@@ -40,8 +40,8 @@ Teams:
             - ""
       contents: #CONTENT OF THE INVENTORY!
         sword:
-          IRON_SWORD:
-            name: "%teamname% SWORD!"
+            type: IRON_SWORD
+            name: "%team_name% SWORD!"
             slot: 0
             amount: 1
             durability: 1
@@ -49,8 +49,9 @@ Teams:
             enchantments:
               - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
             lore: []
-          WOOL:
-            name: "%teamname% BLOCKS!"
+        blocks:
+            type: WOOL
+            name: "%team_name% BLOCKS!"
             slot: 1
             amount: 64
             durability: 0
@@ -66,7 +67,7 @@ Teams:
       armors: #ARMOR CONTENTS!
         helmet:
           type: IRON_HELMET
-          name: "%teamname% HELMET!"
+          name: "%team_name% HELMET!"
           glow: false # GLOW ENCHANTMENT, NO EFFECTS
           enchantments:
             - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
@@ -74,7 +75,7 @@ Teams:
             - ""
         chestplate:
           type: IRON_CHESTPLATE
-          name: "%teamname% CHEST!"
+          name: "%team_name% CHEST!"
           glow: false # GLOW ENCHANTMENT, NO EFFECTS
           enchantments:
             - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
@@ -82,7 +83,7 @@ Teams:
             - ""
         leggings:
           type: IRON_LEGGINGS
-          name: "%teamname% LEGGINGS!"
+          name: "%team_name% LEGGINGS!"
           glow: false # GLOW ENCHANTMENT, NO EFFECTS
           enchantments:
             - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
@@ -90,7 +91,7 @@ Teams:
             - ""
         boots:
           type: IRON_BOOTS
-          name: "%teamname% BOOT!"
+          name: "%team_name% BOOT!"
           glow: false # GLOW ENCHANTMENT, NO EFFECTS
           enchantments:
             - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
@@ -98,12 +99,21 @@ Teams:
             - ""
       contents: #CONTENT OF THE INVENTORY!
         sword:
-          IRON_SWORD:
-            name: "%teamname% SWORD!"
-            slot: 0
-            amount: 1
-            durability: 1
-            glow: false # GLOW ENCHANTMENT, NO EFFECTS
-            enchantments:
-              - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
-            lore: []
+          type: IRON_SWORD
+          name: "%team_name% SWORD!"
+          slot: 0
+          amount: 1
+          durability: 1
+          glow: false # GLOW ENCHANTMENT, NO EFFECTS
+          enchantments:
+            - "DAMAGE_ALL,1,true" #ENACHANTMENT_NAME,POWER_LEVEL,(ACTIVE? true = YES, false = NO)
+          lore: []
+        blocks:
+          type: WOOL
+          name: "%team_name% BLOCKS!"
+          slot: 1
+          amount: 64
+          durability: 0
+          glow: true # GLOW ENCHANTMENT, NO EFFECTS
+          enchantments: []
+          lore: []

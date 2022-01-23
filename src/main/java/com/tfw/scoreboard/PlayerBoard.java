@@ -1,5 +1,6 @@
 package com.tfw.scoreboard;
 
+import com.tfw.configuration.Style;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.data.PlayerData;
 import com.tfw.scoreboard.boards.FastBoard;
@@ -46,6 +47,6 @@ public class PlayerBoard extends FastBoard {
         if (getIScoreboard().isAnimated())
             updateTitle(getIScoreboard().animatedText(getPlayer()));
         else
-            updateTitle(getIScoreboard().getStaticTitle() == null ? "NO STATIC TITLE" : getIScoreboard().getStaticTitle());
+            updateTitle(getIScoreboard().getStaticTitle() == null ? "NO STATIC TITLE" : Style.translateLine_Holders(getPlayer(), getIScoreboard().getStaticTitle()));
     }
 }
