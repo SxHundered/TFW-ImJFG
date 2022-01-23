@@ -1,7 +1,7 @@
 package com.tfw.game.task;
 
+import com.tfw.manager.data.PlayerBoard;
 import com.tfw.scoreboard.AsyncBoard;
-import com.tfw.scoreboard.PlayerBoard;
 import org.bukkit.scheduler.BukkitRunnable;
 
 

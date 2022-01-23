@@ -15,8 +15,8 @@ import java.util.List;
 
 public class CheckCommand extends CommandBase<TFW> {
 
-    final String CHECK_USAGE = "%prefix% &7/&dTFW&e check &c<playerName> &8| &7Displays player current info!";
-    final String OFFLINE_PLAYER = "%prefix% %playerName% is currently OFFLINE";
+    final String CHECK_USAGE = "&7/tfw&e check&b <playerName> &8| &7Displays player current info!";
+    final String OFFLINE_PLAYER = "%prefix% %playerName% &e&lis currently &4&lOFFLINE";
 
     public CheckCommand(TFW plugin, String check) {
         super(plugin, check);

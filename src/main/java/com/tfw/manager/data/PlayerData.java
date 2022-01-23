@@ -5,9 +5,6 @@ import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.team.Team;
 import com.tfw.scoreboard.AsyncBoard;
-import com.tfw.scoreboard.IScoreboardException;
-import com.tfw.scoreboard.IScoreboardManager;
-import com.tfw.scoreboard.PlayerBoard;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -15,7 +12,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
-import org.jetbrains.annotations.Async;
 
 import java.util.Locale;
 import java.util.UUID;

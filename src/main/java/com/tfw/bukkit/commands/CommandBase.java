@@ -1,5 +1,6 @@
 package com.tfw.bukkit.commands;
 
+import com.tfw.configuration.Style;
 import lombok.Getter;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,9 +20,12 @@ import org.bukkit.plugin.Plugin;
  */
 public abstract class CommandBase<P extends Plugin> implements CommandExecutor {
 
+    private final String NO_PERMISSION = "%prefix% no permission granted!";
+
     private final Map<String, CommandExecutor> subCommands = new HashMap<>();
     @Getter
     private String name;
+    private String permission = null;
     private final P plugin;
 
     /**
@@ -64,6 +68,14 @@ public abstract class CommandBase<P extends Plugin> implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+        if (permission != null){
+            if (!sender.hasPermission(permission)) {
+                sender.sendMessage(Style.translate(NO_PERMISSION));
+                return false;
+            }
+        }
+
         if (args.length > 0) {
             CommandExecutor child = subCommands.get(args[0].toLowerCase());
             if (child != null) {

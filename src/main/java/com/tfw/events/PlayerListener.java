@@ -3,10 +3,11 @@ package com.tfw.events;
 import com.tfw.events.custom.PlayerEliminationEvent;
 import com.tfw.events.custom.TFWJoinEvent;
 import com.tfw.events.custom.TFWLeaveEvent;
-import com.tfw.game.arena.ArenaManager;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.TeamManager;
 import com.tfw.manager.team.Team;
+import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -67,6 +68,7 @@ public class PlayerListener implements Listener {
             return;
 
         killerTeam.eliminationEffect(playerEliminationEvent.getLocation());
+        Bukkit.getWorld(playerEliminationEvent.getLocation().getWorld().getName()).playSound(playerEliminationEvent.getLocation(), Sound.FIZZ, 2.0F, 1.0f);
         killerTeam.updateStats();
 
         //Elimination method!

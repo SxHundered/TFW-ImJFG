@@ -1,18 +1,11 @@
 package com.tfw.particleeffect;
 
-
-import com.tfw.manager.team.Team;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
-
-import java.awt.*;
-import java.lang.reflect.Field;
-import java.util.Locale;
 
 public class ParticlePacketUtil {
 
-    public static void teamElimination_Effect(Location location, Team team){
+    public static void teamElimination_Effect(Location location) {
         try {
 
             ParticleEffect.FIREWORKS_SPARK.sendToPlayers(Bukkit.getOnlinePlayers(), location, 1.0f, 1.0f, 1.0f, 1, 4);
@@ -25,5 +18,4 @@ public class ParticlePacketUtil {
         }
 
     }
-
 }

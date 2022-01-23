@@ -1,9 +1,5 @@
 worldSettings:
   HEART_TEAM: BED
-  Weather: "CLEAR"
-  Time:
-    type: "FIXED" # FIXED,AUTO
-    fixed_to_be: DAY
   WorldBorder:
     enable: false
     center: [0.0, 0.0] # [X, Z]

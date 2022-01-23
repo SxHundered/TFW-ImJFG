@@ -274,11 +274,11 @@ public enum ParticleEffect {
 	}
 
 	public void sendColor(Player p, Location location, java.awt.Color color, boolean force) throws Exception {
-		if (!this.hasColor) {
+		if (!this.hasColor)
 			return;
-		}
+
 		sendToPlayer(p, location, getColor(color.getRed()), getColor(color.getGreen()), getColor(color.getBlue()), 1.0F,
-				0, force);
+				3, force);
 	}
 
 	@Deprecated

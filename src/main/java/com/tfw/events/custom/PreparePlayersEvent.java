@@ -42,10 +42,7 @@ public class PreparePlayersEvent extends Event {
                 playerData.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 3));
                 playerData.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20, 3));
 
-                Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TFW.getInstance(), () -> {
-                    if (playerData.isOnline())
-                        playerData.getPlayer().teleport(playerData.getTeam().getSpawn().toBukkitLocation());
-                }, 30L);
+                playerData.getPlayer().teleport(playerData.getTeam().getSpawn().toBukkitLocation());
             }
         }
     }

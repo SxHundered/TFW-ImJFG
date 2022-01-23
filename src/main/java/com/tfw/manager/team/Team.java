@@ -218,7 +218,7 @@ public class Team implements ITeam {
 
     @Override
     public void eliminationEffect(Location location) {
-        ParticlePacketUtil.teamElimination_Effect(location, this);
+        ParticlePacketUtil.teamElimination_Effect(location);
     }
 
     @Override

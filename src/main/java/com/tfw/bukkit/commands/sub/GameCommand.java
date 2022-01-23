@@ -40,10 +40,11 @@ public class GameCommand extends CommandBase<TFW> {
 
         switch (args[0].toLowerCase(Locale.ROOT)) {
             case "spawn":
+                sender.sendMessage(Style.translate("%prefix% spawn has been updated!"));
                 TFWLoader.getArenaManager().setSpawn(CustomLocation.fromBukkitLocation(((Player) sender).getLocation()));
                 break;
             case "game-info":
-                sender.sendMessage(TFWLoader.getGameManager().game_info());
+                sender.sendMessage(Style.translate(TFWLoader.getGameManager().game_info()));
                 break;
             case "start":
                 //Starts the game!
@@ -69,8 +70,8 @@ public class GameCommand extends CommandBase<TFW> {
     }
 
     final List<String> CHECK_USAGE = Arrays.asList(
-            "/tfw game spawn | Updates spawn location!",
-            "/tfw game summary | Displays some details related to team and the game state!",
-            "/tfw game start | Starts the game"
+            "&7/tfw&e game&b spawn &8-&7 Updates spawn location!",
+            "&7/tfw&e game&b summary &8-&7 Displays some details related to team and the game state!",
+            "&7/tfw&e game&b start &8-&7 Starts the game"
     );
 }

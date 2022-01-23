@@ -2,6 +2,7 @@ package com.tfw.game;
 
 import com.tfw.configuration.ConfigFile;
 import com.tfw.configuration.Style;
+import jdk.nashorn.internal.runtime.regexp.joni.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -18,9 +19,8 @@ import java.util.Set;
 
 public class WorldSettings implements Listener {
 
-    public String weather = "CLEAR"; //CLEAR,RAIN
-    public String time = "FIXED"; //FIXED,AUTO
-    public String time_type = "DAY"; //DAY,NIGHT
+    private ConfigFile configFile;
+
     public boolean isWorldBorder = true; // TRUE,FALSE
     public List<Double> center; //CORDINATES
     public int size; //SIZE
@@ -29,9 +29,10 @@ public class WorldSettings implements Listener {
 
     /**
      * @param javaPlugin MAIN CLASS
-     * @param settings represents settings.yml!
+     * @param settings   represents settings.yml!
      */
     public void setUpWorldSettings(JavaPlugin javaPlugin, ConfigFile settings) throws WorldExceptions {
+        configFile = settings;
 
         String pathConfig = "worldSettings";
         if (settings.getYaml().contains(pathConfig)) {
@@ -46,7 +47,7 @@ public class WorldSettings implements Listener {
                 breakable.add(Material.getMaterial(block));
             for (String block : settings.getYaml().getStringList(pathConfig + ".Placeable_blocks"))
                 placeable.add(Material.getMaterial(block));
-        }else throw new WorldExceptions(Style.translate(
+        } else throw new WorldExceptions(Style.translate(
                 "&e&lCOULD NOT LOAD WORLD SETTINGS\n   &cPLEASE REMOVE THE FILE SETTINGS.YML THEN RESTART!"));
 
         //Now checks if world border is enabled or not!
@@ -60,31 +61,37 @@ public class WorldSettings implements Listener {
     //TODO: EVENTS OF WORLD SETTINGS! -> DONE
 
     @EventHandler(ignoreCancelled = true)
-    public void onBreak(BlockBreakEvent event){
+    public void onBreak(BlockBreakEvent event) {
         event.setCancelled(!breakable.contains(event.getBlock().getType()));
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onPlace(BlockPlaceEvent event){
+    public void onPlace(BlockPlaceEvent event) {
         event.setCancelled(!placeable.contains(event.getBlock().getType()));
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onSpread(BlockSpreadEvent event){
+    public void onSpread(BlockSpreadEvent event) {
         event.setCancelled(true);
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onBurn(BlockBurnEvent event){
+    public void onBurn(BlockBurnEvent event) {
         event.setCancelled(true);
     }
 
-    @EventHandler(ignoreCancelled = true)
-    public void onWeather(WeatherChangeEvent event){
-        if(weather.equalsIgnoreCase("CLEAR"))
-            event.getWorld().setStorm(false);
-        else if(weather.equalsIgnoreCase("RAIN"))
-            event.getWorld().setStorm(true);
-    }
 
+    public void updateSettings() {
+        assert configFile != null;
+        String pathConfig = "worldSettings";
+        configFile.getYaml().set(pathConfig + ".WorldBorder.enable", isWorldBorder);
+        for (Double aDouble : center)
+            configFile.getYaml().set(pathConfig + ".WorldBorder.center", aDouble);
+        configFile.getYaml().set(pathConfig + ".WorldBorder.size", size);
+
+        configFile.getYaml().set(pathConfig + ".Breakable_blocks", breakable);
+        configFile.getYaml().set(pathConfig + ".Placeable_blocks", placeable);
+
+        configFile.save();
+    }
 }

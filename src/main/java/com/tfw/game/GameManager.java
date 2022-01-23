@@ -18,14 +18,10 @@ import com.tfw.manager.TeamManager;
 import com.tfw.manager.data.PlayerData;
 import com.tfw.manager.team.Team;
 import com.tfw.utils.ReflectionUtil;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import me.clip.placeholderapi.libs.kyori.adventure.text.Component;
-import me.clip.placeholderapi.libs.kyori.adventure.title.Title;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -141,9 +137,9 @@ public class GameManager implements IGame,ISettings{
     @Override
     public void playSound(Sound sound) {
         for (PlayerData playerData : TeamManager.getA().alive_members())
-            playerData.getPlayer().playSound(playerData.getPlayer().getLocation(), Sound.AMBIENCE_THUNDER, 1.0f, 1.0f);
+            playerData.getPlayer().playSound(playerData.getPlayer().getLocation(), sound, 2.0F, 1.0F);
         for (PlayerData playerData : TeamManager.getB().alive_members())
-            playerData.getPlayer().playSound(playerData.getPlayer().getLocation(), Sound.AMBIENCE_THUNDER, 1.0f, 1.0f);
+            playerData.getPlayer().playSound(playerData.getPlayer().getLocation(), sound, 2.0F, 1.0F);
     }
 
     /**
@@ -198,7 +194,7 @@ public class GameManager implements IGame,ISettings{
     @Override
     public void restartTheGame() {
         GameStates.setGameStates(GameStates.RESTART);
-        notification("&c&lCLOSING THE SERVER IN RIGHT NOW!");
+        notification("&c&lCLOSING THE SERVER, RIGHT NOW!");
 
         Bukkit.getServer().getScheduler().runTaskLater(TFW.getInstance(), ()->{
             Bukkit.getServer().shutdown();

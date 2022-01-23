@@ -84,8 +84,8 @@ public class SettingsListener implements Listener {
             }
         });
 
-        TFWLoader.getGameManager().title_Notification("&eTeleporting", "&cin a moment");
-        TFWLoader.getGameManager().notification("%prefix% &a&lYou will be teleported in a moment!");
+        TFWLoader.getGameManager().title_Notification("&eTeleporting", "");
+        TFWLoader.getGameManager().notification("%prefix% &a&lYou will be teleported right now!");
 
         preparePlayersEvent.startTeleportation();
 

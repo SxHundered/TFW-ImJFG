@@ -1,9 +1,6 @@
 package com.tfw.bukkit.commands;
 
-import com.tfw.bukkit.commands.sub.CheckCommand;
-import com.tfw.bukkit.commands.sub.GameCommand;
-import com.tfw.bukkit.commands.sub.HelpCommand;
-import com.tfw.bukkit.commands.sub.TeamCommand;
+import com.tfw.bukkit.commands.sub.*;
 import com.tfw.bukkit.commands.sub.debug.ScoreboardCommand;
 import com.tfw.configuration.Style;
 import com.tfw.main.TFW;
@@ -16,9 +13,9 @@ import java.util.List;
 
 public class TFWCommand {
 
-    public static void init(TFW instance){
+    public static void init(TFW instance) {
 
-        // Anonymous implementation of "/check" root command.
+        // Anonymous implementation of "/tfw" root command.
         CommandBase<TFW> checkCommand = new CommandBase<TFW>(TFW.getInstance()) {
             @Override
             public boolean runCommand(CommandSender sender, Command rootCommand, String label, String[] args) {
@@ -27,19 +24,26 @@ public class TFWCommand {
             }
         };
 
+
         Arrays.asList(new HelpCommand(instance, "help"), new CheckCommand(instance, "check")
                 , new TeamCommand(instance, "team")
-                , new GameCommand(instance, "game"), new ScoreboardCommand(instance, "iscore")).forEach(tfwCommandBase ->
+                , new GameCommand(instance, "game"),
+                new SettingsCommand(instance, "settings"), new ScoreboardCommand(instance, "iscore")).forEach(tfwCommandBase ->
                 checkCommand.registerSubCommand(tfwCommandBase.getName(), tfwCommandBase));
 
         instance.getCommand("TFW").setExecutor(checkCommand);
     }
-     @Getter
+
+    @Getter
     static List<String> HELP_OP = Arrays.asList(
-            "%prefix% &5Commands",
+            "             &6&lTFW &5&lCOMMANDS",
+            "&7/tfw&e help",
+            "&7/tfw&e game",
+            "&7/tfw&e settings",
+            "&7/tfw&e team",
+            "&7/tfw&e check &b<playername>",
             "",
-            "&7/tfw &echeck &b<playername>",
-            "&7/tfw &ehelp",
-             "&7Authors: &aAbdulAzizCr &7& &eF4res",
-             "&eSource Code:&a&l https://github.com/SxHundered/TFW-ImJFG");
+            "&7Authors: &aAbdulAzizCr &8- &dF4res",
+            "&eSource Code:&a&l https://github.com/SxHundered/TFW-ImJFG",
+            "");
 }

@@ -2,6 +2,7 @@ package com.tfw.scoreboard;
 
 import com.tfw.configuration.Style;
 import com.tfw.main.TFWLoader;
+import com.tfw.manager.data.PlayerBoard;
 import com.tfw.manager.team.Team;
 import lombok.Getter;
 import org.bukkit.ChatColor;
@@ -63,8 +64,9 @@ public class AsyncBoard {
                         fastBoard.getScoreboard().registerNewTeam(teamName.getIdentifier());
                     else if (!fastBoard.getScoreboard().getTeam(teamName.getIdentifier()).hasEntry(playerData.getPlayerName()))
                         fastBoard.getScoreboard().getTeam(teamName.getIdentifier()).addEntry(playerData.getPlayerName());
-                    fastBoard.getScoreboard().getTeam(teamName.getIdentifier()).setPrefix(playerData.getTeam().getIdentifier().toUpperCase(Locale.ROOT)
-                            + ChatColor.GRAY.toString() + " ┃ ");// + playerData.getTeam().getColorTeam().toString());
+                    fastBoard.getScoreboard().getTeam(teamName.getIdentifier()).setPrefix(
+                            playerData.getTeam().getColorTeam().toString() + playerData.getTeam().getIdentifier().toUpperCase(Locale.ROOT)
+                            + ChatColor.GRAY + " ┃ " + ChatColor.GRAY);// + playerData.getTeam().getColorTeam().toString());
                 }
             }
         });

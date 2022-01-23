@@ -60,7 +60,7 @@ public class MultiverseEvents implements Listener {
      * @param worldLoadEvent WORLD LOAD EVENT
      */
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onSlimeWorldLoad(WorldLoadEvent worldLoadEvent){
+    public void onMultiverseEventLoad(WorldLoadEvent worldLoadEvent){
         String world = worldLoadEvent.getWorldName();
 
         Bukkit.getServer().getConsoleSender().sendMessage(Style.RED + "Loading " + Style.YELLOW + world);
@@ -78,7 +78,7 @@ public class MultiverseEvents implements Listener {
      * @param worldUnLoadEvent WORLD UNLOAD EVENT!
      */
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onSlimeWorldUnLoad(WorldUnLoadEvent worldUnLoadEvent){
+    public void onMultiverseEventUnLoad(WorldUnLoadEvent worldUnLoadEvent){
         String world = worldUnLoadEvent.getWorldName();
 
         Bukkit.getServer().getConsoleSender().sendMessage(Style.RED + "UnLoading " + Style.YELLOW + world);

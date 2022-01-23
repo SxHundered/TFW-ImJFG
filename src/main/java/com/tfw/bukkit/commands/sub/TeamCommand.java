@@ -24,7 +24,7 @@ import java.util.Locale;
 public class TeamCommand extends CommandBase<TFW> {
 
 
-    final String OFFLINE_PLAYER = "%prefix% %player_name% is currently OFFLINE";
+    final String OFFLINE_PLAYER = "%prefix% %playerName% &e&lis currently &4&lOFFLINE";
     final String ALREADY_IN_TEAM = "%prefix% %player_name% is already in team, use /TFW team removeplayer <playername>.";
     final String ALREADY_NOT_IN_TEAM = "%prefix% %player_name% is not in team, use /TFW team addplayer <playername> <teamname>.";
     final String TEAM_NOT_FOUND = "%prefix% Could not find %team_name% team!";
@@ -156,14 +156,14 @@ public class TeamCommand extends CommandBase<TFW> {
 
     final List<String> CHECK_USAGE = Arrays.asList(
 
-            "/tfw team addplayer <playername> <teamname>",
-            "/tfw team removeplayer <playername>",
+            "&7/tfw&e team&b addPlayer&6 <playerName>&c <team_name>",
+            "&7/tfw&e team&b removePlayer&6 <playerName>",
 
-            "/tfw team spawn <team_name>",
-            "/tfw team heart <team_name>",
-            "/tfw team color <team_name>",
-            "/tfw team members <team_name>",
-            "/tfw team score <team_name>",
-            "/tfw team update"
+            "&7/tfw&e team&b spawn&6 <team_name>",
+            "&7/tfw&e team&b heart&6 <team_name>",
+            "&7/tfw&e team&b color&6 <team_name>",
+            "&7/tfw&e team&b members&6 <team_name>",
+            "&7/tfw&e team&b score&6 <team_name>",
+            "&7/tfw&e team&b update"
     );
 }

@@ -94,7 +94,6 @@ public class TeamManager implements ITeams{
         arenasConfig.getYaml().set("main_Arena.locations.b_heart", CustomLocation.locationToString(getB().getHeart().getLocation()));
         arenasConfig.save();
 
-        arenasConfig.load();
     }
 
     public Team findTeam(String teamName){

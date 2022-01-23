@@ -4,14 +4,9 @@ import com.tfw.events.custom.CelebrationEvent;
 import com.tfw.events.custom.GameRestartEvent;
 import com.tfw.events.custom.GameStartEvent;
 import com.tfw.game.GameManager;
-import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.TeamManager;
 import com.tfw.manager.data.PlayerData;
-import com.tfw.manager.data.PlayerStatus;
-import com.tfw.scoreboard.IScoreboardException;
-import com.tfw.scoreboard.IScoreboardManager;
-import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -63,11 +58,10 @@ public class GameListener implements Listener {
         GameManager.GameStates.setGameStates(GameManager.GameStates.ENDING);
         celebrationEvent.toggleScoreBoard();
 
-
         TFWLoader.getGameManager().notification("%prefix% &c&lGREAT WAR, &a&lEVERYONE WAS HONOR!");
-        TFWLoader.getGameManager().notification("  " + celebrationEvent.getWinners().getName() + " has won the tournament!");
-        TFWLoader.getGameManager().notification("  Score: ");
-        TFWLoader.getGameManager().notification("    &aKills &7-> &c&l" + celebrationEvent.getWinners().getKills() + "");
+        TFWLoader.getGameManager().notification(celebrationEvent.getWinners().getName() + " has won the tournament!");
+        TFWLoader.getGameManager().notification("Score: ");
+        TFWLoader.getGameManager().notification("&aKills &7-> &c&l" + celebrationEvent.getWinners().getKills() + "");
 
         for (PlayerData playerData : TFWLoader.getPlayerManager().filtered_online_players())
             playerData.backToHome();
