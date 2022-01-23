@@ -4,14 +4,12 @@ import com.tfw.configuration.ConfigFile;
 import com.tfw.configuration.Style;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.BlockSpreadEvent;
-import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashSet;
@@ -38,9 +36,6 @@ public class WorldSettings implements Listener {
         String pathConfig = "worldSettings";
         if (settings.getYaml().contains(pathConfig)) {
             //Here world settings
-            weather = settings.getYaml().getString(pathConfig + ".Weather");
-            time = settings.getYaml().getString(pathConfig + ".Time.type");
-            time_type = settings.getYaml().getString(pathConfig + ".Time.fixed_to_be");
             isWorldBorder = settings.getYaml().getBoolean(pathConfig + ".WorldBorder.enable");
             center = settings.getYaml().getDoubleList(pathConfig + ".WorldBorder.center");
             size = settings.getYaml().getInt(pathConfig + ".WorldBorder.size");
@@ -59,19 +54,6 @@ public class WorldSettings implements Listener {
             //Now setup!
             //Something..
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "");
-
-            final World world = Bukkit.getWorld("world");
-
-            if (world != null) {
-                if (time.equalsIgnoreCase("FIXED")) {
-                    if (time_type.equalsIgnoreCase("DAY"))
-                        world.setTime(1200);
-                    else if (time_type.equalsIgnoreCase("NIGHT"))
-                        world.setTime(12000);
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doDaylightCycle false");
-                } else
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doDaylightCycle true");
-            }
         }
     }
 

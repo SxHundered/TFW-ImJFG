@@ -57,7 +57,7 @@ public class AsyncBoard {
                     else if (!fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).hasEntry(playerData.getPlayerName()))
                         fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).addEntry(playerData.getPlayerName());
                     fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).setPrefix(ChatColor.RED + ChatColor.BOLD.toString()
-                            + "✘ " + ChatColor.GRAY.toString() + "┃ " + ChatColor.GRAY.toString());
+                            + "✘ " + ChatColor.GRAY + "┃ " + ChatColor.GRAY);
                 } else {
                     if (fastBoard.getScoreboard().getTeam(teamName.getIdentifier()) == null)
                         fastBoard.getScoreboard().registerNewTeam(teamName.getIdentifier());

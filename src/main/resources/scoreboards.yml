@@ -15,10 +15,9 @@ scoreboards:
         - "     &6T&fFW    "
     lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
       - ""
+      - "&f&lSettings:"
       - "&aState &7&l» &b%tfw_status%"
-      - ""
       - "&aOnline &7&l» &b%tfw_online%"
-      - ""
       - "&aYour Team &7&l» &b%tfw_team_name%"
       - ""
       - "     &c&lTEAM FIGHT WAR    "
@@ -32,10 +31,9 @@ scoreboards:
         - "     &bStarting in &f%tfw_startingtime%    "
     lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
       - ""
+      - "&f&lSettings:"
       - "&aState &7&l» &b%tfw_status%"
-      - ""
       - "&aArena &7&l» &b%tfw_arena_name%"
-      - ""
       - "&aYour Team &7&l» &b%tfw_team_name%"
       - ""
       - "     &c&lTEAM FIGHT WAR    "
@@ -90,7 +88,7 @@ scoreboards:
     titleOptions:
       animated: true
       interval: 10
-      delay: 3
+      delay: 6
       title:
         - "     &fTFW &7- &c&lCHAMPIONS    "
         - "     &6T&fFW &7- &4&lCHAMPIONS    "

@@ -14,26 +14,12 @@ public class ParticlePacketUtil {
 
     public static void teamElimination_Effect(Location location, Team team){
         try {
-            for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
 
-                Color color = null;
-                try {
-                    Field field = Class.forName("java.awt.Color").getField(team.getColor().toLowerCase(Locale.ROOT));
-                    color = (Color)field.get(null);
-                } catch (Exception ignore) {}
-
-                if (color == null) {
-                    Bukkit.getConsoleSender().sendMessage("NO COLOR HAS BEEN DEFINED FOR " + team.getColor());
-                    return;
-                }
-
-                ParticleEffect.REDSTONE.sendColor(onlinePlayer, location, Color.getHSBColor(color.getRed(), color.getGreen(), color.getBlue()), true);
-                ParticleEffect.REDSTONE.sendColor(onlinePlayer, location, Color.getHSBColor(color.getRed(), color.getGreen(), color.getBlue()), true);
-                ParticleEffect.REDSTONE.sendColor(onlinePlayer, location, Color.getHSBColor(color.getRed(), color.getGreen(), color.getBlue()), true);
-                ParticleEffect.REDSTONE.sendColor(onlinePlayer, location, Color.getHSBColor(color.getRed(), color.getGreen(), color.getBlue()), true);
-                ParticleEffect.FIREWORKS_SPARK.sendToPlayers(Bukkit.getOnlinePlayers(), location, 1.0f, 1.0f, 1.0f, 1, 2);
-                ParticleEffect.FIREWORKS_SPARK.sendToPlayers(Bukkit.getOnlinePlayers(), location, 1.0f, 1.0f, 1.0f, 1, 2);
-            }
+            ParticleEffect.FIREWORKS_SPARK.sendToPlayers(Bukkit.getOnlinePlayers(), location, 1.0f, 1.0f, 1.0f, 1, 4);
+            ParticleEffect.CLOUD.sendToPlayers(Bukkit.getOnlinePlayers(), location, 1.0f, 1.0f, 1.0f, 1, 5);
+            ParticleEffect.FLAME.sendToPlayers(Bukkit.getOnlinePlayers(), location, 2.7f, 1.5f, 2.0f, 1, 10);
+            ParticleEffect.CLOUD.sendToPlayers(Bukkit.getOnlinePlayers(), location, 1.0f, 1.0f, 1.0f, 1, 5);
+            ParticleEffect.FIREWORKS_SPARK.sendToPlayers(Bukkit.getOnlinePlayers(), location, 1.0f, 1.0f, 1.0f, 1, 4);
         } catch (Exception e) {
             e.printStackTrace();
         }

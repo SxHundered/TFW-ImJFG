@@ -45,6 +45,7 @@ public class GameListener implements Listener {
                         + " &c&lvs " +
                         TeamManager.getB().getColorTeam() + TeamManager.getB().getIdentifier(),
                 "&6&lFIGHT FOR HONOR");
+
         TFWLoader.getGameManager().playSound(Sound.ENDERDRAGON_GROWL);
 
         //Maybe we use gate to open the gate!
