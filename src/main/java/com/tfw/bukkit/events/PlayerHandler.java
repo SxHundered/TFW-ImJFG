@@ -1,16 +1,23 @@
 package com.tfw.bukkit.events;
 
+import com.tfw.configuration.Style;
 import com.tfw.events.custom.PlayerEliminationEvent;
 import com.tfw.events.custom.TFWJoinEvent;
 import com.tfw.events.custom.TFWLeaveEvent;
+import com.tfw.game.GameManager;
 import com.tfw.main.TFWLoader;
+import com.tfw.manager.PlayerManager;
 import com.tfw.manager.data.PlayerData;
 import com.tfw.manager.data.PlayerStatus;
+import com.tfw.manager.team.Team;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -57,4 +64,27 @@ public class PlayerHandler implements Listener {
 
     }
 
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void onChat(AsyncPlayerChatEvent event) {
+        Player player = event.getPlayer();
+        PlayerData playerData = TFWLoader.getPlayerManager().data(player.getUniqueId());
+        if (playerData == null) return;
+        event.setCancelled(true);
+
+        final Team team = playerData.getTeam();
+        switch (playerData.getPlayerStatus()) {
+            case LOBBY:
+            case PLAYING:
+                for (Player players : Bukkit.getOnlinePlayers())
+                    players.sendMessage(Style.translate(
+                            (team != null ? team.getColorTeam() + team.getIdentifier() + " &7\u258f " + team.getColorTeam()
+                                    : "&c&l✘ &7\u258f " + ChatColor.GRAY) + player.getName() + " &7» ") + Style.RESET + event.getMessage());
+                break;
+            case STAFF: {
+                for (Player players : Bukkit.getOnlinePlayers())
+                    players.sendMessage(Style.translate("&c&lSTAFF &7\u258f &c" + player.getName() + " &7» ") + Style.RESET + event.getMessage());
+            }
+            break;
+        }
+    }
 }

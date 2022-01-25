@@ -18,13 +18,16 @@ public class Heart implements IHeart{
 
     private final ITeam team;
     private final Material entity;
-    private CustomLocation location;
+    private CustomLocation location; //#HEARTLOCATION
     private boolean destroyed = false;
     private World world;
+    private BlockState BLOCK_HEAD;
+    private BlockState BLOCK_FOOT;
+    private ArmorStand armorStand;
 
     /**
      * Spawn the heart in the location!, using entity type! -> DONE
-     * Add hologram to the top of the heart -> DO IT Abdul PLEASE
+     * Add hologram to the top of the heart -> DONE
      */
     @Override
     public void spawnHeart() {

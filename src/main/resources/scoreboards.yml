@@ -90,14 +90,14 @@ scoreboards:
       interval: 10
       delay: 6
       title:
-        - "     &fTFW &7- &c&lCHAMPIONS    "
-        - "     &6T&fFW &7- &4&lCHAMPIONS    "
-        - "     T&6F&fW &7- &c&lCHAMPIONS    "
-        - "     TF&6W &7- &4&lCHAMPIONS    "
-        - "     &fTFW &7- &c&lCHAMPIONS    "
-        - "     TF&6W &7- &4&lCHAMPIONS    "
-        - "     T&6F&fW &7- &c&lCHAMPIONS    "
-        - "     &6T&fFW &7- &4&lCHAMPIONS    "
+        - "    &fTFW &7- &c&lCHAMPIONS    "
+        - "    &6T&fFW &7- &4&lCHAMPIONS    "
+        - "    T&6F&fW &7- &c&lCHAMPIONS    "
+        - "    TF&6W &7- &4&lCHAMPIONS    "
+        - "    &fTFW &7- &c&lCHAMPIONS    "
+        - "    TF&6W &7- &4&lCHAMPIONS    "
+        - "    T&6F&fW &7- &c&lCHAMPIONS    "
+        - "    &6T&fFW &7- &4&lCHAMPIONS    "
     lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
       - ""
       - "&f&lWINNER:"
