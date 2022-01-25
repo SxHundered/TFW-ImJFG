@@ -38,7 +38,7 @@ public class SettingsCommand extends CommandBase<TFW> {
             return true;
         }
         switch (args[0].toLowerCase(Locale.ROOT)) {
-            case "border"://TODO:
+            case "border":
                 switch (args[1].toLowerCase(Locale.ROOT)) {
                     case "active":
                         TFWLoader.getGameManager().getWorldSettings().isWorldBorder = true;
