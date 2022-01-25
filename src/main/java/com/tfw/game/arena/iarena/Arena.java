@@ -57,14 +57,14 @@ public class Arena implements IArena{
         TeamManager.getA().setSpawn(a);
 
         this.b = b;
-        TeamManager.getB().setSpawn(a);
+        TeamManager.getB().setSpawn(b);
 
         this.a_heart = a_heart;
         TeamManager.getA().getHeart().updateHeart(a_heart);
 
 
         this.b_heart = b_heart;
-        TeamManager.getB().getHeart().updateHeart(a_heart);
+        TeamManager.getB().getHeart().updateHeart(b_heart);
         return true;
     }
 }

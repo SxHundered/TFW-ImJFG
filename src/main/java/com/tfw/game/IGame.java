@@ -3,6 +3,7 @@ package com.tfw.game;
 
 import com.tfw.manager.data.PlayerData;
 import com.tfw.manager.team.Team;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 
 import java.util.Set;
@@ -29,5 +30,9 @@ public interface IGame {
 
     void startGameTask();
 
+    Team isHeartTeam(Location location);
+
     String game_info();
+
+    void modifySkins();
 }

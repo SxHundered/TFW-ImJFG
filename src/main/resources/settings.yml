@@ -1,5 +1,5 @@
 worldSettings:
-  HEART_TEAM: BED
+  HEART_TEAM: BED_BLOCK
   WorldBorder:
     enable: false
     center: [0.0, 0.0] # [X, Z]

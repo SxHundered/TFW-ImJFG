@@ -29,4 +29,6 @@ public interface IData {
 
     void updateStats();
 
+    void staffApply();
+
 }

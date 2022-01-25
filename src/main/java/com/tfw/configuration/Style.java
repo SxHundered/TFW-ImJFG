@@ -65,7 +65,9 @@ public final class Style {
 	}
 
 	public static String translateLine_Holders(Player player, String line) {
-		return PlaceholderAPI.setPlaceholders(player, ChatColor.translateAlternateColorCodes('&', line.replace("%prefix%", TFW.getPrefix())));
+		String newLine = PlaceholderAPI.setPlaceholders(player, ChatColor.translateAlternateColorCodes('&', line.replace("%prefix%", TFW.getPrefix())));
+		newLine = newLine.length() >= 30 ? newLine.substring(0, 29) : newLine;
+		return newLine;
 	}
 
 	public static List<String> translateLines_Holders(Player player, List<String> lines) {

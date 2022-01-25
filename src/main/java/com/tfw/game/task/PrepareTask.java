@@ -36,9 +36,8 @@ public class PrepareTask extends BukkitRunnable {
                     TFWLoader.getGameManager().notification(countdown == 3 ? "%prefix% &a3" : countdown == 2 ? "%prefix% &b2" : countdown == 1 ? "%prefix% &c1" : null);
                     break;
             }
-        }else{
+        }else
             //Start the game!
             TFWLoader.getGameManager().startGame();
-        }
     }
 }

@@ -9,6 +9,7 @@ import com.tfw.scoreboard.AsyncBoard;
 import lombok.Getter;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -39,6 +40,9 @@ public class PlayerManager implements IManage {
     @Getter
     private final List<PlayerData> playerDataList = new CopyOnWriteArrayList<>();
 
+    @Getter
+    private final Set<String> offline_name_staff = new HashSet<>();
+
     /**
      * @param player player needed to be added into the list
      */
@@ -66,6 +70,19 @@ public class PlayerManager implements IManage {
     @Override
     public void removePlayer(PlayerData playerData) {
 
+        /*
+            Detects if player is staff or not!
+         */
+        if (playerData.getPlayerStatus().equals(PlayerStatus.STAFF)){
+            offline_name_staff.add(playerData.getPlayerName());
+
+            for (PlayerData playerDatas : playerDataList)
+                if (playerDatas.isOnline())
+                    playerDatas.getFastBoard().delete(playerData.getDefaultTeam());
+            Bukkit.getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), () -> playerDataList.remove(playerData));
+            return;
+        }
+
 
         playerData.setPlayerStatus(PlayerStatus.DEAD);
 
@@ -90,12 +107,12 @@ public class PlayerManager implements IManage {
     }
 
     /**
-     * @param playerName retrieving the playerdata using the name
+     * @param uuid retrieving the player-data using the name
      * @return return player-data
      */
     @Override
-    public PlayerData data(String playerName) {
-        return playerDataList.stream().filter(playerData -> playerData.getPlayerName().equalsIgnoreCase(playerName)).findFirst().orElse(null);
+    public PlayerData data(UUID uuid) {
+        return playerDataList.stream().filter(playerData -> playerData.getUuid().equals(uuid)).findFirst().orElse(null);
     }
 
     /**
@@ -138,11 +155,11 @@ public class PlayerManager implements IManage {
 
     @Override
     public TextComponent getStaffAsString() {
-        TextComponent textComponent = new TextComponent("Team Members: ");
+        TextComponent textComponent = new TextComponent(ChatColor.DARK_RED + "Staff: ");
 
         getPlayerDataList().stream().filter(Objects::nonNull).forEach(playerData -> {
             if (playerData.getPlayerStatus().equals(PlayerStatus.STAFF))
-                textComponent.addExtra(playerData.getPlayerName() + ", ");
+                textComponent.addExtra(ChatColor.RED + playerData.getPlayerName() + ChatColor.GRAY + ", ");
                 }
         );
         return textComponent;

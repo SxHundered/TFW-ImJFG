@@ -1,16 +1,19 @@
 package com.tfw.events;
 
-import com.tfw.events.custom.CelebrationEvent;
-import com.tfw.events.custom.GameRestartEvent;
-import com.tfw.events.custom.GameStartEvent;
+import com.tfw.events.custom.*;
 import com.tfw.game.GameManager;
+import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.TeamManager;
 import com.tfw.manager.data.PlayerData;
+import com.tfw.manager.team.Team;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 
 
 /**
@@ -43,6 +46,12 @@ public class GameListener implements Listener {
 
         TFWLoader.getGameManager().playSound(Sound.ENDERDRAGON_GROWL);
 
+        HeartSpawnEvent heartSpawnEvent = new HeartSpawnEvent(TeamManager.getA());
+        Bukkit.getServer().getPluginManager().callEvent(heartSpawnEvent);
+
+        heartSpawnEvent = new HeartSpawnEvent(TeamManager.getB());
+        Bukkit.getServer().getPluginManager().callEvent(heartSpawnEvent);
+        
         //Maybe we use gate to open the gate!
     }
 
@@ -50,6 +59,38 @@ public class GameListener implements Listener {
     public void onGameRestart(GameRestartEvent gameRestartEvent){
         GameManager.GameStates.setGameStates(GameManager.GameStates.RESTART);
         TFWLoader.getGameManager().restartTheGame();
+    }
+
+    /**
+     * @param blockBreakEvent Heart Destroy through breaking the heart!
+     */
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void onBedDestroy(BlockBreakEvent blockBreakEvent){
+        if (GameManager.GameStates.getGameStates().equals(GameManager.GameStates.INGAME)){
+            Material material = blockBreakEvent.getBlock().getType();
+
+            //Match material block with the heart!
+            if (material.equals(TFWLoader.getGameManager().getHeartType())){
+                blockBreakEvent.setCancelled(true);
+                PlayerData playerData = TFWLoader.getPlayerManager().data(blockBreakEvent.getPlayer().getUniqueId());
+                if (playerData == null || playerData.getTeam() == null)
+                    return;
+
+                final Team team = TFWLoader.getGameManager().isHeartTeam(blockBreakEvent.getBlock().getLocation());
+
+                if (team == null)
+                    return;
+                if (team == playerData.getTeam()){
+                    //Detected same team!
+                    playerData.textPlayer("%prefix% &c&lYOU!&e can not break your heart!");
+                }else{
+                    //Break heart!
+                    blockBreakEvent.getBlock().setType(Material.AIR);
+                    HeartDestroyEvent heartDestroyEvent = new HeartDestroyEvent(playerData, team);
+                    Bukkit.getServer().getPluginManager().callEvent(heartDestroyEvent);
+                }
+            }
+        }
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

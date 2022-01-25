@@ -49,6 +49,6 @@ public class PlayerBoard extends FastBoard {
         if (getIScoreboard().isAnimated())
             updateTitle(getIScoreboard().animatedText(getPlayer()));
         else
-            updateTitle(getIScoreboard().getStaticTitle() == null ? "NO STATIC TITLE" : Style.translateLine_Holders(getPlayer(), getIScoreboard().getStaticTitle()));
+            updateTitle(getIScoreboard().getStaticTitle() == null ? "&d&lNO-TITLE" : Style.translateLine_Holders(getPlayer(), getIScoreboard().getStaticTitle()));
     }
 }

@@ -17,6 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *     ######################################################
@@ -30,12 +31,13 @@ import java.util.List;
  *     Only used to modify team class!
  */
 
-public class TeamManager implements ITeams{
+public class TeamManager implements ITeams {
 
     @Getter(AccessLevel.PRIVATE)
     static ConfigFile teamsConfig;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private static Team winners = null;
 
     @Getter
@@ -53,17 +55,19 @@ public class TeamManager implements ITeams{
         String pathTeams = "Teams";
 
         ConfigurationSection configurationSection = teamsConfig.getYaml().getConfigurationSection(pathTeams);
-        if (configurationSection != null){
+        if (configurationSection != null) {
             if (configurationSection.getKeys(false).size() == 2) {
                 for (String key : configurationSection.getKeys(false)) {
                     if (teamsConfig.getString(configurationSection.getCurrentPath() + "." + key + ".TEAM_TYPE").equalsIgnoreCase("A"))
                         A = new Team(key, teamsConfig.getString(configurationSection.getCurrentPath() + "." + key + ".display"),
                                 teamsConfig.getString(configurationSection.getCurrentPath() + "." + key + ".chat_format"),
-                                teamsConfig.getString(configurationSection.getCurrentPath() + "." + key + ".color"));
+                                teamsConfig.getString(configurationSection.getCurrentPath() + "." + key + ".color"),
+                                UUID.fromString(teamsConfig.getString(configurationSection.getCurrentPath() + "." + key + ".skin_uuid")));
                     else
                         B = new Team(key, teamsConfig.getString(configurationSection.getCurrentPath() + "." + key + ".display"),
                                 teamsConfig.getString(configurationSection.getCurrentPath() + "." + key + ".chat_format"),
-                                teamsConfig.getString(configurationSection.getCurrentPath() + "." + key + ".color"));
+                                teamsConfig.getString(configurationSection.getCurrentPath() + "." + key + ".color"),
+                                UUID.fromString(teamsConfig.getString(configurationSection.getCurrentPath() + "." + key + ".skin_uuid")));
                 }
 
                 A.heartSetUp(Material.BED, null);
@@ -78,9 +82,9 @@ public class TeamManager implements ITeams{
                 kitB.loadKits(teamsConfig, pathTeams + "." + B.getIdentifier(), B.getIdentifier());
                 B.setKit(kitB);
 
-            }else
+            } else
                 throw new TeamExceptions(Style.translate("&a&lSORRY, &c&lTEAMS CAN NOT BE MORE THAN OR LESS THAN 2 TEAMS IN THE &7&lteams.yml!"));
-        }else throw new TeamExceptions(Style.RED + "COULD NOT FIND ANY TEAM IN THE CONFIG!");
+        } else throw new TeamExceptions(Style.RED + "COULD NOT FIND ANY TEAM IN THE CONFIG!");
     }
 
     @Override
@@ -96,7 +100,7 @@ public class TeamManager implements ITeams{
 
     }
 
-    public Team findTeam(String teamName){
+    public Team findTeam(String teamName) {
         return getA().getIdentifier().equalsIgnoreCase(teamName) ? getA() : getB().getIdentifier().equalsIgnoreCase(teamName) ? getB() : null;
     }
 }

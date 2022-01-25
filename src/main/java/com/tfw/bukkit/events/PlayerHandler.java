@@ -19,9 +19,29 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerHandler implements Listener {
+
+
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void onAsyncLogin(PlayerLoginEvent playerLoginEvent) {
+        switch (GameManager.GameStates.getGameStates()) {
+            case COUNTDOWN:
+            case RESTART:
+            case ENDING:
+                playerLoginEvent.disallow(PlayerLoginEvent.Result.KICK_OTHER, ChatColor.RED + "Sorry, you can not join at this moment!");
+                break;
+            case INGAME:
+                if (!TFWLoader.getPlayerManager().getOffline_name_staff().contains(playerLoginEvent.getPlayer().getName()))
+                    playerLoginEvent.disallow(PlayerLoginEvent.Result.KICK_OTHER, ChatColor.RED + "ONLY STAFF MEMBERS CAN JOIN AT THIS STATE!");
+                break;
+            default:
+                break;
+        }
+    }
+
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onJoin(PlayerJoinEvent playerJoinEvent) {
@@ -34,7 +54,7 @@ public class PlayerHandler implements Listener {
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onQuit(PlayerQuitEvent playerQuitEvent) {
         playerQuitEvent.setQuitMessage(null);
-        PlayerData playerData = TFWLoader.getPlayerManager().data(playerQuitEvent.getPlayer().getName());
+        PlayerData playerData = TFWLoader.getPlayerManager().data(playerQuitEvent.getPlayer().getUniqueId());
 
         assert playerData != null;
 
@@ -51,7 +71,7 @@ public class PlayerHandler implements Listener {
         playerDeathEvent.getDrops().clear();
 
 
-        PlayerData playerData = TFWLoader.getPlayerManager().data(playerDeathEvent.getEntity().getName());
+        PlayerData playerData = TFWLoader.getPlayerManager().data(playerDeathEvent.getEntity().getUniqueId());
 
         if (playerData == null)
             return;

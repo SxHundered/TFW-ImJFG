@@ -18,10 +18,13 @@ import com.tfw.manager.TeamManager;
 import com.tfw.manager.data.PlayerData;
 import com.tfw.manager.team.Team;
 import com.tfw.utils.ReflectionUtil;
+import com.tfw.utils.autoSkinModifier.SkinModifier;
 import lombok.Getter;
 import lombok.Setter;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -46,12 +49,16 @@ public class GameManager implements IGame,ISettings{
 
     @Getter
     private static ConfigFile settings;
+    @Getter@Setter
+    private Material heartType = Material.AIR;
     private GameTask gameTask;
     private WorldSettings worldSettings;
+    private SkinModifier skinModifier;
 
     @Override
     public void gameSetup(JavaPlugin javaPlugin) throws WorldExceptions {
         initializeSettings(javaPlugin);
+        skinModifier = new SkinModifier();
 
         IArena.ARENA_STATUS.setArena_status(IArena.ARENA_STATUS.LOBBY);
 
@@ -64,11 +71,22 @@ public class GameManager implements IGame,ISettings{
     }
 
     /**
+     * Clear all added or generated entities by the plugin before closing the server!
+     */
+    @Override
+    public void clearEntities() {
+
+    }
+
+    /**
      * Setting up configurations
      */
     @Override
-    public void initializeSettings(JavaPlugin javaPlugin) {
+    public void initializeSettings(JavaPlugin javaPlugin) throws WorldExceptions {
         settings = new ConfigFile(javaPlugin, "settings.yml");
+        if (settings.getYaml().contains("worldSettings.HEART_TEAM"))
+            heartType = Material.getMaterial(settings.getString("worldSettings.HEART_TEAM").toUpperCase(Locale.ROOT));
+        else throw new WorldExceptions("Could not find a heart material block!");
     }
 
     /**
@@ -100,6 +118,35 @@ public class GameManager implements IGame,ISettings{
     }
 
     @Override
+    public Team isHeartTeam(Location location) {
+        Location heartLocation = TeamManager.getA().getHeart().getLocation().toBukkitLocation();
+        if (TFWLoader.getGameManager().getHeartType().equals(Material.BED_BLOCK)){
+            Location head = TeamManager.getA().getHeart().getBLOCK_HEAD().getLocation();
+            Location foot = TeamManager.getA().getHeart().getBLOCK_FOOT().getLocation();
+
+            if (location.getBlockX() == head.getBlockX() && location.getBlockY() == head.getBlockY() && location.getBlockZ() == head.getBlockZ())
+                return TeamManager.getA();
+            else if (location.getBlockX() == foot.getBlockX() && location.getBlockY() == foot.getBlockY() && location.getBlockZ() == foot.getBlockZ())
+                return TeamManager.getA();
+
+            head = TeamManager.getB().getHeart().getBLOCK_HEAD().getLocation();
+            foot = TeamManager.getB().getHeart().getBLOCK_FOOT().getLocation();
+            if (location.getBlockX() == head.getBlockX() && location.getBlockY() == head.getBlockY() && location.getBlockZ() == head.getBlockZ())
+                return TeamManager.getB();
+            else if (location.getBlockX() == foot.getBlockX() && location.getBlockY() == foot.getBlockY() && location.getBlockZ() == foot.getBlockZ())
+                return TeamManager.getB();
+
+        }else {
+            if (location.getBlockX() == heartLocation.getBlockX() && location.getBlockY() == heartLocation.getBlockY() && location.getBlockZ() == heartLocation.getBlockZ())
+                return TeamManager.getA();
+            heartLocation = TeamManager.getB().getHeart().getLocation().toBukkitLocation();
+            if (location.getBlockX() == heartLocation.getBlockX() && location.getBlockY() == heartLocation.getBlockY() && location.getBlockZ() == heartLocation.getBlockZ())
+                return TeamManager.getB();
+        }
+        return null;
+    }
+
+    @Override
     public String game_info() {
 
         TextComponent textComponent = new TextComponent("Current State: " + GameStates.getGameStates().name().toUpperCase(Locale.ROOT) + "\n");
@@ -109,10 +156,16 @@ public class GameManager implements IGame,ISettings{
         textComponent.addExtra(TeamManager.getB().getTeam() + ": " + "\n");
         textComponent.addExtra(TeamManager.getB().getMembersAsString().toLegacyText() + "\n");
 
-        textComponent.addExtra("Staff Team: \n");
         textComponent.addExtra(TFWLoader.getPlayerManager().getStaffAsString().toLegacyText() + "\n");
 
         return textComponent.toLegacyText();
+    }
+
+    @Override
+    public void modifySkins() {
+        for (PlayerData playerData : TFWLoader.getPlayerManager().onlyTeamPlayers())
+            if (playerData.isOnline() && playerData.getTeam().getUuid() != null)
+                skinModifier.skinChanger(playerData.getPlayer(), playerData.getTeam().getUuid());
     }
 
     @Override

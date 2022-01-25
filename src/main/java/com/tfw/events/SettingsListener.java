@@ -87,6 +87,8 @@ public class SettingsListener implements Listener {
         TFWLoader.getGameManager().title_Notification("&eTeleporting", "");
         TFWLoader.getGameManager().notification("%prefix% &a&lYou will be teleported right now!");
 
+
+        //Bukkit.getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), ()-> TFWLoader.getGameManager().modifySkins());
         preparePlayersEvent.startTeleportation();
 
         TFWLoader.getGameManager().loadKits(preparePlayersEvent.getPlayerDataSet());

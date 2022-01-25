@@ -10,6 +10,7 @@ import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.TeamExceptions;
 import com.tfw.manager.data.PlayerData;
+import com.tfw.manager.data.PlayerStatus;
 import com.tfw.manager.team.Team;
 import com.tfw.utils.CustomLocation;
 import org.bukkit.Bukkit;
@@ -25,6 +26,7 @@ public class TeamCommand extends CommandBase<TFW> {
 
 
     final String OFFLINE_PLAYER = "%prefix% %playerName% &e&lis currently &4&lOFFLINE";
+    final String STAFF_PLAYER = "%prefix% &c&lERROR&7, &e%playerName% &7is on &bStaff-Mode";
     final String ALREADY_IN_TEAM = "%prefix% %player_name% is already in team, use /TFW team removeplayer <playername>.";
     final String ALREADY_NOT_IN_TEAM = "%prefix% %player_name% is not in team, use /TFW team addplayer <playername> <teamname>.";
     final String TEAM_NOT_FOUND = "%prefix% Could not find %team_name% team!";
@@ -62,10 +64,14 @@ public class TeamCommand extends CommandBase<TFW> {
                             OFFLINE_PLAYER.replace("%player_name%", args[1])));
                     return true;
                 }
-                PlayerData playerData = TFWLoader.getPlayerManager().data(target.getName());
+                PlayerData playerData = TFWLoader.getPlayerManager().data(target.getUniqueId());
                 if (playerData == null) {
                     sender.sendMessage(Style.translate(
                             OFFLINE_PLAYER.replace("%player_name%", args[1])));
+                    return true;
+                }else if (playerData.getPlayerStatus().equals(PlayerStatus.STAFF)){
+                    sender.sendMessage(
+                            STAFF_PLAYER.replace("%player_name%", args[1]));
                     return true;
                 }
                 if (args[0].toLowerCase(Locale.ROOT).equalsIgnoreCase("addplayer")) {

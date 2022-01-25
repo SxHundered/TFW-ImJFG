@@ -54,6 +54,8 @@ public interface ITeam {
 
     void spawnHeart();
 
+    void destroyHeart(PlayerData playerData);
+
     Heart getHeart();
 
     void eliminationEffect(Location location);

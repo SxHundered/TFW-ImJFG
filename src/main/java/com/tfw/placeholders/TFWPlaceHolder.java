@@ -62,7 +62,7 @@ public class TFWPlaceHolder extends PlaceholderExpansion {
     private String onRequests(Player p, String params) {
         //All placeholders place here and translated!
 
-        PlayerData playerData = TFWLoader.getPlayerManager().data(p.getName());
+        PlayerData playerData = TFWLoader.getPlayerManager().data(p.getUniqueId());
 
         if (params.equalsIgnoreCase("online"))
             return "" + Bukkit.getOnlinePlayers().size();

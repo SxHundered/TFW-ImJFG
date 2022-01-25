@@ -5,6 +5,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
 
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 public interface IManage {
@@ -13,7 +14,7 @@ public interface IManage {
 
     void removePlayer(PlayerData playerData);
 
-    PlayerData data(String playerName);
+    PlayerData data(UUID uuid);
 
     void eliminatePlayer(PlayerData playerData);
 

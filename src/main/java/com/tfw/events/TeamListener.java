@@ -1,8 +1,6 @@
 package com.tfw.events;
 
-import com.tfw.events.custom.TeamEliminationEvent;
-import com.tfw.events.custom.TeamJoinEvent;
-import com.tfw.events.custom.TeamLeaveEvent;
+import com.tfw.events.custom.*;
 import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.TeamManager;
@@ -62,4 +60,16 @@ public class TeamListener implements Listener {
         TFWLoader.getGameManager().celebrate(winners);
     }
 
+
+    @EventHandler
+    public void heartSpawn(HeartSpawnEvent heartSpawnEvent){
+        heartSpawnEvent.getTeam().spawnHeart();
+    }
+
+    @EventHandler
+    public void heartDestroy(HeartDestroyEvent heartDestroyEvent){
+
+        TeamEliminationEvent teamEliminationEvent = new TeamEliminationEvent(heartDestroyEvent.getTeam());
+        Bukkit.getServer().getPluginManager().callEvent(teamEliminationEvent);
+    }
 }

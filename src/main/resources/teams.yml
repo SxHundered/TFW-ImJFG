@@ -1,5 +1,6 @@
 Teams:
   Theyab: #TEAM A
+    skin_uuid: 760d9acd-1dac-4df4-9e55-957984a240e8
     TEAM_TYPE: A #DO NOT CHANGE THIS!
     display: "&5&lTEAM &9&lTHEYAB"
     color: BLUE
@@ -59,6 +60,7 @@ Teams:
             enchantments: []
             lore: []
   ImJFG: #TEAM B
+    skin_uuid: a0687556-72a3-4d97-9fd2-658d429b94b7
     TEAM_TYPE: B #DO NOT CHANGE THIS!
     display: "ImJFG TEAM"
     color: GREEN

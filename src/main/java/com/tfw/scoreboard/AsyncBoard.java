@@ -3,6 +3,7 @@ package com.tfw.scoreboard;
 import com.tfw.configuration.Style;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.data.PlayerBoard;
+import com.tfw.manager.data.PlayerStatus;
 import com.tfw.manager.team.Team;
 import lombok.Getter;
 import org.bukkit.ChatColor;
@@ -32,10 +33,11 @@ public class AsyncBoard {
 
         generateTeam(player, fastBoard.getPlayerData().getTeam() != null ? fastBoard.getPlayerData().getTeam().getIdentifier() :
                 fastBoard.getPlayerData().getDefaultTeam(), fastBoard.getPlayerData().getTeam() != null ?
-                fastBoard.getPlayerData().getTeam().getColorTeam() + fastBoard.getPlayerData().getTeam().getIdentifier().toUpperCase(Locale.ROOT)
-                        + ChatColor.GRAY + " ┃ "//w + fastBoard.getPlayerData().getTeam().getColorTeam().toString()
-                : ChatColor.RED + ChatColor.BOLD.toString()
-                + "✘ " + ChatColor.GRAY + "┃ " + ChatColor.GRAY, fastBoard);
+                fastBoard.getPlayerData().getTeam().getColorTeam() +
+                fastBoard.getPlayerData().getTeam().getIdentifier().toUpperCase(Locale.ROOT) + ChatColor.GRAY + " ┃ " :
+                ChatColor.RED + ChatColor.BOLD.toString() +
+                (fastBoard.getPlayerData().getPlayerStatus().equals(PlayerStatus.STAFF) ? "&c&lSTAFF " + ChatColor.GRAY + "┃ " + ChatColor.RED : "✘ ")
+                + ChatColor.GRAY + "┃ " + ChatColor.GRAY, fastBoard);
     }
 
     private static void generateTeam(Player player, String name, String prefix, PlayerBoard fastBoard) {
@@ -58,7 +60,8 @@ public class AsyncBoard {
                     else if (!fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).hasEntry(playerData.getPlayerName()))
                         fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).addEntry(playerData.getPlayerName());
                     fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).setPrefix(ChatColor.RED + ChatColor.BOLD.toString()
-                            + "✘ " + ChatColor.GRAY + "┃ " + ChatColor.GRAY);
+                            + (fastBoard.getPlayerData().getPlayerStatus().equals(PlayerStatus.STAFF) ? "&c&lSTAFF " + ChatColor.GRAY + "┃ " + ChatColor.RED : "✘ ")
+                            + ChatColor.GRAY + "┃ " + ChatColor.GRAY);
                 } else {
                     if (fastBoard.getScoreboard().getTeam(teamName.getIdentifier()) == null)
                         fastBoard.getScoreboard().registerNewTeam(teamName.getIdentifier());

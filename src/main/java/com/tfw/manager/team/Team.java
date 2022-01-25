@@ -17,10 +17,7 @@ import lombok.Setter;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -50,6 +47,7 @@ public class Team implements ITeam {
     private final String name;
     private final String chat_format;
     private final String color;
+    private final UUID uuid;
     private int kills = 0;
     private Kit kit;
     private int weight = 0;
@@ -204,7 +202,12 @@ public class Team implements ITeam {
     public void spawnHeart() {
         heart.spawnEffect();
         heart.spawnHeart();
-        broadcastTeam(TFW.getPrefix() + ChatColor.GREEN.toString() + "YOUR HEART HAS BEEN SPAWNED!\n  §e§lPROTECT YOUR HEART,§c§l AND DESTROY THEIR HEART TO WIN THE GAME!");
+    }
+
+    @Override
+    public void destroyHeart(PlayerData playerData) {
+        heart.getArmorStand().remove();
+        heart.destroyHeart(playerData);
     }
 
     public void updateStats() {

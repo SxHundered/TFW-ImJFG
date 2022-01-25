@@ -1,6 +1,7 @@
 package com.tfw.manager.data;
 
 import com.tfw.configuration.Style;
+import com.tfw.game.GameManager;
 import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.team.Team;
@@ -57,12 +58,21 @@ public class PlayerData implements IData{
     }
 
     /**
+     *
      * Prepare the player and give scoreboard!
+     *
      */
     @Override
     public void preparePlayer() {
-        clearPlayer();
-        updateStatus(PlayerStatus.LOBBY);
+
+        if (GameManager.GameStates.getGameStates().equals(GameManager.GameStates.LOBBY)) {
+            updateStatus(PlayerStatus.LOBBY);
+            clearPlayer();
+        }else {
+            updateStatus(PlayerStatus.STAFF);
+            staffApply();
+        }
+
         selectTeam(team);
         generateScoreboard();
     }
@@ -130,6 +140,30 @@ public class PlayerData implements IData{
         getPlayer().setGameMode(GameMode.SURVIVAL);
         for (PotionEffect activePotionEffect : getPlayer().getActivePotionEffects())
             getPlayer().removePotionEffect(activePotionEffect.getType());
+        getPlayer().updateInventory();
+    }
+
+    /**
+     * Staff Mode - Apply GameMode Spectator
+     */
+    @Override
+    public void staffApply() {
+        getPlayer().setHealth(20);
+        getPlayer().setMaxHealth(20);
+        getPlayer().setFoodLevel(20);
+        getPlayer().setSaturation(12.8F);
+        getPlayer().setMaximumNoDamageTicks(20);
+        getPlayer().setFireTicks(0);
+        getPlayer().setFallDistance(0.0F);
+        getPlayer().setLevel(0);
+        getPlayer().setExp(0.0F);
+        getPlayer().setWalkSpeed(0.2F);
+        getPlayer().getInventory().setHeldItemSlot(0);
+        getPlayer().setAllowFlight(false);
+        getPlayer().getInventory().clear();
+        getPlayer().getInventory().setArmorContents(null);
+        getPlayer().closeInventory();
+        getPlayer().setGameMode(GameMode.SPECTATOR);
         getPlayer().updateInventory();
     }
 

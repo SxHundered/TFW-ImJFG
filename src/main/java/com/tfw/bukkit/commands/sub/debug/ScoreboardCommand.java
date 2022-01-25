@@ -43,7 +43,7 @@ public class ScoreboardCommand extends CommandBase<TFW> {
             return true;
         }
 
-        PlayerData playerData = TFWLoader.getPlayerManager().data(target.getName());
+        PlayerData playerData = TFWLoader.getPlayerManager().data(target.getUniqueId());
         if (playerData == null) {
             sender.sendMessage(Style.translate(
                     OFFLINE_PLAYER.replace("%playerName%", args[0])));

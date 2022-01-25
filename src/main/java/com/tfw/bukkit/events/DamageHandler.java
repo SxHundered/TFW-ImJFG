@@ -27,7 +27,7 @@ public class DamageHandler implements Listener {
         if (!(event.getEntity() instanceof Player))
             return;
 
-        PlayerData playerData = TFWLoader.getPlayerManager().data(event.getEntity().getName());
+        PlayerData playerData = TFWLoader.getPlayerManager().data(event.getEntity().getUniqueId());
         if (playerData == null) {
             event.setCancelled(true);
             return;
@@ -39,7 +39,7 @@ public class DamageHandler implements Listener {
         if (event.getDamager() instanceof Player) {
 
             final Player damager = (Player) event.getDamager();
-            final PlayerData damagerData = TFWLoader.getPlayerManager().data(damager.getName());
+            final PlayerData damagerData = TFWLoader.getPlayerManager().data(damager.getUniqueId());
 
             if (damagerData == null) {
                 event.setCancelled(true);
@@ -59,7 +59,7 @@ public class DamageHandler implements Listener {
             Projectile projectile = (Projectile) event.getDamager();
             if (projectile.getShooter() instanceof Player) {
                 final Player damager = (Player) projectile.getShooter();
-                final PlayerData damagerData = TFWLoader.getPlayerManager().data(damager.getName());
+                final PlayerData damagerData = TFWLoader.getPlayerManager().data(damager.getUniqueId());
 
                 if (damagerData == null) {
                     event.setCancelled(true);

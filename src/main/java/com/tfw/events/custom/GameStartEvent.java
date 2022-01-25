@@ -40,8 +40,7 @@ public class GameStartEvent extends Event {
                         if (playerData.getTeam() != null)
                             playerData.setPlayerStatus(PlayerStatus.PLAYING);
 
-                        playerData.getFastBoard().setIScoreboard(
-                                TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.INGAME));
+                        playerData.getFastBoard().setIScoreboard(TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.INGAME));
                     } catch (IScoreboardException e) {
                         e.printStackTrace();
                     }
