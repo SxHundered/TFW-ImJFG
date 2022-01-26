@@ -117,6 +117,7 @@ public class PlayerListener implements Listener {
                 return;
             }
 
+            TFWLoader.getPlayerManager().getOffline_name_staff().add(target);
             looking_for.setPlayerStatus(PlayerStatus.STAFF);
             looking_for.staffApply();
             looking_for.textPlayer("%prefix% " + ChatColor.GREEN + "You have been assigned as a staff member!");
@@ -149,6 +150,7 @@ public class PlayerListener implements Listener {
             final String NOT_STAFF_PLAYER = "%prefix% &c&lERROR&7, &e%playerName% &7is not on staff-mode!".replace("%playerName%", looking_for.getPlayerName());
             executor.textPlayer(Style.translate(NOT_STAFF_PLAYER));
         }else{
+            TFWLoader.getPlayerManager().getOffline_name_staff().remove(target);
             looking_for.getPlayer().kickPlayer(ChatColor.RED + "Please, rejoin!");
         }
     }

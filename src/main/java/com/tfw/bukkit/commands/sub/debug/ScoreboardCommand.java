@@ -54,6 +54,9 @@ public class ScoreboardCommand extends CommandBase<TFW> {
 
         try {
             switch (SBName.toLowerCase(Locale.ROOT)) {
+                case "reload":
+                    //TODO: RELOADING ALL SCOREBOARD FROM CONFIG AGAIN!
+                    break;
                 case "staff":
                     playerData.getFastBoard().setIScoreboard(TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.STAFF));
                     sender.sendMessage(Style.translate(SUCCESSFULLY));

@@ -65,7 +65,7 @@ public class PlayerData implements IData{
     @Override
     public void preparePlayer() {
 
-        if (GameManager.GameStates.getGameStates().equals(GameManager.GameStates.LOBBY)) {
+        if (!TFWLoader.getPlayerManager().getOffline_name_staff().contains(playerName)) {
             updateStatus(PlayerStatus.LOBBY);
             clearPlayer();
         }else {
@@ -164,6 +164,7 @@ public class PlayerData implements IData{
         getPlayer().getInventory().setArmorContents(null);
         getPlayer().closeInventory();
         getPlayer().setGameMode(GameMode.SPECTATOR);
+        getPlayer().setAllowFlight(true);
         getPlayer().updateInventory();
     }
 
@@ -184,7 +185,7 @@ public class PlayerData implements IData{
         //
         settings.setRefresh(true);
 
-        AsyncBoard.createTeams_Instance(getPlayer(), playerBoard, 0);
+        AsyncBoard.createTeams_Instance(playerBoard);
         getPlayer().setScoreboard(playerBoard.getScoreboard());
         fastBoard.updateTitle();
 
@@ -239,5 +240,9 @@ public class PlayerData implements IData{
         Bukkit.getConsoleSender().sendMessage(Style.BLUE + "Status: " + playerStatus.name().toUpperCase(Locale.ROOT));
         fastBoard.getIScoreboard().info();
         Bukkit.getConsoleSender().sendMessage(Style.BLUE + "}");
+    }
+
+    public String tabName(){
+        return playerName;
     }
 }

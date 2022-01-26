@@ -32,15 +32,16 @@ public class GameStartEvent extends Event {
     }
 
 
-    public void toggleScoreBoard(){
-        Bukkit.getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), ()-> {
+    public void toggleScoreBoard() {
+        Bukkit.getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), () -> {
             for (PlayerData playerData : TFWLoader.getPlayerManager().filtered_online_players()) {
                 if (playerData.isOnline()) {
                     try {
-                        if (playerData.getTeam() != null)
+                        if (playerData.getTeam() != null) {
                             playerData.setPlayerStatus(PlayerStatus.PLAYING);
-
-                        playerData.getFastBoard().setIScoreboard(TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.INGAME));
+                            playerData.getFastBoard().setIScoreboard(TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.INGAME));
+                        }else
+                            playerData.getFastBoard().setIScoreboard(TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.STAFF));
                     } catch (IScoreboardException e) {
                         e.printStackTrace();
                     }

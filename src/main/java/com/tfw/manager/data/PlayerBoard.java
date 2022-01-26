@@ -1,6 +1,7 @@
 package com.tfw.manager.data;
 
 import com.tfw.configuration.Style;
+import com.tfw.game.GameManager;
 import com.tfw.main.TFWLoader;
 import com.tfw.scoreboard.IScoreboard;
 import com.tfw.scoreboard.IScoreboardException;
@@ -30,8 +31,10 @@ public class PlayerBoard extends FastBoard {
         super(player);
 
         try {
-            this.iScoreboard = TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.LOBBY);
-            System.out.println(iScoreboard);
+            if (playerData.getPlayerStatus().equals(PlayerStatus.STAFF))
+                this.iScoreboard = TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.STAFF);
+            else
+                this.iScoreboard = TFWLoader.getIScoreboardManager().getScoreBoard(IScoreboardManager.ScoreboardTYPE.LOBBY);
         } catch (IScoreboardException e) {
             e.printStackTrace();
         }

@@ -15,7 +15,8 @@ import java.util.Locale;
 public class SettingsCommand extends CommandBase<TFW> {
 
     final String ALREADY_STARTED = "%prefix% settings works only in lobby state!";
-    final String BORDER_ACTIVATED = "%prefix% the boarder has been activated successfully!";
+    final String BORDER_ACTIVATED = "%prefix% the boarder has been ACTIVATED!";
+    final String BORDER_DEACTIVATED = "%prefix% the boarder has been &c&lDEACTIVATED!";
     final String CENTER_SAVED = "%prefix% the boarder center has been saved!";
     final String NUMBER_ERROR = "%prefix% You must provide an invalid number!";
     final String BORDER_SIZE = "%prefix% The border size has been changed to %size%";
@@ -43,6 +44,10 @@ public class SettingsCommand extends CommandBase<TFW> {
                     case "active":
                         TFWLoader.getGameManager().getWorldSettings().isWorldBorder = true;
                         sender.sendMessage(Style.translate(BORDER_ACTIVATED));
+                        break;
+                    case "disable":
+                        TFWLoader.getGameManager().getWorldSettings().isWorldBorder = false;
+                        sender.sendMessage(Style.translate(BORDER_DEACTIVATED));
                         break;
                     case "center":
                         try {
@@ -86,6 +91,7 @@ public class SettingsCommand extends CommandBase<TFW> {
 
     final List<String> CHECK_USAGE_BRODER = Arrays.asList(
             "&7/tfw&e settings&b border&6 active &8-&7 Active the border",
+            "&7/tfw&e settings&b border&6 disable &8-&7 Disable the border",
             "&7/tfw&e settings&b border&6 center &8-&7 Change the border center point",
             "&7/tfw&e settings&b border&6 &size &8-&7 Change the border size"
     );

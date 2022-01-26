@@ -13,6 +13,7 @@ import com.tfw.game.GameManager;
 import com.tfw.game.arena.ArenaManager;
 import com.tfw.manager.PlayerManager;
 import com.tfw.manager.TeamManager;
+import com.tfw.manager.messages.MessageManager;
 import com.tfw.scoreboard.IScoreboardManager;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,11 +30,16 @@ public class TFWLoader {
     private static TeamManager teamManager;
     @Getter
     private static PlayerManager playerManager;
+    @Getter
+    private static MessageManager messageManager;
 
     @Getter
     private static IScoreboardManager iScoreboardManager;
 
     public static void loadInstances(JavaPlugin javaPlugin){
+
+        messageManager = new MessageManager();
+        messageManager.messageSetup(javaPlugin);
 
         gameManager = new GameManager();
         arenaManager = new ArenaManager();

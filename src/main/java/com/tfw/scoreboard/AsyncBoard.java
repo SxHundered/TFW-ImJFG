@@ -25,52 +25,59 @@ public class AsyncBoard {
     @Getter
     private static final String[] args = {"A", "B", "C0", "C1"};
 
-    public static void createTeams_Instance(Player player, PlayerBoard fastBoard, int weight) {
+    public static void createTeams_Instance(PlayerBoard fastBoard) {
         final Scoreboard scoreboard = fastBoard.getScoreboard();
 
         scoreboard.registerNewTeam(fastBoard.getPlayerData().getTeam() != null ? fastBoard.getPlayerData().getTeam().getIdentifier() :
                 fastBoard.getPlayerData().getDefaultTeam());
 
-        generateTeam(player, fastBoard.getPlayerData().getTeam() != null ? fastBoard.getPlayerData().getTeam().getIdentifier() :
-                fastBoard.getPlayerData().getDefaultTeam(), fastBoard.getPlayerData().getTeam() != null ?
-                fastBoard.getPlayerData().getTeam().getColorTeam() +
-                fastBoard.getPlayerData().getTeam().getIdentifier().toUpperCase(Locale.ROOT) + ChatColor.GRAY + " ┃ " :
-                ChatColor.RED + ChatColor.BOLD.toString() +
-                (fastBoard.getPlayerData().getPlayerStatus().equals(PlayerStatus.STAFF) ? "&c&lSTAFF " + ChatColor.GRAY + "┃ " + ChatColor.RED : "✘ ")
-                + ChatColor.GRAY + "┃ " + ChatColor.GRAY, fastBoard);
+        generateTeam(fastBoard.getPlayerData().getTeam() != null ?
+                        fastBoard.getPlayerData().getTeam().getIdentifier() :
+                        fastBoard.getPlayerData().getDefaultTeam(),
+
+                fastBoard.getPlayerData().getTeam() != null ?
+                        fastBoard.getPlayerData().getTeam().getColorTeam() +
+                                fastBoard.getPlayerData().getTeam().getIdentifier().toUpperCase(Locale.ROOT) + ChatColor.GRAY + " ┃ " :
+                        (fastBoard.getPlayerData().getPlayerStatus().equals(PlayerStatus.STAFF) ?
+                                ChatColor.RED + ChatColor.BOLD.toString() + "STAFF " + ChatColor.GRAY
+                                : ChatColor.RED + ChatColor.BOLD.toString() + "✘ "
+                                + ChatColor.GRAY + "┃ ")
+
+                , fastBoard);
     }
 
-    private static void generateTeam(Player player, String name, String prefix, PlayerBoard fastBoard) {
+    private static void generateTeam(String name, String prefix, PlayerBoard fastBoard) {
         org.bukkit.scoreboard.Team team = fastBoard.getScoreboard().getTeam(name) == null ?
                 (fastBoard.getScoreboard().registerNewTeam(name)) :
                 (fastBoard.getScoreboard().getTeam(name));
-        if (!team.hasEntry(player.getName())) {
-            team.addEntry(player.getName());
+        if (!team.hasEntry(fastBoard.getPlayerData().tabName())) {
+            team.addEntry(fastBoard.getPlayerData().tabName());
             team.setPrefix(prefix);
         }
     }
 
     public static void generate_ifExists(PlayerBoard fastBoard) {
         TFWLoader.getPlayerManager().filtered_online_players().forEach(playerData -> {
-            if (playerData != null) {
-                Team teamName = playerData.getTeam();
-                if (teamName == null) {
-                    if (fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()) == null)
-                        fastBoard.getScoreboard().registerNewTeam(playerData.getDefaultTeam());
-                    else if (!fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).hasEntry(playerData.getPlayerName()))
-                        fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).addEntry(playerData.getPlayerName());
-                    fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).setPrefix(ChatColor.RED + ChatColor.BOLD.toString()
-                            + (fastBoard.getPlayerData().getPlayerStatus().equals(PlayerStatus.STAFF) ? "&c&lSTAFF " + ChatColor.GRAY + "┃ " + ChatColor.RED : "✘ ")
-                            + ChatColor.GRAY + "┃ " + ChatColor.GRAY);
-                } else {
-                    if (fastBoard.getScoreboard().getTeam(teamName.getIdentifier()) == null)
-                        fastBoard.getScoreboard().registerNewTeam(teamName.getIdentifier());
-                    else if (!fastBoard.getScoreboard().getTeam(teamName.getIdentifier()).hasEntry(playerData.getPlayerName()))
-                        fastBoard.getScoreboard().getTeam(teamName.getIdentifier()).addEntry(playerData.getPlayerName());
-                    fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).setPrefix(ChatColor.RED + ChatColor.BOLD.toString()
-                            + (fastBoard.getPlayerData().getPlayerStatus().equals(PlayerStatus.STAFF) ? "&c&lSTAFF " + ChatColor.GRAY + "┃ " + ChatColor.RED : "✘ ")
-                            + ChatColor.GRAY + "┃ " + ChatColor.GRAY);
-                }
+            Team teamName = playerData.getTeam();
+            if (teamName == null) {
+                if (fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()) == null)
+                    fastBoard.getScoreboard().registerNewTeam(playerData.getDefaultTeam());
+
+                else if (!fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).hasEntry(playerData.tabName()))
+                    fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).addEntry(playerData.tabName());
+
+                fastBoard.getScoreboard().getTeam(playerData.getDefaultTeam()).setPrefix((playerData.getPlayerStatus().equals(PlayerStatus.STAFF) ?
+                        ChatColor.RED + ChatColor.BOLD.toString() + "STAFF " + ChatColor.GRAY : ChatColor.RED + ChatColor.BOLD.toString() + "✘ " + ChatColor.GRAY + "┃ "));
+            } else {
+
+                if (fastBoard.getScoreboard().getTeam(teamName.getIdentifier()) == null)
+                    fastBoard.getScoreboard().registerNewTeam(teamName.getIdentifier());
+
+                else if (!fastBoard.getScoreboard().getTeam(teamName.getIdentifier()).hasEntry(playerData.tabName()))
+                    fastBoard.getScoreboard().getTeam(teamName.getIdentifier()).addEntry(playerData.tabName());
+
+                fastBoard.getScoreboard().getTeam(teamName.getIdentifier()).setPrefix(teamName.getColorTeam() +
+                        teamName.getIdentifier().toUpperCase(Locale.ROOT) + ChatColor.GRAY + " ┃ ");
             }
         });
     }

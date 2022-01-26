@@ -27,9 +27,10 @@ public class TFWCommand {
 
         Arrays.asList(new HelpCommand(instance, "help"), new CheckCommand(instance, "check")
                 , new TeamCommand(instance, "team")
-                , new GameCommand(instance, "game"),
-                new SettingsCommand(instance, "settings"),
-                new StaffCommand(instance, "staff"), new ScoreboardCommand(instance, "iscore")).forEach(tfwCommandBase ->
+                , new GameCommand(instance, "game")
+                , new StaffCommand(instance, "staff")
+                , new SettingsCommand(instance, "settings")
+                , new ScoreboardCommand(instance, "iscore")).forEach(tfwCommandBase ->
                 checkCommand.registerSubCommand(tfwCommandBase.getName(), tfwCommandBase));
 
         instance.getCommand("TFW").setExecutor(checkCommand);

@@ -79,9 +79,10 @@ scoreboards:
         - "     &6T&fFW    "
     lines: #Limited characters maximum 16! including colors | Limited scores only 15 available!
       - ""
-      - "&f&lARENA:"
-      - "&aName &7&l» &b%tfw_arena_name%"
-      - "&aPlayers &7&l» &b%tfw_arena_players%"
+      - "&f&lTIMER: &7%staff_timer%"
+      - ""
+      - "&cTEAM &aA &7&l» &6%tfw_a_players%"
+      - "&cTEAM &aB &7&l» &6%tfw_b_players%"
       - ""
       - "     &c&lTEAM FIGHT WAR    "
   Win: #ISCOREBOARD identifier

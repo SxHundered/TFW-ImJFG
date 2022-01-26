@@ -70,8 +70,8 @@ public class TeamCommand extends CommandBase<TFW> {
                             OFFLINE_PLAYER.replace("%player_name%", args[1])));
                     return true;
                 }else if (playerData.getPlayerStatus().equals(PlayerStatus.STAFF)){
-                    sender.sendMessage(
-                            STAFF_PLAYER.replace("%player_name%", args[1]));
+                    sender.sendMessage(Style.translate(
+                            STAFF_PLAYER.replace("%playerName%", args[1])));
                     return true;
                 }
                 if (args[0].toLowerCase(Locale.ROOT).equalsIgnoreCase("addplayer")) {

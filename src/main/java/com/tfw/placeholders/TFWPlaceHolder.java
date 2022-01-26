@@ -62,8 +62,6 @@ public class TFWPlaceHolder extends PlaceholderExpansion {
     private String onRequests(Player p, String params) {
         //All placeholders place here and translated!
 
-        PlayerData playerData = TFWLoader.getPlayerManager().data(p.getUniqueId());
-
         if (params.equalsIgnoreCase("online"))
             return "" + Bukkit.getOnlinePlayers().size();
         else if (params.equalsIgnoreCase("status"))
@@ -72,6 +70,15 @@ public class TFWPlaceHolder extends PlaceholderExpansion {
             return TFWLoader.getGameManager().currentTime();
         else if (params.equalsIgnoreCase("startingtime"))
             return "" + PrepareTask.countdown;
+        else if (params.equalsIgnoreCase("staff_timer"))
+            return "" + (GameManager.GameStates.getGameStates().equals(GameManager.GameStates.COUNTDOWN) ?
+                    PrepareTask.countdown : TFWLoader.getGameManager().currentTime());
+        else if (params.equalsIgnoreCase("a_players"))
+            return "" + TeamManager.getA().getPlayers().size();
+        else if (params.equalsIgnoreCase("b_players"))
+            return "" + TeamManager.getB().getPlayers().size();
+
+        final PlayerData playerData = TFWLoader.getPlayerManager().data(p.getUniqueId());
 
         if (playerData != null) {
             Team team = playerData.getTeam();
@@ -85,7 +92,7 @@ public class TFWPlaceHolder extends PlaceholderExpansion {
                 else if (params.equalsIgnoreCase("team_heart"))
                     return team.getTeam() + "'s" + Style.RED + Style.BOLD + "HEART";
                 else if (params.equalsIgnoreCase("team_heart_status"))
-                    return (team.getHeart().isDestroyed() ? Style.RED + "\u274C" : Style.GREEN + "\u2713");
+                    return (team.getHeart().isDestroyed() ? Style.RED + ChatColor.BOLD + "✘" : Style.GREEN + ChatColor.BOLD + "✔");
             } else {
                 if (params.equalsIgnoreCase("team_name"))
                     return "&c&lNONE";
@@ -99,7 +106,8 @@ public class TFWPlaceHolder extends PlaceholderExpansion {
             else if (params.equalsIgnoreCase("arena_players"))
                 return "" + arena.arena_Players();
             else if (params.equalsIgnoreCase("winner_team"))
-                return TeamManager.getWinners() != null ? TeamManager.getWinners().getColorTeam().toString() + TeamManager.getWinners().getIdentifier() : ChatColor.RED + "No one";
+                return TeamManager.getWinners() != null ? TeamManager.getWinners().getColorTeam().toString()
+                        + TeamManager.getWinners().getIdentifier() : ChatColor.RED + "No one";
             else if (params.equalsIgnoreCase("winner_team_kills"))
                 return TeamManager.getWinners() != null ? "" + TeamManager.getWinners().getKills() : "" + 0;
         }
