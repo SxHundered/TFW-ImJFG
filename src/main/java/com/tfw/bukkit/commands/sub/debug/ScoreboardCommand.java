@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class ScoreboardCommand extends CommandBase<TFW> {
 
-    final String CHECK_USAGE = "%prefix% &7/&dTFW&e iscore &c<scoreboard> &8| &7Display Scoreboard!";
+    final String CHECK_USAGE = "%prefix% &7/&dTFW&e iscore &c<playername> <scoreboard> &8| &7Display Scoreboard!";
     final String OFFLINE_PLAYER = "%prefix% %playerName% is currently OFFLINE";
     final String ERROR = "%prefix% &cThe requested scoreboard has an invalid setting!";
     final String SUCCESSFULLY = "%prefix% &aYou've sucessfully got the scoreboard!";

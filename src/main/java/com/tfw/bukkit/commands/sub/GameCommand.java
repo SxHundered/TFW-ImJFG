@@ -25,6 +25,7 @@ public class GameCommand extends CommandBase<TFW> {
 
     final String NOT_ENOUGH_TEAM_MEMBERS = "%prefix% There is not enough players!.";
     final String ALREADY_STARTED = "%prefix% the game is already started!";
+    final String SPAWN_UPDATED = "%prefix% the game is already started!";
 
     public GameCommand(TFW plugin, String help) {
         super(plugin, help);

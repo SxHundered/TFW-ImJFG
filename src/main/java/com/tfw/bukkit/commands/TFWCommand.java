@@ -38,15 +38,15 @@ public class TFWCommand {
 
     @Getter
     static List<String> HELP_OP = Arrays.asList(
-            "             &6&lTFW &5&lCOMMANDS",
-            "&7/tfw&e help",
-            "&7/tfw&e game",
-            "&7/tfw&e settings",
-            "&7/tfw&e team",
-            "&7/tfw&e staff",
-            "&7/tfw&e check &b<playername>",
+            "             &6&lTFW COMMANDS",
+            "             &e/tfw &3help",
+            "             &7/tfw &3game",
+            "             &7/tfw &3settings",
+            "             &7/tfw &3team",
+            "             &7/tfw &3staff",
+            "             &7/tfw &3check &b<playername>",
             "",
-            "&7Authors: &aAbdulAzizCr &8- &dF4res",
-            "&eSource Code:&a&l https://github.com/SxHundered/TFW-ImJFG",
+            "             &7Authors: &aAbdulAzizCr &8- &dF4res",
+            "&             eSource Code:&a&l https://github.com/SxHundered/TFW-ImJFG",
             "");
 }

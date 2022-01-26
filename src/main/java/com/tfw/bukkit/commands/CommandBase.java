@@ -20,7 +20,7 @@ import org.bukkit.plugin.Plugin;
  */
 public abstract class CommandBase<P extends Plugin> implements CommandExecutor {
 
-    private final String NO_PERMISSION = "%prefix% no permission granted!";
+    private final String NO_PERMISSION = "%prefix% &cYou don't have permissions to do that!";
 
     private final Map<String, CommandExecutor> subCommands = new HashMap<>();
     @Getter
