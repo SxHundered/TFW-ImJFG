@@ -10,6 +10,7 @@ import com.tfw.main.TFWLoader;
 import com.tfw.manager.TeamExceptions;
 import com.tfw.manager.data.PlayerData;
 import com.tfw.manager.data.PlayerStatus;
+import com.tfw.manager.messages.Messages;
 import com.tfw.manager.team.Team;
 import com.tfw.utils.CustomLocation;
 import org.bukkit.Bukkit;
@@ -24,20 +25,20 @@ import java.util.Locale;
 public class TeamCommand extends CommandBase<TFW> {
 
 
-    final String OFFLINE_PLAYER = "%prefix% %playerName% &e&lis currently &4&lOFFLINE";
-    final String STAFF_PLAYER = "%prefix% &c&lERROR&7, &e%playerName% &7is on &bStaff-Mode";
-    final String ALREADY_IN_TEAM = "%prefix% %player_name% is already in team, use /TFW team removeplayer <playername>.";
-    final String ALREADY_NOT_IN_TEAM = "%prefix% %player_name% is not in team, use /TFW team addplayer <playername> <teamname>.";
-    final String TEAM_NOT_FOUND = "%prefix% Could not find %team_name% team!";
-    final String PLAYER_ADDED_TO_TEAM = "%prefix% Sucessfully added %player_name% to %team_name%";
-    final String YOU_HAVE_BEEN_ADDED = "%prefix% You've been added to %team_name% by %operator%";
-    final String REMOVED_FROM_TEAM = "%prefix% Sucessfully removed %player_name% from %team_name%";
-    final String YOU_HAVE_BEEN_REMOVED = "%prefix% You've been removed from %team_name% by %operator%";
-    final String TEAM_COLOR = "%prefix% %team_name%'s color is %team_color%";
-    final String TEAM_SCORE = "%prefix% %team_name%'s kills is %team_score%";
-    final String TEAM_SPAWN = "%prefix% %team_name%'s spawn location saved!";
-    final String TEAM_HEART = "%prefix% %team_name%'s heart location saved!";
-    final String CONFIGURATION_SAVED = "%prefix% Team's locations have been updated successfully!";
+    final String OFFLINE_PLAYER = Messages.OFFLINE_PLAYER.toString();
+    final String STAFF_PLAYER = Messages.STAFF_PLAYER.toString();
+    final String ALREADY_IN_TEAM = Messages.ALREADY_IN_TEAM.toString();
+    final String ALREADY_NOT_IN_TEAM = Messages.ALREADY_NOT_IN_TEAM.toString();
+    final String TEAM_NOT_FOUND = Messages.TEAM_NOT_FOUND.toString();
+    final String PLAYER_ADDED_TO_TEAM = Messages.PLAYER_ADDED_TO_TEAM.toString();
+    final String YOU_HAVE_BEEN_ADDED = Messages.YOU_HAVE_BEEN_ADDED.toString();
+    final String REMOVED_FROM_TEAM = Messages.REMOVED_FROM_TEAM.toString();
+    final String YOU_HAVE_BEEN_REMOVED = Messages.YOU_HAVE_BEEN_REMOVED.toString();
+    final String TEAM_COLOR = Messages.TEAM_COLOR.toString();
+    final String TEAM_SCORE = Messages.TEAM_SCORE.toString();
+    final String TEAM_SPAWN = Messages.TEAM_SPAWN.toString();
+    final String TEAM_HEART = Messages.TEAM_HEART.toString();
+    final String CONFIGURATION_SAVED = Messages.CONFIGURATION_SAVED.toString();
 
     public TeamCommand(TFW plugin, String check) {
         super(plugin, check);
@@ -46,7 +47,7 @@ public class TeamCommand extends CommandBase<TFW> {
     @Override
     public boolean runCommand(CommandSender sender, Command rootCommand, String label, String[] args) {
         if (args.length == 0) {
-            for (String s : CHECK_USAGE)
+            for (String s : TEAM_USAGE)
                 sender.sendMessage(Style.translate(s));
             return true;
         }
@@ -70,7 +71,7 @@ public class TeamCommand extends CommandBase<TFW> {
                     return true;
                 }else if (playerData.getPlayerStatus().equals(PlayerStatus.STAFF)){
                     sender.sendMessage(Style.translate(
-                            STAFF_PLAYER.replace("%playerName%", args[1])));
+                            STAFF_PLAYER.replace("%player_name%", args[1])));
                     return true;
                 }
                 if (args[0].toLowerCase(Locale.ROOT).equalsIgnoreCase("addplayer")) {
@@ -93,7 +94,7 @@ public class TeamCommand extends CommandBase<TFW> {
                                 playerData.textPlayer(Style.translate(YOU_HAVE_BEEN_ADDED.replace("%team_name%", args[2]).replace("%operator%", sender.getName())));
                             }
                         } else
-                            for (String s : CHECK_USAGE)
+                            for (String s : TEAM_USAGE)
                                 sender.sendMessage(Style.translate(s));
                     }
                 } else {
@@ -159,16 +160,5 @@ public class TeamCommand extends CommandBase<TFW> {
         return true;
     }
 
-    final List<String> CHECK_USAGE = Arrays.asList(
-
-            "&7/tfw&e team&b addPlayer&6 <playerName>&c <team_name>",
-            "&7/tfw&e team&b removePlayer&6 <playerName>",
-
-            "&7/tfw&e team&b spawn&6 <team_name>",
-            "&7/tfw&e team&b heart&6 <team_name>",
-            "&7/tfw&e team&b color&6 <team_name>",
-            "&7/tfw&e team&b members&6 <team_name>",
-            "&7/tfw&e team&b score&6 <team_name>",
-            "&7/tfw&e team&b update"
-    );
+    final List<String> TEAM_USAGE = Messages.TEAM_HELP.toArrayList();
 }

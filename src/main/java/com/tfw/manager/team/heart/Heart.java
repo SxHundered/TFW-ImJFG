@@ -5,6 +5,7 @@ import com.tfw.events.custom.HeartDestroyEvent;
 import com.tfw.game.GameManager;
 import com.tfw.main.TFW;
 import com.tfw.manager.data.PlayerData;
+import com.tfw.manager.messages.Messages;
 import com.tfw.manager.team.ITeam;
 import com.tfw.manager.team.Team;
 import com.tfw.particleeffect.ParticleEffect;
@@ -31,6 +32,10 @@ public class Heart implements IHeart{
     private BlockState BLOCK_HEAD;
     private BlockState BLOCK_FOOT;
     private ArmorStand armorStand;
+
+    final String HEARTHOLOGRAM = Messages.HEARTHOLOGRAM.toString();
+    final String HEART_SPAWNED_MESSAGE = Messages.HEART_SPAWNED_MESSAGE.toString();
+    final String HEART_CAN_NOT_DESTROYED = Messages.HEART_CAN_NOT_DESTROYED.toString();
 
     /**
      * Spawn the heart in the location!, using entity type! -> DONE
@@ -64,10 +69,10 @@ public class Heart implements IHeart{
 
         armorStand.setVisible(false);
         armorStand.setSmall(true);
-        armorStand.setCustomName(Style.translate(team.getColorTeam() + team.getTeam() + "'s &c&lHEART"));
+        armorStand.setCustomName(Style.translate(HEARTHOLOGRAM.replace("%team%", team.getColorTeam() + team.getTeam())));
         armorStand.setCustomNameVisible(true);
 
-        getTeam().broadcastTeam(TFW.getPrefix() + ChatColor.GREEN + "YOUR HEART HAS BEEN SPAWNED!\n  §e§lPROTECT YOUR HEART,§c§l AND DESTROY THEIR HEART TO WIN THE GAME!");
+        getTeam().broadcastTeam(Style.translate(HEART_SPAWNED_MESSAGE.replace("%prefix%", TFW.getPrefix())));
     }
 
     /**
@@ -85,7 +90,7 @@ public class Heart implements IHeart{
             HeartDestroyEvent heartDestroyEvent = new HeartDestroyEvent(destroyer, (Team) getTeam());
             Bukkit.getServer().getPluginManager().callEvent(heartDestroyEvent);
         }else
-            destroyer.textPlayer("%prefix% " + ChatColor.RED + "Heart can not be destroyed in this state!");
+            destroyer.textPlayer(HEART_CAN_NOT_DESTROYED);
     }
 
     @Override

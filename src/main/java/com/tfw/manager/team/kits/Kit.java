@@ -2,6 +2,7 @@ package com.tfw.manager.team.kits;
 
 import com.tfw.configuration.ConfigFile;
 import com.tfw.manager.data.PlayerData;
+import com.tfw.manager.messages.Messages;
 import com.tfw.manager.team.ITeam;
 import com.tfw.manager.team.kits.items.CustomItem;
 import lombok.Data;
@@ -17,6 +18,9 @@ public class Kit implements IKIT {
     private final ITeam team;
     private Set<CustomItem> armors;
     private Set<CustomItem> contents;
+
+
+    final String RECEIVED_KIT = Messages.RECEIVED_KIT.toString();
 
     //fighter_equipments
     @Override
@@ -114,7 +118,7 @@ public class Kit implements IKIT {
                             playerData.getPlayer().getInventory().setBoots(customItem.getItemStack());
                             break;
                     }
-        playerData.textPlayer("%prefix% &eYou have received your kit successfully!");
+        playerData.textPlayer(RECEIVED_KIT);
     }
 
 

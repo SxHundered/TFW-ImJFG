@@ -1,6 +1,7 @@
 package com.tfw.bukkit.commands;
 
 import com.tfw.configuration.Style;
+import com.tfw.manager.messages.Messages;
 import lombok.Getter;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,7 +21,7 @@ import org.bukkit.plugin.Plugin;
  */
 public abstract class CommandBase<P extends Plugin> implements CommandExecutor {
 
-    private final String NO_PERMISSION = "%prefix% &cYou don't have permissions to do that!";
+    private final String NO_PERMISSION = Messages.NO_PERMISSIONS.toString();
 
     private final Map<String, CommandExecutor> subCommands = new HashMap<>();
     @Getter

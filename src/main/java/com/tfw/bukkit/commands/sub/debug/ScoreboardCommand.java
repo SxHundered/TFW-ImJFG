@@ -5,6 +5,7 @@ import com.tfw.configuration.Style;
 import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.data.PlayerData;
+import com.tfw.manager.messages.Messages;
 import com.tfw.scoreboard.IScoreboardException;
 import com.tfw.scoreboard.IScoreboardManager;
 import org.bukkit.Bukkit;
@@ -19,10 +20,10 @@ import java.util.Locale;
 
 public class ScoreboardCommand extends CommandBase<TFW> {
 
-    final String CHECK_USAGE = "%prefix% &7/&dTFW&e iscore &c<playername> <scoreboard> &8| &7Display Scoreboard!";
-    final String OFFLINE_PLAYER = "%prefix% %playerName% is currently OFFLINE";
-    final String ERROR = "%prefix% &cThe requested scoreboard has an invalid setting!";
-    final String SUCCESSFULLY = "%prefix% &aYou've sucessfully got the scoreboard!";
+    final String ISCORE_USAGE = Messages.ISCORE_USAGE.toString();
+    final String OFFLINE_PLAYER = Messages.OFFLINE_PLAYER.toString();
+    final String ERROR = Messages.ISCORE_ERROR.toString();
+    final String SUCCESSFULLY = Messages.ISCORE_SUCCESSFULLY.toString();
 
     public ScoreboardCommand(TFW plugin, String check) {
         super(plugin, check);
@@ -32,7 +33,7 @@ public class ScoreboardCommand extends CommandBase<TFW> {
     public boolean runCommand(CommandSender sender, Command rootCommand, String label, String[] args) {
 
         if (args.length != 2) {
-            sender.sendMessage(Style.translate(CHECK_USAGE));
+            sender.sendMessage(Style.translate(ISCORE_USAGE));
             return true;
         }
 

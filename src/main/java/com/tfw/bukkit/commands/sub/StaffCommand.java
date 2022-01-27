@@ -7,6 +7,7 @@ import com.tfw.events.custom.StaffRemoveEvent;
 import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.data.PlayerData;
+import com.tfw.manager.messages.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -26,7 +27,7 @@ public class StaffCommand extends CommandBase<TFW> {
     @Override
     public boolean runCommand(CommandSender sender, Command rootCommand, String label, String[] args) {
         if (args.length == 0) {
-            for (String s : CHECK_USAGE)
+            for (String s : STAFF_USAGE)
                 sender.sendMessage(Style.translate(s));
             return true;
         }
@@ -38,7 +39,7 @@ public class StaffCommand extends CommandBase<TFW> {
                 playerData = TFWLoader.getPlayerManager().data(((Player) sender).getUniqueId());
 
                 if (args.length != 2) {
-                    for (String s : CHECK_USAGE)
+                    for (String s : STAFF_USAGE)
                         sender.sendMessage(Style.translate(s));
                     return true;
                 }
@@ -51,7 +52,7 @@ public class StaffCommand extends CommandBase<TFW> {
                 playerData = TFWLoader.getPlayerManager().data(((Player) sender).getUniqueId());
 
                 if (args.length != 2) {
-                    for (String s : CHECK_USAGE)
+                    for (String s : STAFF_USAGE)
                         sender.sendMessage(Style.translate(s));
                     return true;
                 }
@@ -67,9 +68,5 @@ public class StaffCommand extends CommandBase<TFW> {
         return true;
     }
 
-    final List<String> CHECK_USAGE = Arrays.asList(
-            "&7/tfw&e staff&b add &e<playername> &8-&7 Add a player to staff mode",
-            "&7/tfw&e staff&b remove &e<playername> &8-&7 Removes a player to staff mode",
-            "&7/tfw&e staff&b list &8-&7 Staff list!"
-    );
+    final List<String> STAFF_USAGE = Messages.STAFF_HELP.toArrayList();
 }

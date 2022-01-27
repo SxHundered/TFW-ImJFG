@@ -5,6 +5,7 @@ import com.tfw.events.custom.TeamLeaveEvent;
 import com.tfw.main.TFW;
 import com.tfw.manager.data.PlayerData;
 import com.tfw.manager.data.PlayerStatus;
+import com.tfw.manager.messages.Messages;
 import com.tfw.scoreboard.AsyncBoard;
 import lombok.Getter;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -36,6 +37,8 @@ public class PlayerManager implements IManage {
          1- adding the main scoreboard to addPlayer.
          2- removing the scoreboard @ removePlayer.
     */
+
+    final String LOST_TOURNAMENT = Messages.LOST_TOURNAMENT.toString();
 
     @Getter
     private final List<PlayerData> playerDataList = new CopyOnWriteArrayList<>();
@@ -123,7 +126,7 @@ public class PlayerManager implements IManage {
     public void eliminatePlayer(PlayerData playerData) {
 
         playerData.setPlayerStatus(PlayerStatus.DEAD);
-        playerData.getPlayer().kickPlayer(Style.translate("&cYou have lost this tournament! \n &aNext Time"));
+        playerData.getPlayer().kickPlayer(Style.translate(LOST_TOURNAMENT));
 
         //Elimination team event!
         if (playerData.getTeam() != null) {

@@ -8,6 +8,7 @@ import com.tfw.game.task.PrepareTask;
 import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.data.PlayerData;
+import com.tfw.manager.messages.Messages;
 import com.tfw.scoreboard.IScoreboardException;
 import com.tfw.scoreboard.IScoreboardManager;
 import net.minecraft.server.v1_8_R3.PacketPlayOutWorldBorder;
@@ -32,6 +33,10 @@ import org.bukkit.event.Listener;
  */
 
 public class SettingsListener implements Listener {
+
+    final String STARTINGTITLE = Messages.STARTINGTITLE.toString();
+    final String STARTINGSUBTITLE = Messages.STARTINGSUBTITLE.toString();
+    final String STARTINGMESSAGE = Messages.STARTINGMESSAGE.toString();
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onBorderEvent(BorderSetUpEvent borderSetUpEvent) {
@@ -84,8 +89,8 @@ public class SettingsListener implements Listener {
             }
         });
 
-        TFWLoader.getGameManager().title_Notification("&eTeleporting", "");
-        TFWLoader.getGameManager().notification("%prefix% &a&lYou will be teleported right now!");
+        TFWLoader.getGameManager().title_Notification(STARTINGTITLE, STARTINGSUBTITLE);
+        TFWLoader.getGameManager().notification(STARTINGMESSAGE);
 
 
         //Bukkit.getServer().getScheduler().runTaskAsynchronously(TFW.getInstance(), ()-> TFWLoader.getGameManager().modifySkins());

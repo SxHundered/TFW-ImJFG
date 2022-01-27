@@ -1,6 +1,11 @@
 Messages:
   GENERAL:
+    NO_PERMISSIONS: "%prefix% &cYou don't have permissions to do that!"
     OFFLINEPLAYER: "%prefix% %player_name% &e&lis currently &4&lOFFLINE"
+    CAN_NOT_JOIN: "&cSorry, you can not join at this moment!"
+    ONLY_STAFF_JOIN: "&cONLY STAFF MEMBERS CAN JOIN AT THIS STATE!"
+    LOST_TOURNAMENT: "&cYou have lost this tournament!
+    \n&aNext Time"
   TFW:
     HELP:
       - "             &6&lTFW COMMANDS"
@@ -11,18 +16,101 @@ Messages:
       - "               &e/tfw &3staff"
       - "               &e/tfw &3check &b<playername>"
       - ""
-  Game:
+  GAME:
     NOT_ENOUGH_TEAM_MEMBERS: "%prefix% There is not enough players!."
     ALREADY_STARTED: "%prefix% the game is already started!"
     SPAWN_UPDATED: "%prefix% the game is already started!"
+    RECEIVED_KIT: "%prefix% &eYou have received your kit successfully!"
     HELP:
       - "&7/tfw&e game&b spawn &8-&7 Updates spawn location!"
       - "&7/tfw&e game&b summary &8-&7 Displays some details related to team and the game state!"
       - "&7/tfw&e game&b start &8-&7 Starts the game"
-      SETTINGS
+    STARTING:
+      TITLE: "&eTeleporting"
+      SUBTITLE: ""
+      MESSAGE: "%prefix% &a&lYou will be teleported right now!"
+    STARTED: "&c&lTHE WAR HAS STARTED!\n&9&lTEAM: %teamA% &c&lVS &9&lTEAM: %teamB%"
+    STARTEDTITLE: "%teamA% &c&lvs %teamB%"
+    STARTEDSUBTITLE: "&6&lFIGHT FOR HONOR"
+    CAN_NOT_BREAK_HEART: "%prefix% &c&lYOU!&e can not break your heart!"
+  SETTINGS:
+    ONLY_IN_LOBBY: "%prefix% settings works only in lobby state!"
+    BORDER_ACTIVATED: "%prefix% the boarder has been ACTIVATED!"
+    BORDER_DEACTIVATED: "%prefix% the boarder has been &c&lDEACTIVATED!"
+    CENTER_SAVED: "%prefix% the boarder center has been saved!"
+    NUMBER_ERROR: "%prefix% You must provide an invalid number!"
+    BORDER_SIZE: "%prefix% The border size has been changed to %size%"
+    SETTINGS_UPDATED: "%prefix% The settings has been updated successfully!"
+    HELP:
+      USAGE:
+        - "&7/tfw&e settings&b border &8-&7 Border settings"
+        - "&7/tfw&e settings&b update &8-&7 Update the border settings file"
+      BORDER:
+        - "&7/tfw&e settings&b border&6 active &8-&7 Active the border"
+        - "&7/tfw&e settings&b border&6 disable &8-&7 Disable the border"
+        - "&7/tfw&e settings&b border&6 center &8-&7 Change the border center point"
+        - "&7/tfw&e settings&b border&6 &size &8-&7 Change the border size"
+  STAFF:
+    CAN_NOT_ADDED: "%prefix% &cStaff can be only added in &aLOBBY&7/&eIN-GAME&c status!"
+    ALREADY_STAFF: "%prefix% &c%player%&e is already a&b staff&9 member!"
+    ADDED_TO_STAFF: "%prefix% &c%player%&a has been assigned as a&b staff&9 member!"
+    IS_PLAYING: "%prefix% &c&lERROR&7, &e%player_name% &7is on &bStaff-Mode"
+    YOU_ARE_NOW_STAFF: "%prefix% &aYou have been assigned as a staff member!"
+    IS_NOT_STAFF: "%prefix% &c&lERROR&7, &e%player_name% &7is not on staff-mode!"
+    REMOVED_FROM_STAFF: "%prefix% &c%player%&e has been reassigned to normal player!".
+    ALREADY_NOT_STAFF: "%prefix% &c&lERROR&7, &e%player_name% &7is not on staff-mode!"
+    REJOIN: "&cPlease Rejoin."
+    HELP:
+      - "&7/tfw&e staff&b add &e<playername> &8-&7 Add a player to staff mode"
+      - "&7/tfw&e staff&b remove &e<playername> &8-&7 Removes a player to staff mode"
+      - "&7/tfw&e staff&b list &8-&7 Staff list!"
+  TEAM:
+    STAFF_PLAYER: "%prefix% &c&lERROR&7, &e%player_name% &7is on &bStaff-Mode"
+    ALREADY_IN_TEAM: "%prefix% %player_name% is already in team, use /TFW team removeplayer <playername>."
+    ALREADY_NOT_IN_TEAM: "%prefix% %player_name% is not in team, use /TFW team addplayer <playername> <teamname>."
+    TEAM_NOT_FOUND: "%prefix% Could not find %team_name% team!"
+    PLAYER_ADDED_TO_TEAM: "%prefix% Sucessfully added %player_name% to %team_name%"
+    YOU_HAVE_BEEN_ADDED: "%prefix% You've been added to %team_name% by %operator%"
+    REMOVED_FROM_TEAM: "%prefix% Sucessfully removed %player_name% from %team_name%"
+    YOU_HAVE_BEEN_REMOVED: "%prefix% You've been removed from %team_name% by %operator%"
+    TEAM_COLOR: "%prefix% %team_name%'s color is %team_color%"
+    TEAM_SCORE: "%prefix% %team_name%'s kills is %team_score%"
+    TEAM_SPAWN: "%prefix% %team_name%'s spawn location saved!"
+    TEAM_HEART: "%prefix% %team_name%'s heart location saved!"
+    CONFIGURATION_SAVED: "%prefix% Team's locations have been updated successfully!"
+    JOINED: "%team_color%%player_name% &ehas joined your team!"
+    LEFT: "%team_color%%player_name% &ehas left your team!"
+    PLAYER_KILLED: "%team_color%%player_name% &ehas been killed!"
+    HELP:
+      - "&7/tfw&e team&b addPlayer&6 <playerName>&c <team_name>"
+      - "&7/tfw&e team&b removePlayer&6 <playerName>"
+      - "&7/tfw&e team&b spawn&6 <team_name>"
+      - "&7/tfw&e team&b heart&6 <team_name>"
+      - "&7/tfw&e team&b color&6 <team_name>"
+      - "&7/tfw&e team&b members&6 <team_name>"
+      - "&7/tfw&e team&b score&6 <team_name>"
+      - "&7/tfw&e team&b update"
+  ISCORE:
+    USAGE: "%prefix% &7/&dTFW&e iscore &c<playername> <scoreboard> &8| &7Display Scoreboard!"
+    ERROR: "%prefix% &cThe requested scoreboard has an invalid setting!"
+    SUCCESSFULLY: "%prefix% &aYou've sucessfully got the scoreboard!"
+  CHAT:
+    NOT_IN_TEAM: "&c&l✘ &7\u258f "
+    IN_TEAM: "%team_color%%team_name% &7\u258f %team_color%"
+    STAFF: "&c&lSTAFF &7\y258f &c"
   CHECK:
     USAGE: "%prefix% &7/tfw&e check&b <playerName> &8| &7Displays player current info!"
     MESSAGE:
       - "%player_name%'s Details:"
       - "&bCurrent State: %states%"
       - "&bJoined Team: %team%"
+  HEART:
+    HOLOGRAM: "%team%'s &c&lHEART"
+    SPAWNED: "%prefix% &a&lYOUR HEART HAS BEEN SPAWNED!
+    \n&e&lPROTECT YOUR HEART,&c&l AND DESTROY THEIR HEART TO WIN THE GAME!"
+    CAN_NOT_DESTROYED: "%prefix% &cHeart can not be destroyed in this state!"
+  WINNING:
+    MESSAGE: "
+    \n%prefix% &c&lGREAT WAR, &a&lEVERYONE WAS HONOR!
+    \n%winners% has won the tournament!
+    \n&aScore: &c&l%kills% Kills"

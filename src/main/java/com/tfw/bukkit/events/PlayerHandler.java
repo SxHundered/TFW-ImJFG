@@ -9,6 +9,7 @@ import com.tfw.main.TFWLoader;
 import com.tfw.manager.PlayerManager;
 import com.tfw.manager.data.PlayerData;
 import com.tfw.manager.data.PlayerStatus;
+import com.tfw.manager.messages.Messages;
 import com.tfw.manager.team.Team;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -24,6 +25,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerHandler implements Listener {
 
+    final String CAN_NOT_JOIN = Messages.CAN_NOT_JOIN.toString();
+    final String ONLY_STAFF_JOIN = Messages.ONLY_STAFF_JOIN.toString();
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onAsyncLogin(PlayerLoginEvent playerLoginEvent) {
@@ -31,11 +34,11 @@ public class PlayerHandler implements Listener {
             case COUNTDOWN:
             case RESTART:
             case ENDING:
-                playerLoginEvent.disallow(PlayerLoginEvent.Result.KICK_OTHER, ChatColor.RED + "Sorry, you can not join at this moment!");
+                playerLoginEvent.disallow(PlayerLoginEvent.Result.KICK_OTHER, Style.translate(CAN_NOT_JOIN));
                 break;
             case INGAME:
                 if (!TFWLoader.getPlayerManager().getOffline_name_staff().contains(playerLoginEvent.getPlayer().getName()))
-                    playerLoginEvent.disallow(PlayerLoginEvent.Result.KICK_OTHER, ChatColor.RED + "ONLY STAFF MEMBERS CAN JOIN AT THIS STATE!");
+                    playerLoginEvent.disallow(PlayerLoginEvent.Result.KICK_OTHER, Style.translate(ONLY_STAFF_JOIN));
                 break;
             default:
                 break;
@@ -84,6 +87,10 @@ public class PlayerHandler implements Listener {
 
     }
 
+    final String NOT_IN_TEAM = Messages.NOT_IN_TEAM.toString();
+    final String IN_TEAM = Messages.IN_TEAM.toString();
+    final String STAFF = Messages.STAFF.toString();
+
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
@@ -97,12 +104,12 @@ public class PlayerHandler implements Listener {
             case PLAYING:
                 for (Player players : Bukkit.getOnlinePlayers())
                     players.sendMessage(Style.translate(
-                            (team != null ? team.getColorTeam() + team.getIdentifier() + " &7\u258f " + team.getColorTeam()
-                                    : "&c&l✘ &7\u258f " + ChatColor.GRAY) + player.getName() + " &7» ") + Style.RESET + event.getMessage());
+                            (team != null ? IN_TEAM.replace("%team_color%", team.getColorTeam().toString().replace("%team_name%", team.getIdentifier()))
+                                    : NOT_IN_TEAM) + player.getName() + " &7» ") + Style.RESET + event.getMessage());
                 break;
             case STAFF: {
                 for (Player players : Bukkit.getOnlinePlayers())
-                    players.sendMessage(Style.translate("&c&lSTAFF &7\u258f &c" + player.getName() + " &7» ") + Style.RESET + event.getMessage());
+                    players.sendMessage(Style.translate(STAFF + player.getName() + " &7» ") + Style.RESET + event.getMessage());
             }
             break;
         }

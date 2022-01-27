@@ -6,6 +6,7 @@ import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.TeamManager;
 import com.tfw.manager.data.PlayerData;
+import com.tfw.manager.messages.Messages;
 import com.tfw.manager.team.Team;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -29,20 +30,25 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 public class GameListener implements Listener {
 
+
+    final String GAME_STARTED = Messages.GAME_STARTED.toString();
+    final String GAME_STARTEDTITLE = Messages.GAME_STARTEDTITLE.toString();
+    final String GAME_STARTEDSUUBTITLE = Messages.GAME_STARTEDSUUBTITLE.toString();
+    final String CAN_NOT_BREAK_HEART = Messages.CAN_NOT_BREAK_HEART.toString();
+    final String WINNING_MESSAGE = Messages.WINNING_MESSAGE.toString();
+
     @EventHandler(priority = EventPriority.LOWEST)
     public void onGameStart(GameStartEvent gameStartEvent) {
         GameManager.GameStates.setGameStates(GameManager.GameStates.INGAME);
 
         gameStartEvent.toggleScoreBoard();
 
-        TFWLoader.getGameManager().notification("&c&lTHE WAR HAS STARTED!");
-        TFWLoader.getGameManager().notification("&9&lTEAM: " + TeamManager.getA().getIdentifier() + " &c&lVS &9&lTEAM: " + TeamManager.getB().getIdentifier());
+        TFWLoader.getGameManager().notification(GAME_STARTED.replace("%teamA%", TeamManager.getA().getIdentifier()).replace("%teamB%", TeamManager.getB().getIdentifier()));
 
         TFWLoader.getGameManager().title_Notification(
-                TeamManager.getA().getColorTeam() + TeamManager.getA().getIdentifier()
-                        + " &c&lvs " +
-                        TeamManager.getB().getColorTeam() + TeamManager.getB().getIdentifier(),
-                "&6&lFIGHT FOR HONOR");
+                GAME_STARTEDTITLE.replace("%teamA%", TeamManager.getA().getColorTeam() + TeamManager.getA().getIdentifier())
+                        .replace("%teamB%", TeamManager.getB().getColorTeam() + TeamManager.getB().getIdentifier()),
+                GAME_STARTEDSUUBTITLE);
 
         TFWLoader.getGameManager().playSound(Sound.ENDERDRAGON_GROWL);
 
@@ -82,7 +88,7 @@ public class GameListener implements Listener {
                     return;
                 if (team == playerData.getTeam()){
                     //Detected same team!
-                    playerData.textPlayer("%prefix% &c&lYOU!&e can not break your heart!");
+                    playerData.textPlayer(CAN_NOT_BREAK_HEART);
                 }else{
                     //Break heart!
                     blockBreakEvent.getBlock().setType(Material.AIR);
@@ -99,10 +105,7 @@ public class GameListener implements Listener {
         GameManager.GameStates.setGameStates(GameManager.GameStates.ENDING);
         celebrationEvent.toggleScoreBoard();
 
-        TFWLoader.getGameManager().notification("%prefix% &c&lGREAT WAR, &a&lEVERYONE WAS HONOR!");
-        TFWLoader.getGameManager().notification(celebrationEvent.getWinners().getName() + " has won the tournament!");
-        TFWLoader.getGameManager().notification("Score: ");
-        TFWLoader.getGameManager().notification("&aKills &7-> &c&l" + celebrationEvent.getWinners().getKills() + "");
+        TFWLoader.getGameManager().notification(WINNING_MESSAGE.replace("%winners%", celebrationEvent.getWinners().getName()).replace("%kills%", "" + celebrationEvent.getWinners().getKills()));
 
         for (PlayerData playerData : TFWLoader.getPlayerManager().filtered_online_players())
             playerData.backToHome();

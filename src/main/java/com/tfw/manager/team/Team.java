@@ -6,6 +6,7 @@ import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.data.PlayerData;
 import com.tfw.manager.data.PlayerStatus;
+import com.tfw.manager.messages.Messages;
 import com.tfw.manager.team.heart.Heart;
 import com.tfw.manager.team.kits.Kit;
 import com.tfw.particleeffect.ParticlePacketUtil;
@@ -53,6 +54,10 @@ public class Team implements ITeam {
     private int weight = 0;
 
     private CustomLocation spawn;
+
+    final String JOINED_TEAM = Messages.JOINED_TEAM.toString();
+    final String LEFT_TEAM = Messages.LEFT_TEAM.toString();
+    final String HAS_BEEN_KILLED = Messages.HAS_BEEN_KILLED.toString();
 
     /**
      * @return Team name
@@ -128,7 +133,7 @@ public class Team implements ITeam {
 
         players.add(target);
         target.setTeam(this);
-        broadcastTeam(getColorTeam().toString() + target.getPlayerName() + ChatColor.YELLOW + " has joined your team!");
+        broadcastTeam(JOINED_TEAM.replace("%team_color%", getColorTeam().toString()).replace("%player_name%", target.getPlayerName()));
         return true;
     }
 
@@ -148,10 +153,10 @@ public class Team implements ITeam {
         if (target.getPlayerStatus().equals(PlayerStatus.PLAYING) || target.getPlayerStatus().equals(PlayerStatus.DEAD)) {
             switch (reason.toLowerCase(Locale.ROOT)) {
                 case "leave":
-                    broadcastTeam(getColorTeam().toString() + target.getPlayerName() + ChatColor.RED + " has left your team!");
+                    broadcastTeam(LEFT_TEAM.replace("%team_color%", getColorTeam().toString()).replace("%player_name%", target.getPlayerName()));
                     break;
                 case "killed":
-                    broadcastTeam(getColorTeam().toString() + target.getPlayerName() + ChatColor.RED + " has been killed!");
+                    broadcastTeam(HAS_BEEN_KILLED.replace("%team_color%", getColorTeam().toString()).replace("%player_name%", target.getPlayerName()));
                     break;
             }
             TFWLoader.getGameManager().playSound(Sound.AMBIENCE_THUNDER);

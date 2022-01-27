@@ -7,6 +7,7 @@ import com.tfw.main.TFWLoader;
 import com.tfw.manager.TeamManager;
 import com.tfw.manager.data.PlayerData;
 import com.tfw.manager.data.PlayerStatus;
+import com.tfw.manager.messages.Messages;
 import com.tfw.manager.team.Team;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -33,6 +34,16 @@ import java.util.Locale;
 public class PlayerListener implements Listener {
 
 
+
+    final String CAN_NOT_ADDED = Messages.CAN_NOT_ADDED.toString();
+    final String ALREADY_STAFF = Messages.ALREADY_STAFF.toString();
+    final String ADDED_TO_STAFF = Messages.ADDED_TO_STAFF.toString();
+    final String IS_PLAYING = Messages.IS_PLAYING.toString();
+    final String YOU_ARE_NOW_STAFF = Messages.YOU_ARE_NOW_STAFF.toString();
+    final String IS_NOT_STAFF = Messages.IS_NOT_STAFF.toString();
+    final String REMOVED_FROM_STAFF = Messages.REMOVED_FROM_STAFF.toString();
+    final String ALREADY_NOT_STAFF = Messages.ALREADY_NOT_STAFF.toString();
+    final String REJOIN = Messages.REJOIN.toString();
     /**
      * @param tfwJoinEvent Handle player join event!
      */
@@ -94,33 +105,33 @@ public class PlayerListener implements Listener {
         PlayerData executor = staffAddEvent.getExecutorData();
 
         if (!GameManager.GameStates.getGameStates().equals(GameManager.GameStates.LOBBY) && !GameManager.GameStates.getGameStates().equals(GameManager.GameStates.INGAME)){
-            executor.textPlayer("%prefix% &cStaff can be only added in &aLOBBY&7/&eIN-GAME&c status!");
+            executor.textPlayer(CAN_NOT_ADDED);
             return;
         }
 
         if (looking_for == null){
             //Offline detection
             if (TFWLoader.getPlayerManager().getOffline_name_staff().contains(target)){
-                executor.textPlayer("%prefix% &c%player%&e is already a&b staff&9 member!".replace("%player%", target.toUpperCase(Locale.ROOT)));
+                executor.textPlayer(ALREADY_STAFF.replace("%player%", target.toUpperCase(Locale.ROOT)));
                 return;
             }
 
             TFWLoader.getPlayerManager().getOffline_name_staff().add(target);
-            executor.textPlayer("%prefix% &c%player%&a has been assigned as a&b staff&9 member!".replace("%player%", target.toUpperCase(Locale.ROOT)));
+            executor.textPlayer(ADDED_TO_STAFF.replace("%player%", target.toUpperCase(Locale.ROOT)));
 
         }else if (looking_for.getPlayerStatus().equals(PlayerStatus.STAFF)){
-            final String STAFF_PLAYER = "%prefix% &c&lERROR&7, &e%playerName% &7is on &bStaff-Mode".replace("%playerName%", looking_for.getPlayerName());
+            final String STAFF_PLAYER = IS_PLAYING.replace("%player_name%", looking_for.getPlayerName());
             executor.textPlayer(Style.translate(STAFF_PLAYER));
         }else{
             if (looking_for.getPlayerStatus().equals(PlayerStatus.PLAYING)){
-                executor.textPlayer("%prefix% &6&l%player% &cis already playing in the game!".replace("%player%", target.toUpperCase(Locale.ROOT)));
+                executor.textPlayer(IS_PLAYING.replace("%player%", target.toUpperCase(Locale.ROOT)));
                 return;
             }
 
             TFWLoader.getPlayerManager().getOffline_name_staff().add(target);
             looking_for.setPlayerStatus(PlayerStatus.STAFF);
             looking_for.staffApply();
-            looking_for.textPlayer("%prefix% " + ChatColor.GREEN + "You have been assigned as a staff member!");
+            looking_for.textPlayer(YOU_ARE_NOW_STAFF);
         }
     }
 
@@ -140,18 +151,18 @@ public class PlayerListener implements Listener {
         if (looking_for == null){
             //Offline detection
             if (!TFWLoader.getPlayerManager().getOffline_name_staff().contains(target)){
-                final String NOT_STAFF_PLAYER = "%prefix% &c&lERROR&7, &e%playerName% &7is not on staff-mode!".replace("%playerName%", target.toUpperCase(Locale.ROOT));
+                final String NOT_STAFF_PLAYER = IS_NOT_STAFF.replace("%player_name%", target.toUpperCase(Locale.ROOT));
                 executor.textPlayer(Style.translate(NOT_STAFF_PLAYER));
                 return;
             }
-            executor.textPlayer("%prefix% &c%player%&e has been reassigned to normal player!".replace("%player%", target.toUpperCase(Locale.ROOT)));
+            executor.textPlayer(REMOVED_FROM_STAFF.replace("%player%", target.toUpperCase(Locale.ROOT)));
             TFWLoader.getPlayerManager().getOffline_name_staff().remove(target);
         }else if (!looking_for.getPlayerStatus().equals(PlayerStatus.STAFF)){
-            final String NOT_STAFF_PLAYER = "%prefix% &c&lERROR&7, &e%playerName% &7is not on staff-mode!".replace("%playerName%", looking_for.getPlayerName());
+            final String NOT_STAFF_PLAYER = ALREADY_NOT_STAFF.replace("%player_name%", looking_for.getPlayerName());
             executor.textPlayer(Style.translate(NOT_STAFF_PLAYER));
         }else{
             TFWLoader.getPlayerManager().getOffline_name_staff().remove(target);
-            looking_for.getPlayer().kickPlayer(ChatColor.RED + "Please, rejoin!");
+            looking_for.getPlayer().kickPlayer(REJOIN);
         }
     }
 }

@@ -5,6 +5,7 @@ import com.tfw.configuration.Style;
 import com.tfw.game.GameManager;
 import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
+import com.tfw.manager.messages.Messages;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -14,13 +15,13 @@ import java.util.Locale;
 
 public class SettingsCommand extends CommandBase<TFW> {
 
-    final String ALREADY_STARTED = "%prefix% settings works only in lobby state!";
-    final String BORDER_ACTIVATED = "%prefix% the boarder has been ACTIVATED!";
-    final String BORDER_DEACTIVATED = "%prefix% the boarder has been &c&lDEACTIVATED!";
-    final String CENTER_SAVED = "%prefix% the boarder center has been saved!";
-    final String NUMBER_ERROR = "%prefix% You must provide an invalid number!";
-    final String BORDER_SIZE = "%prefix% The border size has been changed to %size%";
-    final String SETTINGS_UPDATED = "%prefix% The settings has been updated successfully!";
+    final String ONLY_IN_LOBBY = Messages.ONLY_IN_LOBBY.toString();
+    final String BORDER_ACTIVATED = Messages.BORDER_ACTIVATED.toString();
+    final String BORDER_DEACTIVATED = Messages.BORDER_DEACTIVATED.toString();
+    final String CENTER_SAVED = Messages.CENTER_SAVED.toString();
+    final String NUMBER_ERROR = Messages.NUMBER_ERROR.toString();
+    final String BORDER_SIZE = Messages.BORDER_SIZE.toString();
+    final String SETTINGS_UPDATED = Messages.SETTINGS_UPDATED.toString();
 
     public SettingsCommand(TFW plugin, String help) {
         super(plugin, help);
@@ -29,13 +30,13 @@ public class SettingsCommand extends CommandBase<TFW> {
     @Override
     public boolean runCommand(CommandSender sender, Command rootCommand, String label, String[] args) {
         if (args.length == 0) {
-            for (String s : CHECK_USAGE)
+            for (String s : SETTINGS_USAGE)
                 sender.sendMessage(Style.translate(s));
             return true;
         }
 
         if (!GameManager.GameStates.getGameStates().equals(GameManager.GameStates.LOBBY)) {
-            sender.sendMessage(Style.translate(ALREADY_STARTED));
+            sender.sendMessage(Style.translate(ONLY_IN_LOBBY));
             return true;
         }
         switch (args[0].toLowerCase(Locale.ROOT)) {
@@ -69,7 +70,7 @@ public class SettingsCommand extends CommandBase<TFW> {
                         }
                         break;
                     default:
-                        CHECK_USAGE_BRODER.forEach(s -> sender.sendMessage(Style.translate(s)));
+                        SETTINGS_USAGE_BOARDER.forEach(s -> sender.sendMessage(Style.translate(s)));
                         break;
                 }
                 break;
@@ -78,21 +79,13 @@ public class SettingsCommand extends CommandBase<TFW> {
                 sender.sendMessage(Style.translate(SETTINGS_UPDATED));
                 break;
             default:
-                CHECK_USAGE.forEach(s -> sender.sendMessage(Style.translate(s)));
+                SETTINGS_USAGE.forEach(s -> sender.sendMessage(Style.translate(s)));
                 break;
         }
         return true;
     }
 
-    final List<String> CHECK_USAGE = Arrays.asList(
-            "&7/tfw&e settings&b border &8-&7 Border settings",
-            "&7/tfw&e settings&b update &8-&7 Update the border settings file"
-    );
+    final List<String> SETTINGS_USAGE = Messages.SETTINGS_HELP.toArrayList();
 
-    final List<String> CHECK_USAGE_BRODER = Arrays.asList(
-            "&7/tfw&e settings&b border&6 active &8-&7 Active the border",
-            "&7/tfw&e settings&b border&6 disable &8-&7 Disable the border",
-            "&7/tfw&e settings&b border&6 center &8-&7 Change the border center point",
-            "&7/tfw&e settings&b border&6 &size &8-&7 Change the border size"
-    );
+    final List<String> SETTINGS_USAGE_BOARDER = Messages.SETTINGS_HELP_BOARDER.toArrayList();
 }
