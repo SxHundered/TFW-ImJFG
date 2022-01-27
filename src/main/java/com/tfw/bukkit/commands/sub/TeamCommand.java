@@ -4,7 +4,6 @@ import com.tfw.bukkit.commands.CommandBase;
 import com.tfw.configuration.Style;
 import com.tfw.events.custom.TeamJoinEvent;
 import com.tfw.events.custom.TeamLeaveEvent;
-import com.tfw.game.GameManager;
 import com.tfw.game.arena.ArenaManager;
 import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
