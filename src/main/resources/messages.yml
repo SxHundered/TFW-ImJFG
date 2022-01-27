@@ -1,2 +1,28 @@
 Messages:
-  PREFIX: ""
+  GENERAL:
+    OFFLINEPLAYER: "%prefix% %player_name% &e&lis currently &4&lOFFLINE"
+  TFW:
+    HELP:
+      - "             &6&lTFW COMMANDS"
+      - "               &e/tfw &3help"
+      - "               &e/tfw &3game"
+      - "               &e/tfw &3settings"
+      - "               &e/tfw &3team"
+      - "               &e/tfw &3staff"
+      - "               &e/tfw &3check &b<playername>"
+      - ""
+  Game:
+    NOT_ENOUGH_TEAM_MEMBERS: "%prefix% There is not enough players!."
+    ALREADY_STARTED: "%prefix% the game is already started!"
+    SPAWN_UPDATED: "%prefix% the game is already started!"
+    HELP:
+      - "&7/tfw&e game&b spawn &8-&7 Updates spawn location!"
+      - "&7/tfw&e game&b summary &8-&7 Displays some details related to team and the game state!"
+      - "&7/tfw&e game&b start &8-&7 Starts the game"
+      SETTINGS
+  CHECK:
+    USAGE: "%prefix% &7/tfw&e check&b <playerName> &8| &7Displays player current info!"
+    MESSAGE:
+      - "%player_name%'s Details:"
+      - "&bCurrent State: %states%"
+      - "&bJoined Team: %team%"

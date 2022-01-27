@@ -4,6 +4,7 @@ import com.tfw.bukkit.commands.sub.*;
 import com.tfw.bukkit.commands.sub.debug.ScoreboardCommand;
 import com.tfw.configuration.Style;
 import com.tfw.main.TFW;
+import com.tfw.manager.messages.Messages;
 import lombok.Getter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -38,15 +39,8 @@ public class TFWCommand {
 
     @Getter
     static List<String> HELP_OP = Arrays.asList(
-            "             &6&lTFW COMMANDS",
-            "             &e/tfw &3help",
-            "             &7/tfw &3game",
-            "             &7/tfw &3settings",
-            "             &7/tfw &3team",
-            "             &7/tfw &3staff",
-            "             &7/tfw &3check &b<playername>",
-            "",
-            "             &7Authors: &aAbdulAzizCr &8- &dF4res",
-            "&             eSource Code:&a&l https://github.com/SxHundered/TFW-ImJFG",
+            Messages.GENERAL_HELP.toArrayList() + "\n" +
+            "             &7Authors: &eAbdulAzizCr &7- &eF4res",
+            "&            &eSource Code: &bhttps://github.com/SxHundered/TFW-ImJFG",
             "");
 }

@@ -1,6 +1,7 @@
 package com.tfw.manager.messages;
 
 import com.tfw.configuration.Style;
+import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public enum Messages {
         if (message == null || message.isEmpty())
             return "Could not load message!";
 
-        return Style.translate(message);
+        return Style.translate(message.replace("%prefix%", TFW.getPrefix()));
     }
 
     public List<String> toArrayList() {

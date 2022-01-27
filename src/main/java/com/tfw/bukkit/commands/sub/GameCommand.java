@@ -10,6 +10,7 @@ import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.TeamManager;
 import com.tfw.manager.data.PlayerData;
+import com.tfw.manager.messages.Messages;
 import com.tfw.utils.CustomLocation;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -23,9 +24,9 @@ import java.util.Set;
 
 public class GameCommand extends CommandBase<TFW> {
 
-    final String NOT_ENOUGH_TEAM_MEMBERS = "%prefix% There is not enough players!.";
-    final String ALREADY_STARTED = "%prefix% the game is already started!";
-    final String SPAWN_UPDATED = "%prefix% the game is already started!";
+    final String NOT_ENOUGH_TEAM_MEMBERS = Messages.NOT_ENOUGH_TEAM_MEMBERS.toString();
+    final String ALREADY_STARTED = Messages.ALREADY_STARTED.toString();
+    final String SPAWN_UPDATED = Messages.SPAWN_UPDATED.toString();
 
     public GameCommand(TFW plugin, String help) {
         super(plugin, help);
@@ -34,14 +35,14 @@ public class GameCommand extends CommandBase<TFW> {
     @Override
     public boolean runCommand(CommandSender sender, Command rootCommand, String label, String[] args) {
         if (args.length == 0) {
-            for (String s : CHECK_USAGE)
+            for (String s : GAME_USAGE)
                 sender.sendMessage(Style.translate(s));
             return true;
         }
 
         switch (args[0].toLowerCase(Locale.ROOT)) {
             case "spawn":
-                sender.sendMessage(Style.translate("%prefix% spawn has been updated!"));
+                sender.sendMessage(SPAWN_UPDATED);
                 TFWLoader.getArenaManager().setSpawn(CustomLocation.fromBukkitLocation(((Player) sender).getLocation()));
                 break;
             case "game-info":
@@ -50,13 +51,13 @@ public class GameCommand extends CommandBase<TFW> {
             case "start":
                 //Starts the game!
                 if (!GameManager.GameStates.getGameStates().equals(GameManager.GameStates.LOBBY)){
-                    sender.sendMessage(Style.translate(ALREADY_STARTED));
+                    sender.sendMessage(ALREADY_STARTED);
                     return true;
                 }
 
                 //Checks if there is enough players in each team!
                 if (TeamManager.getA().getPlayers().size() == 0 || TeamManager.getB().getPlayers().size() == 0){
-                    sender.sendMessage(Style.translate(NOT_ENOUGH_TEAM_MEMBERS));
+                    sender.sendMessage(NOT_ENOUGH_TEAM_MEMBERS);
                     return true;
                 }
 
@@ -70,9 +71,5 @@ public class GameCommand extends CommandBase<TFW> {
         return true;
     }
 
-    final List<String> CHECK_USAGE = Arrays.asList(
-            "&7/tfw&e game&b spawn &8-&7 Updates spawn location!",
-            "&7/tfw&e game&b summary &8-&7 Displays some details related to team and the game state!",
-            "&7/tfw&e game&b start &8-&7 Starts the game"
-    );
+    final List<String> GAME_USAGE = Messages.GAME_USAGE.toArrayList();
 }
