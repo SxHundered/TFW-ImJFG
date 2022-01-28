@@ -1,5 +1,9 @@
 # Team Fight War! - Spigot-1.8.8
 
-The Ultimate team fight war - Beta version v1.1
+Team Fight War - Plugin
 
-this plugin 
+
+Support Discord:  
+
+- Az#7012 
+- 𝑭4𝑹𝑬𝑺#4444
