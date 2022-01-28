@@ -2,6 +2,8 @@
 
 Team Fight War - Plugin
 
+Please if you have any questions/bugs/problems do not hesitate to contact us!
+
 
 Support Discord:  
 
