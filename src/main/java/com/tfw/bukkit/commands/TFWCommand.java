@@ -9,6 +9,7 @@ import lombok.Getter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class TFWCommand {
     public static void init(TFW instance) {
 
         // Anonymous implementation of "/tfw" root command.
+
         CommandBase<TFW> checkCommand = new CommandBase<TFW>(TFW.getInstance()) {
             @Override
             public boolean runCommand(CommandSender sender, Command rootCommand, String label, String[] args) {
@@ -35,12 +37,13 @@ public class TFWCommand {
                 checkCommand.registerSubCommand(tfwCommandBase.getName(), tfwCommandBase));
 
         instance.getCommand("TFW").setExecutor(checkCommand);
+
+
+        HELP_OP.addAll(Messages.GENERAL_HELP.toArrayList());
+        HELP_OP.add("&7Authors: &eAbdulAzizCr &7- &eF4res");
+        HELP_OP.add("&eSource Code: &bhttps://github.com/SxHundered/TFW-ImJFG");
     }
 
     @Getter
-    static List<String> HELP_OP = Arrays.asList(
-            Messages.GENERAL_HELP.toArrayList() + "\n" +
-            "             &7Authors: &eAbdulAzizCr &7- &eF4res",
-            "&            &eSource Code: &bhttps://github.com/SxHundered/TFW-ImJFG",
-            "");
+    static List<String> HELP_OP = new ArrayList<>();
 }

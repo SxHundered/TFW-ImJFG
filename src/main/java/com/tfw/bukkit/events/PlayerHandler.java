@@ -98,13 +98,13 @@ public class PlayerHandler implements Listener {
         if (playerData == null) return;
         event.setCancelled(true);
 
-        final Team team = playerData.getTeam();
+        Team team = playerData.getTeam();
         switch (playerData.getPlayerStatus()) {
             case LOBBY:
             case PLAYING:
                 for (Player players : Bukkit.getOnlinePlayers())
                     players.sendMessage(Style.translate(
-                            (team != null ? IN_TEAM.replace("%team_color%", team.getColorTeam().toString().replace("%team_name%", team.getIdentifier()))
+                            (team != null ? IN_TEAM.replace("%team_color%", team.getColorTeam().toString()).replace("%team_name%", team.getIdentifier())
                                     : NOT_IN_TEAM) + player.getName() + " &7» ") + Style.RESET + event.getMessage());
                 break;
             case STAFF: {

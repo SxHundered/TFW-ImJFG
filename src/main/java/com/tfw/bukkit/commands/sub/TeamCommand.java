@@ -18,12 +18,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 public class TeamCommand extends CommandBase<TFW> {
-
 
     final String OFFLINE_PLAYER = Messages.OFFLINE_PLAYER.toString();
     final String STAFF_PLAYER = Messages.STAFF_PLAYER.toString();
@@ -97,7 +95,7 @@ public class TeamCommand extends CommandBase<TFW> {
                             for (String s : TEAM_USAGE)
                                 sender.sendMessage(Style.translate(s));
                     }
-                } else {
+                }else {
                     team = playerData.getTeam();
                     if (team == null) {
                         sender.sendMessage(Style.translate(ALREADY_NOT_IN_TEAM.replace("%player_name%", args[1])));
@@ -153,8 +151,7 @@ public class TeamCommand extends CommandBase<TFW> {
                 try {
                     TFWLoader.getTeamManager().updateConfig(ArenaManager.getArenasConfig());
                     sender.sendMessage(Style.translate(CONFIGURATION_SAVED));
-                } catch (TeamExceptions ignore) {
-                }
+                } catch (TeamExceptions ignore) {}
                 break;
         }
         return true;
