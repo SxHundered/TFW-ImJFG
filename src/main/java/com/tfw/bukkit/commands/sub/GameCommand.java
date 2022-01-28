@@ -54,7 +54,6 @@ public class GameCommand extends CommandBase<TFW> {
                     sender.sendMessage(ALREADY_STARTED);
                     return true;
                 }
-
                 //Checks if there is enough players in each team!
                 if (TeamManager.getA().getPlayers().size() == 0 || TeamManager.getB().getPlayers().size() == 0){
                     sender.sendMessage(NOT_ENOUGH_TEAM_MEMBERS);
