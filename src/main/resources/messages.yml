@@ -107,6 +107,10 @@ Messages:
     HOLOGRAM: "%team%'s &c&lHEART"
     SPAWNED: "%prefix% &a&lYOUR HEART HAS BEEN SPAWNED! \n&e&lPROTECT YOUR HEART,&c&l AND DESTROY THEIR HEART TO WIN THE GAME!"
     CAN_NOT_DESTROYED: "%prefix% &cHeart can not be destroyed in this state!"
+  STARTING:
+    TITLE: "&eTeleporting"
+    SUBTITLE: " "
+    MESSAGE: "%prefix% &a&lYou will be teleported right now!"
   WINNING:
     MESSAGE: "
     \n%prefix% &c&lGREAT WAR, &a&lEVERYONE WAS HONOR!

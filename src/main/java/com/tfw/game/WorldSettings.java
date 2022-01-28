@@ -13,9 +13,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.BlockSpreadEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class WorldSettings implements Listener {
 
@@ -87,10 +85,19 @@ public class WorldSettings implements Listener {
         configFile.getYaml().set(pathConfig + ".WorldBorder.enable", isWorldBorder);
         for (Double aDouble : center)
             configFile.getYaml().set(pathConfig + ".WorldBorder.center", aDouble);
+
         configFile.getYaml().set(pathConfig + ".WorldBorder.size", size);
 
-        configFile.getYaml().set(pathConfig + ".Breakable_blocks", breakable);
-        configFile.getYaml().set(pathConfig + ".Placeable_blocks", placeable);
+        List<String> listOfStrings = new ArrayList<>();
+        for (Material material : breakable)
+            listOfStrings.add(material.name().toUpperCase(Locale.ROOT));
+
+        configFile.getYaml().set(pathConfig + ".Breakable_blocks", listOfStrings);
+
+        listOfStrings = new ArrayList<>();
+        for (Material material : placeable)
+            listOfStrings.add(material.name().toUpperCase(Locale.ROOT));
+        configFile.getYaml().set(pathConfig + ".Placeable_blocks", listOfStrings);
 
         configFile.save();
     }
