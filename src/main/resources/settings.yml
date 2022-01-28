@@ -1,10 +1,12 @@
 worldSettings:
   HEART_TEAM: BED_BLOCK
   WorldBorder:
-    enable: false
-    center: [0.0, 0.0] # [X, Z]
+    enable: true
+    center:
+      - 110
+      - 180
     size: 300
-  Breakable_blocks: #https for materials
+  Breakable_blocks:
     - WOOL
     - FIRE
     - WEB
