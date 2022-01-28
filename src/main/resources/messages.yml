@@ -4,8 +4,7 @@ Messages:
     OFFLINEPLAYER: "%prefix% %player_name% &e&lis currently &4&lOFFLINE"
     CAN_NOT_JOIN: "&cSorry, you can not join at this moment!"
     ONLY_STAFF_JOIN: "&cONLY STAFF MEMBERS CAN JOIN AT THIS STATE!"
-    LOST_TOURNAMENT: "&cYou have lost this tournament!
-    \n&aNext Time"
+    LOST_TOURNAMENT: "&cYou have lost this tournament! \n&aNext Time"
   TFW:
     HELP:
       - "             &6&lTFW COMMANDS"
@@ -27,7 +26,7 @@ Messages:
       - "&7/tfw&e game&b start &8-&7 Starts the game"
     STARTING:
       TITLE: "&eTeleporting"
-      SUBTITLE: ""
+      SUBTITLE: " "
       MESSAGE: "%prefix% &a&lYou will be teleported right now!"
     STARTED: "&c&lTHE WAR HAS STARTED!\n&9&lTEAM: %teamA% &c&lVS &9&lTEAM: %teamB%"
     STARTEDTITLE: "%teamA% &c&lvs %teamB%"
@@ -57,7 +56,7 @@ Messages:
     IS_PLAYING: "%prefix% &c&lERROR&7, &e%player_name% &7is on &bStaff-Mode"
     YOU_ARE_NOW_STAFF: "%prefix% &aYou have been assigned as a staff member!"
     IS_NOT_STAFF: "%prefix% &c&lERROR&7, &e%player_name% &7is not on staff-mode!"
-    REMOVED_FROM_STAFF: "%prefix% &c%player%&e has been reassigned to normal player!".
+    REMOVED_FROM_STAFF: "%prefix% &c%player%&e has been reassigned to normal player!"
     ALREADY_NOT_STAFF: "%prefix% &c&lERROR&7, &e%player_name% &7is not on staff-mode!"
     REJOIN: "&cPlease Rejoin."
     HELP:
@@ -97,7 +96,7 @@ Messages:
   CHAT:
     NOT_IN_TEAM: "&c&l✘ &7\u258f "
     IN_TEAM: "%team_color%%team_name% &7\u258f %team_color%"
-    STAFF: "&c&lSTAFF &7\y258f &c"
+    STAFF: "&c&lSTAFF &7\u258f &c"
   CHECK:
     USAGE: "%prefix% &7/tfw&e check&b <playerName> &8| &7Displays player current info!"
     MESSAGE:
@@ -106,8 +105,7 @@ Messages:
       - "&bJoined Team: %team%"
   HEART:
     HOLOGRAM: "%team%'s &c&lHEART"
-    SPAWNED: "%prefix% &a&lYOUR HEART HAS BEEN SPAWNED!
-    \n&e&lPROTECT YOUR HEART,&c&l AND DESTROY THEIR HEART TO WIN THE GAME!"
+    SPAWNED: "%prefix% &a&lYOUR HEART HAS BEEN SPAWNED! \n&e&lPROTECT YOUR HEART,&c&l AND DESTROY THEIR HEART TO WIN THE GAME!"
     CAN_NOT_DESTROYED: "%prefix% &cHeart can not be destroyed in this state!"
   WINNING:
     MESSAGE: "

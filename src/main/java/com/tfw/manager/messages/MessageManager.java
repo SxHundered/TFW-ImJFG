@@ -13,12 +13,9 @@ public class MessageManager implements IMessage{
     @Override
     public void messageSetup(JavaPlugin javaPlugin) {
         messagesConfig = new ConfigFile(javaPlugin, "messages.yml");
-
-
     }
 
     public ConfigFile getMessage(){
         return messagesConfig;
     }
-
 }
