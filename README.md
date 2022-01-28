@@ -3,6 +3,7 @@
 Team Fight War - Plugin
 
 
-Support Discord: 
-1- Az#7012 
-2- 𝑭4𝑹𝑬𝑺#4444
+Support Discord:  
+
+- Az#7012 
+- 𝑭4𝑹𝑬𝑺#4444
