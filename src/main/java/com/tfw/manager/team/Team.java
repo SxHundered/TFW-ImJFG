@@ -2,6 +2,7 @@ package com.tfw.manager.team;
 
 import com.tfw.configuration.Style;
 import com.tfw.events.custom.TeamEliminationEvent;
+import com.tfw.game.GameManager;
 import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.data.PlayerData;
@@ -163,6 +164,8 @@ public class Team implements ITeam {
 
             //Checks if the game is started!
             //here we check whether the team has no members left to end the game!
+            if (GameManager.GameStates.getGameStates().equals(GameManager.GameStates.LOBBY))
+                return;
             if (currentAlive() == 0) {
                 Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TFW.getInstance(), () -> {
                     TeamEliminationEvent teamEliminationEvent = new TeamEliminationEvent(this);

@@ -3,6 +3,7 @@ package com.tfw.events;
 import com.tfw.configuration.Style;
 import com.tfw.events.custom.*;
 import com.tfw.game.GameManager;
+import com.tfw.main.TFW;
 import com.tfw.main.TFWLoader;
 import com.tfw.manager.TeamManager;
 import com.tfw.manager.data.PlayerData;
@@ -86,6 +87,9 @@ public class PlayerListener implements Listener {
         killerTeam.eliminationEffect(playerEliminationEvent.getLocation());
         Bukkit.getWorld(playerEliminationEvent.getLocation().getWorld().getName()).playSound(playerEliminationEvent.getLocation(), Sound.FIZZ, 2.0F, 1.0f);
         killerTeam.updateStats();
+        for (Player player : Bukkit.getOnlinePlayers())
+            player.sendMessage(TFW.getPrefix() + "%PLAYER% &ehas been &c&lELIMINATED".replace("%PLAYER%", playerEliminationEvent.getPlayerData().getTeam().getColorTeam() + playerEliminationEvent.getPlayerData().getPlayerName()));
+
 
         //Elimination method!
         TFWLoader.getPlayerManager().eliminatePlayer(playerEliminationEvent.getPlayerData());
