@@ -5,13 +5,7 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 public class DependencyLoader {
-
-
-    public static Set<PLUGINS> depencendies = new LinkedHashSet<>();
 
     /**
      * @param javaPlugin Main Class
@@ -19,20 +13,17 @@ public class DependencyLoader {
      * @throws Exception if we can not find the dependency in plugin list!
      */
     public static boolean load(JavaPlugin javaPlugin) throws Exception {
-        depencendies.add(PLUGINS.PLACEHOLDER_API);
-        depencendies.add(PLUGINS.MULTIVERSE_PLUGIN);
-        depencendies.add(PLUGINS.SLIME_WORLD_MANAGER);
 
         //Now load them
-        for (PLUGINS depencendy : depencendies)
-            if (javaPlugin.getServer().getPluginManager().getPlugin(depencendy.pluginName) != null)
-                if (depencendy.checkCompatibility(javaPlugin.getServer().getPluginManager().getPlugin(depencendy.pluginName).getDescription().getVersion(), depencendy.limited_version))
-                    depencendy.updatePlugin();
+        for (final PLUGINS dependency : PLUGINS.values())
+            if (javaPlugin.getServer().getPluginManager().getPlugin(dependency.pluginName) != null)
+                if (dependency.checkCompatibility(javaPlugin.getServer().getPluginManager().getPlugin(dependency.pluginName).getDescription().getVersion(), dependency.limited_version))
+                    dependency.updatePlugin();
         else
-            throw new Exception(Style.RED + "Sorry, InCompatible version for " + Style.YELLOW + depencendy.pluginName + Style.RED +
-                    " has to be at least " + Style.GREEN + depencendy.limited_version + Style.RED + " or higher!");
-        else if (!depencendy.soft)
-                throw new Exception(Style.RED + "Sorry, I can not find " + Style.GREEN + depencendy.pluginName + "");
+            throw new Exception(Style.RED + "Sorry, InCompatible version for " + Style.YELLOW + dependency.pluginName + Style.RED +
+                    " has to be at least " + Style.GREEN + dependency.limited_version + Style.RED + " or higher!");
+        else if (!dependency.soft)
+                throw new Exception(Style.RED + "Sorry, I can not find " + Style.GREEN + dependency.pluginName + "");
 
         return true;
     }
