@@ -7,5 +7,5 @@ Please if you have any questions/bugs/problems do not hesitate to contact us!
 
 Support Discord:  
 
-- Az#7012 
+- Sx100#5946
 - F4res#3899
